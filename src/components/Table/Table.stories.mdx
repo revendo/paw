@@ -1,0 +1,595 @@
+import { Meta, Canvas, Story } from "@storybook/addon-docs";
+import PawTable from "./Table";
+
+<Meta title="Components/PawTable/Data structure and event handling" component={PawTable} />
+
+# Table top navigation
+
+The **navigation** section can be adjusted with a title and buttons.
+
+## **`buttons`**
+
+This represents a PawButton. There are some props which are adjustable but the size will stay `md` due to fixed navigation height.
+
+```js
+buttons: [
+    {
+        identifier: "add",
+        title: "test button",
+        textSlot: "Add Row",
+        icon: "add",
+        outlined: false,
+    },
+    {
+        identifier: "delete",
+        title: "Here",
+        textSlot: "Delete",
+        icon: "delete",
+        outlined: true,
+    },
+];
+```
+
+> #### **`identifier`**
+>
+> This will be the identifier which is also the payload of a click event callback
+>
+> #### **`title`**
+>
+> Represents the PawButton title
+>
+> #### **`textSlot`**
+>
+> Represents the PawButton slot
+>
+> #### **`icon`**
+>
+> Represents the PawButton icon
+>
+> #### **`outlined`**
+>
+> Represents the PawButton outlined state
+
+
+## **`title`**
+
+```js
+title: {
+    "Table title";
+}
+```
+
+# Data structure
+
+The **prop** called `data` in `PawTable` contains all table information in one single object. Let's have a closer look at this object:
+
+```js
+data: {
+    meta: {
+        pagination: 10,
+        records: 5,
+        page: 1,
+    },
+    headings: [
+        {
+            name: 'name',
+            title: 'Name Lastname',
+            position: 0,
+            sort: null,
+            visible: true,
+        },
+        {
+            name: 'email',
+            title: 'E-mail address',
+            position: 2,
+            sort: null,
+            visible: true,
+            format: 'mail',
+        },
+        {
+            name: 'phone',
+            title: 'Telephone number',
+            position: 3,
+            sort: null,
+            visible: true,
+            format: 'phone',
+        },
+    ],
+    items: [
+        {
+            id: 1,
+            name: 'Max Muster',
+            email: 'max.muster@domain.com',
+            phone: '+41123456789',
+        },
+        {
+            id: 2,
+            name: 'John Example',
+            email: 'john.example@domain.com',
+            phone: '+41246803579',
+        },
+        {
+            id: 3,
+            name: 'Lucy Fox',
+            email: 'lucy.fox@domain.com',
+            phone: '+41987654321',
+        },
+        {
+            id: 4,
+            name: 'Willy Paw',
+            email: 'willy.paw@domain.com',
+            phone: '+41192837465',
+        },
+        {
+            id: 5,
+            name: 'Nancy Fancy',
+            email: 'nancy.fancy@domain.com',
+            phone: '+415918273645',
+        },
+    ],
+}
+```
+
+## **`meta`**
+
+The `meta` object contains 3 attributes:
+
+```js
+meta: {
+    pagination: 10,
+    records: 5,
+    page: 1,
+}
+```
+
+> ### **`pagination`**
+>
+> This defines how many records should be at most displayed at once within the table.
+>
+> ### **`records`**
+>
+> This tells the `PawTable` component how many available records might be paginated in total. This number is important for the pagination logic to calculate the amount of available pages. If not provided, the length of `data.items` will be used instead.
+>
+> ### **`page`**
+>
+> This number tells the `PawTable` component on which page we are. If it's not provided, the component will take `1` as default value.
+
+## **`items`**
+
+The `items` object is an indexed array of objects that contain pairs of **key** — **value**. Each key must be present in the `headings` object in order to be displayed correctly. If there is no heading matching the key, this pair won't be displayed.
+
+```js
+items: [
+    {
+        id: 1,
+        name: "Max Muster",
+        email: "max.muster@domain.com",
+        phone: "+41123456789",
+        format: "phone",
+    },
+    // next item...
+];
+```
+
+## **`headings`**
+
+### **1.&nbsp;&nbsp;Component-specific properties**
+
+The `headings` object can contain up to 6 **component-specific properties**:
+
+```js
+{
+    name: 'phone',
+    title: 'Telephone number',
+    position: 3,
+    sort: null,
+    visible: true,
+    align: 'left',
+}
+```
+
+> #### **`name`** String in `camelCase`.
+>
+> This attribute specifies the name of the field (column), which in turn corresponds to the name of an attribute contained in the `items` object.
+>
+> #### **`title`**
+>
+> This is a textual representation of the column name.
+>
+> #### **`position`**
+>
+> This specifies in which position should the heading be displayed regarding the order of columns. For ordering purposes, it is recommended to begin the numeration with `0`.
+>
+> #### **`sort`**
+>
+> This attribute specifies whether the heading is being sorted either ascending `asc` or descending `desc`. Both values must be provided in lowercase.
+>
+> #### **`visible`**
+>
+> This attribute can be used to hide a heading (column) by default. The user can activate or deactivate the visibility of a heading in the table settings menu. Default value is `true`.
+>
+> #### **`align`**
+>
+> The `align` attribute defines the horizontal alignment of the content in the cells. Default value is `left`.
+
+### **2.&nbsp;&nbsp;`PawLazyField`'s inherited properties**
+
+Since **each table cell uses a `PawLazyField`** to display the data, this can be formatted (`format`), hidden (`secret`), copied (`copy`) or can trigger an `action` as it would be normally done in the `PawLazyField`. Head up now to [PawLazyField documentation](?path=/story/pawlazyfield--telephone) for more details.
+
+Below you find a brief preview of one of these fields, in this case a phone number:
+
+<Canvas>
+    <Story id="pawlazyfield--telephone" />
+</Canvas>
+
+The following parameters are thus supported in the `headings` objects:
+
+-   `action`
+-   `copy`
+-   `link`
+-   `insecure`
+-   `secret`
+-   `format`
+-   `unit-label`
+-   `unit-icon`
+-   `unit-icon-outlined`
+-   `min-decimals`
+-   `max-decimals`
+
+The next example corresponds to a heading (column) with a currency format. Note the `align` set to `right` so that all numbers are aligned to the right:
+
+```js
+{
+    name: 'amount',
+    title: 'Amount',
+    position: 2,
+    sort: null,
+    visible: true,
+    align: 'right',
+    format: 'number',
+    unitLabel: 'CHF',
+    maxDecimals: 2,
+},
+```
+
+### **3.&nbsp;&nbsp;Cell data represented within a `PawLabel`**
+
+When a heading's `format` property is set to `label`, the data will be displayed in a `PawLabel`. In this case, the item data must correspond to an object which contains:
+
+-   `color` of the label. Possible values: `action`, `success`, `danger`, `warning`
+-   `text` of the label
+-   `disabled` = `true` shows the text in a disabled label
+
+**headings**
+
+```js
+{
+    name: 'status',
+    title: 'Status',
+    position: 3,
+    sort: null,
+    visible: true,
+    align: 'right',
+    format: 'label',
+}
+```
+
+**items**
+
+```js
+// a yellow label
+{
+    id: 3,
+    date: '8.1.2022',
+    invoice: 'RA123340',
+    amount: 2180,
+    status: {
+        color: 'warning',
+        text: 'Pending',
+    }
+},
+// or a disabled label...
+{
+    id: 2,
+    date: '18.12.2021',
+    invoice: 'RA123823',
+    amount: 12.90,
+    status: {
+        disabled: true,
+        text: 'Cancelled',
+    },
+}
+```
+
+We can see all these heading configurations in action in the following table:
+
+<Canvas>
+    <Story id="pawtable--list-of-invoices" />
+</Canvas>
+
+### **4.&nbsp;&nbsp;Display links in a table cell**
+
+In order to add a link to a table cell, the item property (in this case: **githubProfile**) has to be an object containing:
+
+-   `link` URL of the link
+-   `text` Text of the link
+
+**headings**
+
+```js
+{
+    name: 'githubProfile',
+    title: 'GitHub Profile',
+    position: 6,
+    sort: null,
+    visible: true,
+    action: 'link',
+    align: 'right',
+},
+```
+
+**items**
+
+```js
+{
+    id: 2,
+    name: 'Jonathan Miskolczy',
+    email: 'jonathan.miskolczy@revendo.ch',
+    githubProfile: {
+        link: 'https://github.com/miskolczy',
+        text: 'miskolczy',
+    },
+},
+{
+    id: 3,
+    name: 'Gerard Fígols',
+    email: 'gerard.figols@revendo.ch',
+    githubProfile: {
+        link: 'https://github.com/gerardfigols',
+        text: 'gerardfigols',
+    },
+},
+```
+
+---
+
+# Event handling
+
+As a general rule, the table component **does not modify none of the input data** it receives through the props, but it just displays the data in a tabulated form:
+
+<Canvas>
+    <Story id="pawtable--example-with-events" />
+</Canvas>
+
+In order to capture the actions that a user may perform in the table, several events are emitted.
+Nonetheless, table events **may affect the way in which data should be fetched** in the next data requests. This is the case of 3 of the events: `filtered`, `sorted` and `paginated`. In these cases it is highly recommended updating the parent component's `meta` values to **ensure data consistency**. You can do it easily this way:
+
+## `filtered`
+
+In the `PawTable` component we grab the two parameters `headingName` and `headingPosition` which are passed on in the event `filtered` emitted from the child component by means of the **arrow function** this way:
+
+```vue
+<PawTable
+    @filtered="
+        (headingName, headingPosition) =>
+            updateVisibility(headingName, headingPosition)
+    "
+></PawTable>
+```
+
+In the parent component we create a method to update the `meta` values of the `PawTable` component and continue doing other stuff we might need after the event has occurred:
+
+```js
+/**
+ * Update selected heading's visibility
+ * @param headingName {String} Name of table heading
+ * @param value {Boolean} Is table heading visible?
+ */
+updateVisibility(headingName, value) {
+    this.table.headings.filter(v => v.name === headingName)[0].visible = value;
+    // Do other stuff here
+}
+```
+
+`this.table` corresponds to the `data` prop that is of `PawTable`. To see a working example, please have a look at the code in **src/App.vue**.
+
+## `sorted`
+
+In the `PawTable` component we pass the heading name and sort value (`asc` or `desc`) to our method `updateSorting`:
+
+```vue
+<PawTable
+    @sorted="
+        (headingName, headingSort) => updateSorting(headingName, headingSort)
+    "
+></PawTable>
+```
+
+### Sort records with an API request
+
+If we want to receive a sorted set of records, we may directly request the data sorted from the API. This is specially important for big sets of records that need to be paginated.
+In this case, we just need to update the `sort` heading of the table:
+
+```js
+/**
+ * Update sorting of heading
+ * @param headingName {String} Name of table heading
+ * @param headingSort {'asc' | 'desc'} Heading sorting
+ */
+updateSorting(headingName, headingSort) {
+    this.table.headings.filter(v => v.name === headingName)[0].sort = headingSort;
+    this.tableOutput = `Table sorted <b>${headingSort}ending</b> by <b>${headingName}</b>.`;
+}
+```
+
+### Sort records in the Vue.js application
+
+If we want to sort an existing set of records within the Vue.js app, the two following methods can be defined to achieve it:
+
+-   `updateSorting` to update the `sort` heading and sort the records
+-   `getItemValue` auxiliary method to get a comparable value of each record
+
+```js
+/**
+ * Get comparable value of a given table record
+ * @param value {String | Object} Property's value of a table item (record)
+ * @returns {String | Number | Object} Record's value represented as string, number or other type of object
+ */
+getItemValue(value) {
+    if (!value) return null;
+    // Object
+    if (value.text !== undefined) {
+        return value.text.toLowerCase();
+    }
+    // String
+    if (typeof value === 'string' || value instanceof String) {
+        return value.toLowerCase();
+    }
+    // Number or other
+    return value;
+},
+
+/**
+ * Update sorting of heading and sort records accordingly
+ * @param headingName {String} Name of table heading
+ * @param headingSort {'asc' | 'desc'} Heading sorting
+ */
+updateSorting(headingName, headingSort) {
+    // Update sort heading
+    this.table.headings.filter(v => v.name === headingName)[0].sort = headingSort;
+    // Sort records with a bit of magic...
+    this[!this.informalTable ? 'table' : 'tableInformal'].items.sort(
+        (a, b) =>
+            this.getItemValue(a[headingName]) > this.getItemValue(b[headingName]) ?
+                (headingSort === 'asc' ? 1 : -1) :
+                this.getItemValue(b[headingName]) > this.getItemValue(a[headingName]) ?
+                    (headingSort === 'asc' ? -1 : 1) :
+                    0
+    );
+    this.tableOutput = `Table sorted <b>${headingSort}ending</b> by <b>${headingName}</b>.`;
+}
+```
+
+**Please note that:**
+The expression `this[!this.informalTable ? 'table' : 'tableInformal'].items` corresponds to either `this.table.items` or `this.tableInformal.items` which are the table items of a standard `PawTable` or a `PawTable` in its [informal variation](?path=/docs/pawtable--list-of-invoices) respectively.
+
+## `paginated`
+
+If an event returns only one parameter, we can use a direct notation (without arrow function) by means of the `$event` parameter:
+
+```vue
+<PawTable @paginated="paginateTable($event)"></PawTable>
+```
+
+In the parent component's methods:
+
+```js
+/**
+ * Increase / decrease current page of table
+ * @param page {'prev' | 'next'} Page number
+ */
+paginateTable(page) {
+    // Do not allow page to go below 1
+    if (this.table.meta.page === 1 && page === 'prev') return;
+    this.table.meta.page += (page === 'prev' ? -1 : 1);
+    // Do other stuff here
+}
+```
+
+## `selected`
+
+In order to collect the selected record IDs in an array, we can build a method like shown below:
+
+In the `PawTable` component:
+
+```vue
+<PawTable
+    @selected="(id, eventValue) => selectRecord(id, eventValue)"
+></PawTable>
+```
+
+In the parent component's methods:
+
+```js
+/**
+ * Add or remove record ID from selected records
+ * @param id {Number | String} ID of record
+ * @param value {Boolean} Is record selected?
+ */
+selectRecord(id, value) {
+    let index = this.selectedRecords.indexOf(id);
+    // Selected record is already present in array
+    if (index !== -1) {
+        // Skip because record is already selected
+        if (value) return;
+        // Unselect record
+        this.selectedRecords.splice(index, 1);
+    }
+    // Select record
+    if (value) {
+        this.selectedRecords.push(id);
+    }
+}
+```
+
+`selectedRecords` is the name of the data attribute which collects the selected record IDs.
+
+## `reordered`
+
+This event is fired when the order of the headings (columns) is changed.
+
+In the `PawTable` component:
+
+```vue
+<PawTable
+    @reordered="
+        (headingName, headingPosition) =>
+            updatePosition(headingName, headingPosition)
+    "
+></PawTable>
+```
+
+In the parent component's methods:
+
+```js
+/**
+ * Change position of table heading
+ * @param headingName {String} Name of table heading
+ * @param position {Number} New position of heading
+ */
+updatePosition(headingName, position) {
+    // TODO: implement method to set new heading's position and re-index position of next headings
+    console.log(`Heading <b>${headingName}</b> has been reordered to position <b>${position}</b>.`);
+}
+```
+
+## `buttonClicked`
+
+This event is fired when one of the top navigation button is clicked. 
+
+In the `PawTable` component:
+
+```vue
+<PawTable
+    @buttonClicked="
+        (identifier) =>
+            tableButtonClicked(identifier)
+    "
+></PawTable>
+```
+
+```js
+/**
+ * Button in navigation was fired
+ * @param identifier {String} identifier of the button
+ */
+tableButtonClicked(identifier) {
+    this.tableOutput = `Table button was clicked! ${identifier}`;
+},
+```
+
+
+
+
+For a fully operational example of `PawTable` please check `Paw`'s [App.vue file](https://github.com/revendo/paw/blob/dev/src/App.vue).
+

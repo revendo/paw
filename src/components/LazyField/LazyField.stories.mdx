@@ -1,0 +1,164 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs'
+import PawLazyField from './LazyField'
+
+<Meta title="Components/PawLazyField/Date formatting" component={PawLazyField} />
+
+# Date & time formatting of LazyField
+
+The parsing and representation of dates and times in **PawLazyField** is handled by <a href="https://momentjs.com/" target="_blank" rel="noopener" title="Open in a new tab">Moment.js</a>, a library to parse, validate, manipulate and display dates and times in JavaScript.
+The formatting in **PawLazyField** depends on the input and the output formats:
+<br />
+
+## **Input format & language locale**
+The date or time value passed to the component **must match one of the formats** that is formed in combination with the **accepted input locales**. The input value is matched in `strict` mode against all possible formats and recognised languages and if a match is found, the value is parsed into a `moment` object.
+
+### Input locales
+ | Accepted input locale | Language |
+ | --------------------- | -------- |
+ | `en`                  | English  |
+ | `de`                  | German   |
+
+### Input `date` formats
+ | Accepted date format | Input (German)          | Input          (English) |
+ | -------------------- | ----------------------- | ------------------------ |
+ | YYYY M D             | 2022 3 28               |                          |
+ | D M YYYY             | 28 3 2022               |                          |
+ | D M YY               | 28 3 22                 |                          |
+ | YYYY-M-D             | 2022-3-28               |                          |
+ | D-M-YYYY             | 28-3-2022               |                          |
+ | D-M-YY               | 28-3-22                 |                          |
+ | YYYY.M.D             | 2022-3-28               |                          |
+ | D.M.YYYY             | 28-3-2022               |                          |
+ | D.M.YY               | 28-3-22                 |                          |
+ | dddd, D M YYYY       | Montag, 28 3 2022       | Monday, 28 3 2022        |
+ | dddd, D-M-YYYY       | Montag, 28-3-2022       | Monday, 28-3-2022        |
+ | dddd, D.M.YYYY       | Montag, 28.3.2022       | Monday, 28.3.2022        |
+ | Do MMMM YYYY         | 28. März 2022           | 28th March 2022          |
+ | dddd, Do MMMM YYYY   | Montag, 28. März 2022   | Monday, 28th March 2022  |
+
+### Input `time` formats
+ | Accepted time format | Input          | Description |
+ | -------------------- | -------------- | ----------- |
+ | kk:mm:ss             | 17:14:11       |             |
+ | kk:mm                | 17:14          |             |
+ | x                    | 1410715640579  | UNIX time   |
+
+### Input `datetime` formats
+ | Accepted datetime format    | Input (German)                 | Input (English)                  |
+ | --------------------------- | ------------------------------ | -------------------------------- |
+ | YYYY M D kk:mm:ss           | 2022 3 28 17:14:11             |                                  |
+ | D M YYYY kk:mm:ss           | 28 3 2022 17:14:11             |                                  |
+ | D M YY kk:mm:ss             | 28 3 22 17:14:11               |                                  |
+ | YYYY-M-D kk:mm:ss           | 2022-3-28 17:14:11             |                                  |
+ | D-M-YYYY kk:mm:ss           | 28-3-2022 17:14:11             |                                  |
+ | D-M-YY kk:mm:ss             | 28-3-22 17:14:11               |                                  |
+ | YYYY.M.D kk:mm:ss           | 2022-3-28 17:14:11             |                                  |
+ | D.M.YYYY kk:mm:ss           | 28-3-2022 17:14:11             |                                  |
+ | D.M.YY kk:mm:ss             | 28-3-22 17:14:11               |                                  |
+ | dddd, D M YYYY kk:mm:ss     | Montag, 28 3 2022 17:14:11     | Monday, 28 3 2022 17:14:11       |
+ | dddd, D-M-YYYY kk:mm:ss     | Montag, 28-3-2022 17:14:11     | Monday, 28-3-2022 17:14:11       |
+ | dddd, D.M.YYYY kk:mm:ss     | Montag, 28.3.2022 17:14:11     | Monday, 28.3.2022 17:14:11       |
+ | Do MMMM YYYY kk:mm:ss       | 28. März 2022 17:14:11         | 28th March 2022 17:14:11         |
+ | dddd, Do MMMM YYYY kk:mm:ss | Montag, 28. März 2022 17:14:11 | Monday, 28th March 2022 17:14:11 |
+ | YYYY M D kk:mm              | 2022 3 28 17:14                |                                  |
+ | D M YYYY kk:mm              | 28 3 2022 17:14                |                                  |
+ | D M YY kk:mm                | 28 3 22 17:14                  |                                  |
+ | YYYY-M-D kk:mm              | 2022-3-28 17:14                |                                  |
+ | D-M-YYYY kk:mm              | 28-3-2022 17:14                |                                  |
+ | D-M-YY kk:mm                | 28-3-22 17:14                  |                                  |
+ | YYYY.M.D kk:mm              | 2022-3-28 17:14                |                                  |
+ | D.M.YYYY kk:mm              | 28-3-2022 17:14                |                                  |
+ | D.M.YY kk:mm                | 28-3-22 17:14                  |                                  |
+ | dddd, D M YYYY kk:mm        | Montag, 28 3 2022 17:14        | Monday, 28 3 2022 17:14          |
+ | dddd, D-M-YYYY kk:mm        | Montag, 28-3-2022 17:14        | Monday, 28-3-2022 17:14          |
+ | dddd, D.M.YYYY kk:mm        | Montag, 28.3.2022 17:14        | Monday, 28.3.2022 17:14          |
+ | Do MMMM YYYY kk:mm          | 28. März 2022 17:14            | 28th March 2022 17:14            |
+ | dddd, Do MMMM YYYY kk:mm    | Montag, 28. März 2022 17:14    | Monday, 28th March 2022 17:14    |
+ | utc                         | 2022-03-28T17:14:11+01:00      |                                  |
+<br />
+
+## **Output format & browser language settings**
+The output format determines the way in which the `moment` object **will be rendered in the DOM**. The language settings of the user's browser are used to add a flavour to the date format, e.g. 28.3.2022 for German dates or 3/28/2022 for English dates.
+
+ | Data type | Format           | Representation (German)    | Representation (English)   |
+ | --------- | ---------------- | -------------------------- | -------------------------- |
+ | date      | dddd, l          | Montag, 28.3.2022          | Monday, 3/28/2022          |
+ | time      | kk:mm            | 17:14                      | 17:14                      |
+ | datetime  | dddd, l kk:mm:ss | Montag, 28.3.2022 17:14:11 | Monday, 3/28/2022 17:14:11 |
+<br />
+
+## **Examples**
+<br />
+
+### **Example of German formatted `date` input**
+Input value is formatted in German (click on **Show code** to display input value) and output value is formatted in user's browser language settings.
+<Canvas>
+    <Story id="pawlazyfield--date" />
+</Canvas>
+
+### **Example of English formatted `datetime` input**
+Input value is formatted in English (click on **Show code** to display input value) and output value is formatted in user's browser language settings.
+<Canvas>
+    <Story id="pawlazyfield--datetime" />
+</Canvas>
+
+### **Example of `time`**
+In this example, a `time` input containing seconds is formatted into a `kk:mm` time, so seconds are stripped out. All times are represented in 24h format.
+<Canvas>
+    <Story id="pawlazyfield--time" />
+</Canvas>
+
+### **Example of wrongly formatted `date` input**
+In this case, a `date` input contains an overflown day of month (29th February 2022 didn't exist). This makes <a href="https://momentjs.com/" target="_blank" rel="noopener" title="Open in a new tab">Moment.js</a> to evaluate it as a wrong format.
+<Canvas>
+    <Story id="pawlazyfield--overflown-date" />
+</Canvas>
+
+### **Example of wrongly formatted `datetime` input**
+In this case, a `datetime` input contains a weekday mismatch (28th March 2022 was a Monday and not a Tuesday).
+<Canvas>
+    <Story id="pawlazyfield--weekday-mismatch" />
+</Canvas>
+
+### **Example of wrongly formatted `date` input**
+And finally in this case, a `.` is missing between the month and the year values. The closest possible format is suggested in the error message.
+<Canvas>
+    <Story id="pawlazyfield--wrong-formatted-date" />
+</Canvas>
+
+## **Date & time settings**
+Both the accepted date & time input and output formats can be adjusted in the file **src/constants.js**:
+```js
+const momentFormats = {
+    date: {
+        /* Possible input formats */
+        formats: [
+            'YYYY M D',           // 2022 3 28
+            //...
+        ],
+
+        /* Output format */
+        format: 'dddd, l',        // Montag, 28.3.2022          Monday, 3/28/2022
+    },
+    time: {
+        /* Possible input formats */
+        formats: [
+            'kk:mm:ss', // 17:14:11
+            //...
+        ],
+
+        /* Output format */
+        format: 'kk:mm',// 17:14
+    },
+    datetime: {
+        /* Possible input formats */
+        formats: [
+            'YYYY M D kk:mm:ss',           // 2022 3 28 17:14:11
+            //...
+        ],
+
+        /* Output format */
+        format: 'dddd, l kk:mm:ss',     // Montag, 28.3.2022 17:14:11           Monday, 3/28/2022 17:14:11
+    },
+};
+```

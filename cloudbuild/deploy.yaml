@@ -1,0 +1,46 @@
+steps:
+# Build Components
+- name: node:16
+  entrypoint: npm
+  args: ['install']
+- name: node:16
+  entrypoint: npm
+  args: ['run', 'build']
+# Commit and Tag new build version on master
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: 'bash'
+  args: [
+      '-c',
+      "gcloud secrets versions access latest --secret=${_GITHUB_SECRET} --format='get(payload.data)' | tr '_-' '/+' | base64 -d > token.txt"
+  ]
+- name: 'gcr.io/$PROJECT_ID/github'
+  entrypoint: 'bash'
+  args:
+    - ./cloudbuild/scripts/check-version.sh
+    - ${_GITHUB_USER}
+    - $REPO_NAME
+- name: 'gcr.io/$PROJECT_ID/github'
+  entrypoint: 'bash'
+  args:
+    - ./cloudbuild/scripts/commit-tag-build.sh
+    - ${_GITHUB_USER}
+    - $REPO_NAME
+    - ${_GITHUB_SECRET}
+    - ${_GITHUB_USER_EMAIL}
+# Build Storybook
+- name: node:16
+  entrypoint: npm
+  args: ['install']
+- name: node:16
+  entrypoint: npm
+  args: ['run', 'build-storybook']
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy"]
+options:
+  logging: CLOUD_LOGGING_ONLY
+  # machineType: 'E2_HIGHCPU_8'
+substitutions:
+  _GITHUB_SECRET:
+  _GITHUB_USER:
+  _GITHUB_USER_EMAIL:
+timeout: 3600s

@@ -1,0 +1,266 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs'
+import PawCrazyInput from './CrazyInput'
+
+<Meta title="Components/PawCrazyInput/Data structure and event handling" component={PawCrazyInput} />
+
+# Data structure
+
+After typing in the `PawCrazyInput` (variations [select](?path=/docs/pawcrazyinput--select-email) or [multiselect](?path=/docs/pawcrazyinput--multiselect-team-member)), an event called `typed` is triggered. This event can be used to perform a search against the DB by means of the API. The results of this search **must comply with a specific data structure**. The **prop** used to pass the search results to the `PawCrazyInput` is called `data`:
+
+```js
+data: [
+    {
+        id: 1,
+        value: 'jakob.baranowski@revendo.ch',
+    },
+    {
+        id: 2,
+        value: 'jonathan.miskolczy@revendo.ch',
+        extraIcon: 'pets',
+        extraLabel: 'CHF',
+    },
+    {
+        id: 3,
+        value: 'gerard.figols@revendo.ch',
+    },
+    {
+        id: 4,
+        value: 'christian.rickenbacher@revendo.ch',
+        extraIcon: 'ac_unit',
+        extraLabel: 'EUR',
+    },
+    {
+        id: 5,
+        value: 'dragan.rapic@revendo.ch',
+    },
+    {
+        id: 6,
+        value: 'tino.zorotovic@revendo.ch',
+    },
+    {
+        id: 7,
+        value: 'simun.radmanlivaja@revendo.ch',
+    },
+    {
+        id: 8,
+        value: 'jerko.zaneta@revendo.ch',
+    },
+]
+```
+Each search result is an object which contains the following properties:
+
+### Mandatory properties:
+- `id` It identifies uniquely the search result and can be of the type `String` or `Number` or an alphanumeric string.
+- `value` This is the text value displayed as an option in the dropdown. It must be of the type `String` or `Number`. Objects are not accepted.
+
+### Optional properties:
+Since each option shown in the dropdown of a `PawCrazyInput` uses in turn a `PawCrazyInput` to be displayed (🤪&nbsp;&nbsp;crazy, isn't it?), the following properties can be added to each search result independently, as it would be normally done in a **CrazyInput**:
+
+- `readonly` Set to `true` by default, this is the only possible state of an option. This means, options are not editable.
+- `disabled` Tells whether the option is disabled.
+- `multiline` Tells whether the option text should be formatted in multiple lines. An ellipsis is applied to the overflown text by default.
+- `extraLabel` [See documentation](?path=/docs/pawcrazyinput--ellipsis) for more details.
+- `extraIcon` [See documentation](?path=/docs/pawcrazyinput--ellipsis) for more details.
+- `extraIconOutlined` [See documentation](?path=/docs/pawcrazyinput--ellipsis) for more details.
+- `extraPosition` [See documentation](?path=/docs/pawcrazyinput--ellipsis) for more details.
+- `contextPosition` [See documentation](?path=/docs/pawcrazyinput--ellipsis) for more details.
+
+> #### **Example of extended search result**
+> The following search result will be displayed in multiple lines. The left (custom control) and right elements (label and icon) will be vertically centered.
+>
+> ```js
+> {
+>    id: 3,
+>    value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ornare justo eget ultricies ultrices. Sed lorem nibh, feugiat ut felis ut, hendrerit interdum ligula. Aenean sagittis urna in dui posuere facilisis. Donec pretium nisl id egestas ullamcorper. Nam blandit nec eros eget pellentesque.',
+>    extraIcon: 'account_circle',
+>    extraLabel: 'EUR',
+>    multiline: true,
+>    extraPosition: 'center',
+>    extraIconOutlined: true,
+>    contextPosition: 'center',
+> }
+> ```
+
+This results in the following:
+
+<img src="./img/Crazy-Input-Multiselect-Multiline-Centered-Option.png" alt="Multiline Option" />
+
+# Event handling
+
+As a general rule, the crazy input component **does not modify none of the input data** it receives through the props, but it just displays the data as search results in a dropdown list:
+
+> **How to use**:
+> After typing something in, close and open dropdown again with rightmost icon in order to see the options.
+
+<Canvas>
+    <Story id="pawcrazyinput--multiselect-team-member" />
+</Canvas>
+
+In order to capture the actions that a user may perform in the crazy input, several events are emitted.
+
+## `typed`
+
+This event is fired immediately after and each time that some text has been typed in the text input of the `PawCrazyInput` component. Since we want a list of suggestions or search results to be displayed below the text input in the dropdown, this event is the most suitable for initiating a search.
+A method called `search` can be implemented as follows to achieve this purpose:
+
+```html
+<PawCrazyInput
+    @typed="term => search(term)"
+    :data="results"
+    multiselect
+    label="Crazy Input Multiselect"
+    placeholder="Search team member"
+    context-icon="search">
+</PawCrazyInput>
+```
+
+### Search against a set of existing data
+
+**data**
+```js
+data() {
+    return {
+        searchData:
+        [
+            {
+                id: 1,
+                value: 'Jakob Baranowski',
+            },
+            {
+                id: 2,
+                value: 'Jonathan Miskolczy',
+                extraIcon: 'pets',
+                extraLabel: 'CHF',
+            },
+            {
+                id: 3,
+                value: 'Gerard Fígols',
+                extraIcon: 'ac_unit',
+                extraLabel: 'EUR',
+            },
+            {
+                id: 4,
+                value: 'Christian Rickenbacher',
+            },
+            {
+                id: 5,
+                value: 'Dragan Rapić',
+            },
+            {
+                id: 6,
+                value: 'Tino Zorotović',
+            },
+            {
+                id: 7,
+                value: 'Šimun Radman-Livaja',
+            },
+            {
+                id: 8,
+                value: 'Jerko Zaneta',
+            },
+        ]
+    }
+}
+```
+**search method**
+```js
+/**
+ * Perform a search of a term against a data object and set results composed by pairs of 'id' and 'value'
+ * @param term {String} Search term
+ * @param scope {String} Scope of the search (e.g. select data or multiselect data)
+ */
+search(term) {
+    // Perform search against a set of existing data
+    this.results = this.searchData.filter(
+        item => item.value.toLowerCase().indexOf(term.toLowerCase()) !== -1
+    );
+    const numResults = this.results.length;
+    console.log(`Loaded ${numResults} result${numResults !== 1 ? 's' : ''}.`);
+
+    this.results = axios.results;
+}
+```
+
+### Search against a DB by means of an API
+
+**search method**
+```js
+/**
+ * Perform a search of a term against a DB and set results composed by pairs of 'id' and 'value'
+ * @param term {String} Search term
+ * @param scope {String} Scope of the search (e.g. select data or multiselect data)
+ */
+search(term) {
+    try {
+        // Perform request
+        let response = await foxAPI.foxMdata.listLegalEntities({ data });
+        // Get legal entities object
+        const legalEntities = response.data.data;
+
+        // Fill search results object
+        for (const entity of legalEntities) {
+            this.results.push({
+                id: entity.id,
+                email: entity.name,
+            });
+        }
+
+        const numResults = this.results.length;
+        console.log(`Loaded ${numResults} result${numResults !== 1 ? 's' : ''}.`);
+    } catch (error) {
+        console.log(error);
+    }
+}
+```
+
+## `selected`
+
+This event is fired every time that an option is selected (or removed, in the case of the multiselect variation). A parameter is passed containing the current selected options.
+An example of implementation might look like this:
+
+```html
+<PawCrazyInput
+    @selected="v => select(v)"
+    :data="results"
+    multiselect
+    label="Crazy Input Multiselect"
+    placeholder="Search team member"
+    context-icon="search">
+</PawCrazyInput>
+```
+
+```js
+select(items) {
+    console.log(items);
+}
+```
+
+**Example of output:**
+```json
+[ { "id": 2, "value": "Jonathan Miskolczy", "extraIcon": "pets", "extraLabel": "CHF" }, { "id": 1, "value": "Jakob Baranowski" } ]
+```
+
+## `cancelled`
+
+This event is triggered when either the search loading is cancelled, the dropdown is closed or the whole input text is deleted. A good idea would be to use this event to cancel the ongoing requests to the API.
+
+```html
+<PawCrazyInput
+    @cancelled="cancel"
+    :data="results"
+    multiselect
+    label="Crazy Input Multiselect"
+    placeholder="Search team member"
+    context-icon="search">
+</PawCrazyInput>
+```
+
+```js
+cancel() {
+    console.log('Loading of results was cancelled.');
+    // Reset array of results
+    this.results = [];
+    // Cancel current request to API here
+    // ...
+}
+```

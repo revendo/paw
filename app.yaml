@@ -1,0 +1,14 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+  - url: /
+    static_files: storybook-static/index.html
+    upload: storybook-static/index.html
+
+  - url: /(.*)
+    static_files: storybook-static/\1
+    upload: storybook-static/(.*)
+
+    
