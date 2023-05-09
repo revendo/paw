@@ -1,4 +1,6 @@
-env: {
-    node: true,
-    es2022: true,
+{
+  "env": {
+    "node": true,
+    "es2022": true
+  }
 }

@@ -11,12 +11,17 @@
     "create-index-files": "node scripts/create-index-files.js",
     "storybook": "storybook dev -p 6006"
   },
-  "main": "./index.js",
-  "module": "./index.js",
+  "main": "./dist/paw.umd.cjs",
+  "module": "./dist/paw.js",
   "files": [
-    "src/*",
-    "index.js"
+    "dist"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/paw.js",
+      "require": "./dist/paw.umd.cjs"
+    }
+  },
   "dependencies": {
     "@storybook/addon-styling": "^1.0.3",
     "@vitejs/plugin-vue": "^4.2.1",
