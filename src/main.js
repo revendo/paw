@@ -6,6 +6,6 @@ import './assets/tailwind.css';
 
 const app = createApp(App);
 
-app .use(VueClipboard)
+app.use(VueClipboard)
     .use(i18n)
     .mount('#app');

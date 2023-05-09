@@ -1053,25 +1053,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 <script>
 // Test components
-import PawColorSwatches from "@/tests/ColorSwatches";
-import PawTypography from "@/tests/Typography";
+import PawColorSwatches from "@/doc/ColorSwatches.vue";
+import PawTypography from "@/doc/Typography.vue";
 
 // Library components
-import PawIcon from "@/components/Icon/Icon";
-import PawDropdown from "@/components/Dropdown/Dropdown";
-import PawButton from "@/components/Button/Button";
-import PawChip from "@/components/Chip/Chip";
-import PawLabel from "@/components/Label/Label";
-import PawLink from "@/components/Link/Link";
-import PawListItem from "@/components/NavigationList/ListItem";
-import PawList from "@/components/NavigationList/List";
-import PawCheckbox from "@/components/Checkbox/Checkbox";
-import PawRadio from "@/components/Radio/Radio";
-import PawSwitch from "@/components/Switch/Switch";
-import PawCrazyInput from "@/components/CrazyInput/CrazyInput";
-import PawLazyField from "@/components/LazyField/LazyField";
-import PawTable from "@/components/Table/Table";
-import PawDatepicker from "@/components/Datepicker/Datepicker";
+import PawIcon from "@/components/Icon/Icon.vue";
+import PawDropdown from "@/components/Dropdown/Dropdown.vue";
+import PawButton from "@/components/Button/Button.vue";
+import PawChip from "@/components/Chip/Chip.vue";
+import PawLabel from "@/components/Label/Label.vue";
+import PawLink from "@/components/Link/Link.vue";
+import PawListItem from "@/components/NavigationList/ListItem.vue";
+import PawList from "@/components/NavigationList/List.vue";
+import PawCheckbox from "@/components/Checkbox/Checkbox.vue";
+import PawRadio from "@/components/Radio/Radio.vue";
+import PawSwitch from "@/components/Switch/Switch.vue";
+import PawCrazyInput from "@/components/CrazyInput/CrazyInput.vue";
+import PawLazyField from "@/components/LazyField/LazyField.vue";
+import PawTable from "@/components/Table/Table.vue";
+import PawDatepicker from "@/components/Datepicker/Datepicker.vue";
 
 export default {
   name: "App",
