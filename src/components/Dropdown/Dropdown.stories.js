@@ -1,5 +1,5 @@
 import "../../assets/tailwind.css";
-import PawDropdown from "./Dropdown";
+import PawDropdown from "./DropDown";
 import { componentProps } from "../../index.js";
 
 export default {
