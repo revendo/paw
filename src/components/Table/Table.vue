@@ -517,7 +517,7 @@ import PawLazyField from "../LazyField/LazyField.vue";
 import PawIcon from "../Icon/Icon.vue";
 import PawLink from "../Link/Link.vue";
 import PawLabel from "../Label/Label.vue";
-import PawDropdown from "../Dropdown/Dropdown.vue";
+import PawDropdown from "../Dropdown/DropDown.vue";
 import PawCrazyInput from "../CrazyInput/CrazyInput.vue";
 import { languagePreference } from "../../constants";
 import { useI18n } from "vue-i18n";
