@@ -389,12 +389,12 @@
 </template>
 
 <script>
-import PawIcon from "../Icon/Icon";
-import PawLink from "../Link/Link";
-import PawCheckbox from "../Checkbox/Checkbox";
-import PawRadio from "../Radio/Radio";
-import PawChip from "../Chip/Chip";
-import PawButton from "../Button/Button";
+import PawIcon from "../Icon/Icon.vue";
+import PawLink from "../Link/Link.vue";
+import PawCheckbox from "../Checkbox/Checkbox.vue";
+import PawRadio from "../Radio/Radio.vue";
+import PawChip from "../Chip/Chip.vue";
+import PawButton from "../Button/Button.vue";
 import { useI18n } from "vue-i18n";
 
 // Number of loading items

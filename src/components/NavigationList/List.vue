@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import PawListItem from './ListItem';
+import PawListItem from './ListItem.vue';
 
 export default {
     name: 'PawList',

@@ -114,7 +114,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 <script setup>
 /* eslint-disable */
-import PawIcon from "../Icon/Icon";
+import PawIcon from "../Icon/Icon.vue";
 import { detect } from "detect-browser";
 import moment from "moment";
 import { ref } from "vue";
