@@ -1,5 +1,5 @@
 import '../../assets/tailwind.css';
-import PawCrazyInput from './CrazyInput'
+import PawCrazyInput from './index'
 import { componentProps } from '../../index.js'
 
 export default {

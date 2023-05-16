@@ -1,5 +1,5 @@
 import '../assets/tailwind.css';
-import PawTypography from './Typography'
+import PawTypography from './Typography.vue'
 import { componentProps } from '../index.js'
 
 export default {

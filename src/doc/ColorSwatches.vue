@@ -20,9 +20,9 @@
 
 <script>
 import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from '../../tailwind.config.js'
-
+import tailwindConfig from '@tailwindConfig'
 const fullConfig = resolveConfig(tailwindConfig)
+
 
 export default {
     name: 'PawColorSwatches',

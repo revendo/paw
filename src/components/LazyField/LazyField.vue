@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import PawIcon from '../Icon/Icon';
+import PawIcon from '../Icon/Icon.vue';
 import creditCardType from 'credit-card-type';
 import moment from 'moment';
 import { actionIcons, defaultLanguageLocale, languagePreference, creditCardMinDigits, momentFormats } from '../../constants';

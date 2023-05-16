@@ -1,3 +1,3 @@
-import PawDatepicker from './Datepicker.vue'
+import PawDatepicker from './DatePicker.vue'
 
 export default PawDatepicker

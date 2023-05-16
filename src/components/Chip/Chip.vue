@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import PawIcon from "../Icon/Icon";
+import PawIcon from "../Icon/Icon.vue";
 
 export default {
   name: "PawChip",

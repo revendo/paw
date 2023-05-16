@@ -1,5 +1,5 @@
 import "../../assets/tailwind.css";
-import PawTable from "./Table";
+import PawTable from "./index";
 import { componentProps } from "../../index.js";
 
 export default {

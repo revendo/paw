@@ -46,8 +46,8 @@
 
 <script setup>
 /* eslint-disable */
-import PawIcon from "../Icon/Icon";
-import PawButton from "../Button/Button";
+import PawIcon from "../Icon/Icon.vue";
+import PawButton from "../Button/Button.vue";
 import { ref } from "vue";
 
 const popoverClass = ref("right-0");

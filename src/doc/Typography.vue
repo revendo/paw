@@ -38,6 +38,7 @@ import tailwindConfig from '../../tailwind.config.js'
 
 const fullConfig = resolveConfig(tailwindConfig)
 
+
 export default {
     name: 'PawTypography',
     props: ['view'],

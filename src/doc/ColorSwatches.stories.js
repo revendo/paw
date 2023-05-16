@@ -1,5 +1,5 @@
 import '../assets/tailwind.css';
-import PawColorSwatches from './ColorSwatches'
+import PawColorSwatches from './ColorSwatches.vue'
 import { componentProps } from '../index.js'
 
 export default {

@@ -18,27 +18,6 @@
             @clicked="darkMode = true"
           ></PawButton>
         </div>
-
-        <h1
-          class="prose-xxl mt-10 mb-5 text-gray-900 dark:text-white transition"
-        >
-          Color Swatches
-        </h1>
-        <PawColorSwatches
-          :bg-color="{ color: 'white', border: 'gray-200' }"
-          :bg-color-dark="{ color: 'gray-800', border: 'gray-600' }"
-        ></PawColorSwatches>
-
-        <div class="max-w-2xl w-full mx-auto">
-          <h1
-            class="prose-xxl mt-10 mb-5 text-gray-900 dark:text-white transition"
-          >
-            Typography
-          </h1>
-          <PawTypography view="sizes"></PawTypography>
-          <PawTypography view="context" class="mt-10"></PawTypography>
-        </div>
-
         <div class="max-w-2xl w-full mx-auto">
           <h1
             class="text-xxl mt-10 mb-5 text-gray-900 dark:text-white transition"
@@ -756,7 +735,6 @@
           </div>
         </div>
 
-
         <div class="max-w-2xl w-full mx-auto">
           <h1
             class="text-xxl mt-10 mb-5 text-gray-900 dark:text-white transition"
@@ -900,7 +878,9 @@
           <div
             class="bg-success-100 dark:bg-success-800 text-success-800 dark:text-success-100 p-4 mb-5 rounded-md transition"
           >
-            <strong>Searchbar output: </strong><span> {{ tableSearchInput }}</span><br />
+            <strong>Searchbar output: </strong
+            ><span> {{ tableSearchInput }}</span
+            ><br />
             <strong>Selected records:</strong> {{ selectedRecords }}<br />
             <strong>Events output:</strong> <span v-html="tableOutput"></span>
           </div>
@@ -1052,32 +1032,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 </style>
 
 <script>
-// Test components
-import PawColorSwatches from "@/tests/ColorSwatches";
-import PawTypography from "@/tests/Typography";
-
 // Library components
-import PawIcon from "@/components/Icon/Icon";
-import PawDropdown from "@/components/Dropdown/Dropdown";
-import PawButton from "@/components/Button/Button";
-import PawChip from "@/components/Chip/Chip";
-import PawLabel from "@/components/Label/Label";
-import PawLink from "@/components/Link/Link";
-import PawListItem from "@/components/NavigationList/ListItem";
-import PawList from "@/components/NavigationList/List";
-import PawCheckbox from "@/components/Checkbox/Checkbox";
-import PawRadio from "@/components/Radio/Radio";
-import PawSwitch from "@/components/Switch/Switch";
-import PawCrazyInput from "@/components/CrazyInput/CrazyInput";
-import PawLazyField from "@/components/LazyField/LazyField";
-import PawTable from "@/components/Table/Table";
-import PawDatepicker from "@/components/Datepicker/Datepicker";
+import PawIcon from "@/components/Icon/Icon.vue";
+import PawDropdown from "@/components/Dropdown/Dropdown.vue";
+import PawButton from "@/components/Button/Button.vue";
+import PawChip from "@/components/Chip/Chip.vue";
+import PawLabel from "@/components/Label/Label.vue";
+import PawLink from "@/components/Link/Link.vue";
+import PawListItem from "@/components/NavigationList/ListItem.vue";
+import PawList from "@/components/NavigationList/List.vue";
+import PawCheckbox from "@/components/Checkbox/Checkbox.vue";
+import PawRadio from "@/components/Radio/Radio.vue";
+import PawSwitch from "@/components/Switch/Switch.vue";
+import PawCrazyInput from "@/components/CrazyInput/CrazyInput.vue";
+import PawLazyField from "@/components/LazyField/LazyField.vue";
+import PawTable from "@/components/Table/Table.vue";
+import PawDatepicker from "@/components/Datepicker/Datepicker.vue";
 
 export default {
   name: "App",
   components: {
-    PawColorSwatches,
-    PawTypography,
     PawIcon,
     PawButton,
     PawChip,
