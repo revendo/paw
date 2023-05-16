@@ -23,6 +23,7 @@ import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from '@tailwindConfig'
 const fullConfig = resolveConfig(tailwindConfig)
 
+
 export default {
     name: 'PawColorSwatches',
     props: {

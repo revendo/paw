@@ -1,5 +1,5 @@
 import '../../assets/tailwind.css';
-import PawLazyField from './LazyField'
+import PawLazyField from './index'
 import { componentProps } from '../../index.js'
 
 export default {

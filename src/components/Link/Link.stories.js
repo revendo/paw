@@ -1,5 +1,5 @@
 import '../../assets/tailwind.css';
-import PawLink from './Link'
+import PawLink from './index'
 import { componentProps } from '../../index.js'
 
 export default {

@@ -1,5 +1,5 @@
 import '../../assets/tailwind.css';
-import PawIcon from './Icon'
+import PawIcon from './index'
 import { componentProps } from '../../index.js'
 
 export default {
