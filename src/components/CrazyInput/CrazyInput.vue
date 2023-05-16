@@ -209,7 +209,7 @@
               type="text"
               v-model="inputValue"
               ref="textInput"
-              @click="type"
+              
               @input="type"
               @focus="outlineContainer(true)"
               @blur="outlineContainer(false)"
