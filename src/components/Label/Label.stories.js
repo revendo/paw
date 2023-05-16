@@ -1,5 +1,5 @@
 import '../../assets/tailwind.css';
-import PawLabel from './Label'
+import PawLabel from './index'
 import { componentProps } from '../../index.js'
 
 export default {

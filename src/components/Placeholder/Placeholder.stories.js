@@ -1,5 +1,5 @@
 import '../../assets/tailwind.css';
-import PawPlaceholder from './Placeholder'
+import PawPlaceholder from './index'
 import { componentProps } from '../../index.js'
 
 export default {

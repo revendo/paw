@@ -36,8 +36,11 @@ module.exports = {
     ],
     staticDirs: ["../src/assets"],
     framework: {
-        name: "@storybook/vue3-webpack5",
+        name: "@storybook/vue3-vite",
         options: {},
+    },
+    core: {
+        builder: "@storybook/builder-vite",
     },
     docs: {
         autodocs: true,

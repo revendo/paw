@@ -1,5 +1,5 @@
 import "../../assets/tailwind.css";
-import PawDatepicker from "./DatePicker";
+import PawDatepicker from "./index";
 import { componentProps } from "../../index.js";
 
 export default {

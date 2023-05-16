@@ -1,5 +1,5 @@
 import '../../assets/tailwind.css';
-import PawSwitch from './Switch'
+import PawSwitch from './index'
 import { componentProps } from '../../index.js'
 
 export default {

@@ -1,5 +1,5 @@
 import '../../assets/tailwind.css';
-import PawCheckbox from './Checkbox'
+import PawCheckbox from './index'
 import { componentProps } from '../../index.js'
 
 export default {

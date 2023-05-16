@@ -1,5 +1,5 @@
 import '../../assets/tailwind.css';
-import PawRadio from './Radio'
+import PawRadio from './index'
 import { componentProps } from '../../index.js'
 
 export default {

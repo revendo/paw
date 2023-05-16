@@ -25,7 +25,7 @@ export const decorators = [(story) => ({
   template: '<div class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-5 antialiased"><story /></div>'
 })];
 
-import { setup } from "@storybook/vue3";
+import { setup } from '@storybook/vue3';
 import i18n from '../src/i18n'
 
 setup((app) => {
