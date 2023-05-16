@@ -6644,7 +6644,7 @@ O.HTML5_FMT = {
   MONTH: "YYYY-MM"
   // <input type="month" />
 };
-const Kf = (e) => (js("data-v-3c26ffd3"), e = e(), Bs(), e), Xf = {
+const Kf = (e) => (js("data-v-ee12da86"), e = e(), Bs(), e), Xf = {
   key: 0,
   class: "flex flex-row"
 }, Qf = {
@@ -6792,7 +6792,7 @@ const Kf = (e) => (js("data-v-3c26ffd3"), e = e(), Bs(), e), Xf = {
       ], 64))
     ], 512));
   }
-}, Im = /* @__PURE__ */ ve(uh, [["__scopeId", "data-v-3c26ffd3"]]), dh = { class: "relative w-fit" }, fh = { class: "flex flex-col" }, hh = ["onClick"], mh = { class: "" }, gh = {
+}, Im = /* @__PURE__ */ ve(uh, [["__scopeId", "data-v-ee12da86"]]), dh = { class: "relative w-fit" }, fh = { class: "flex flex-col" }, hh = ["onClick"], mh = { class: "" }, gh = {
   props: {
     items: {
       type: Array,
@@ -8045,7 +8045,7 @@ const im = {
       immediate: !0
     }
   }
-}, lm = (e) => (js("data-v-34a5eebd"), e = e(), Bs(), e), om = ["title"], cm = ["checked", "disabled"], um = /* @__PURE__ */ lm(() => /* @__PURE__ */ P("span", { class: "relative w-8 h-5 m-0.5 shrink-0 self-start bg-gray-400 peer-disabled:bg-gray-200 dark:peer-disabled:bg-gray-600 peer-checked:bg-action-500 dark:peer-checked:bg-action-500 rounded-full transition" }, [
+}, lm = (e) => (js("data-v-158ee7e1"), e = e(), Bs(), e), om = ["title"], cm = ["checked", "disabled"], um = /* @__PURE__ */ lm(() => /* @__PURE__ */ P("span", { class: "relative w-8 h-5 m-0.5 shrink-0 self-start bg-gray-400 peer-disabled:bg-gray-200 dark:peer-disabled:bg-gray-600 peer-checked:bg-action-500 dark:peer-checked:bg-action-500 rounded-full transition" }, [
   /* @__PURE__ */ P("span", { class: "block w-4 h-4 bg-white m-0.5 rounded-full shadow-box dark:shadow-box-dark transition" })
 ], -1));
 function dm(e, t, n, r, s, a) {
@@ -8077,7 +8077,7 @@ function dm(e, t, n, r, s, a) {
     ], 2)) : N("", !0)
   ], 10, om);
 }
-const Pm = /* @__PURE__ */ ve(im, [["render", dm], ["__scopeId", "data-v-34a5eebd"]]), fm = 8, hm = 5, mm = {
+const Pm = /* @__PURE__ */ ve(im, [["render", dm], ["__scopeId", "data-v-158ee7e1"]]), fm = 8, hm = 5, mm = {
   name: "PawTable",
   emits: [
     "filtered",
@@ -8783,8 +8783,8 @@ export {
   Gs as PawCheckbox,
   Di as PawChip,
   Lo as PawCrazyInput,
-  Im as PawDatepicker,
-  gh as PawDropdown,
+  Im as PawDatePicker,
+  gh as PawDropDown,
   ze as PawIcon,
   kh as PawLabel,
   Qh as PawLazyField,
