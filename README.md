@@ -1,6 +1,8 @@
 # paw
 Paw, the Design System for 🦊
 
+*Other contributors: [@gerardfigols](https://github.com/gerardfigols)*
+
 ### How to import Paw into a Vue project
 1. Add following line to your `package.json` dependencies:
 ```json
