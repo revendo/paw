@@ -150,6 +150,7 @@
                     title="Button's title"
                     :outlined="subtype.outlined"
                     :disabled="subtype.disabled"
+                    :loading="false"
                     @clicked="
                       clickedButton = `Size: ${size} – Icon: ${
                         type.icon !== null
