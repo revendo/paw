@@ -209,7 +209,6 @@
               type="text"
               v-model="inputValue"
               ref="textInput"
-              
               @input="type"
               @focus="outlineContainer(true)"
               @blur="outlineContainer(false)"
@@ -414,6 +413,7 @@ export default {
     "optionMoved",
     "optionTyped",
     "dropdownClosed",
+    "keyDownEnter",
   ],
   data() {
     return {
@@ -837,10 +837,19 @@ export default {
             this.showingResults = false;
             this.cancelLoading();
             break;
+
+          case "Enter":
+            // Exit
+            console.log(this.$refs.textInput);
+            console.log("asda");
+
+            // Emit enter pressed
+            this.$emit("keyDownEnter");
+            break;
         }
       }
       // Events within dropdown
-      if (this.readonly) {
+      else if (this.readonly) {
         switch (event.code) {
           case "Enter":
             switch (this.contextControl) {
@@ -888,6 +897,20 @@ export default {
             }
             break;
         }
+      } else {
+        event: switch (event.code) {
+          case "Enter":
+            // Exit input
+            this.unFocusInputElement();
+
+            // Emit enter pressed
+            this.$emit("keyDownEnter");
+            break;
+          case "Escape":
+            // Exit input
+            this.unFocusInputElement();
+            break;
+        }
       }
     },
 
@@ -908,6 +931,7 @@ export default {
     },
     unFocusTextInput() {
       this.$refs.textInput.blur();
+      console.log("blur");
     },
 
     getOptionId(item) {
