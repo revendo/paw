@@ -614,6 +614,7 @@
                   this.crazyInputCopy = v;
                 }
               "
+              @keyDownEnter="keyDownEventHandler('enter')"
               context-control="radio"
               placeholder="Initial content"
               label="Crazy Input"
@@ -1611,6 +1612,10 @@ Schweiz`,
      */
     tableSearched(value) {
       this.tableSearchInput = value;
+    },
+
+    keyDownEventHandler(type) {
+      console.log(type);
     },
     openDatepicker(event) {
       const input = event.srcElement.previousElementSibling;
