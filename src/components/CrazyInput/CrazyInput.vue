@@ -839,10 +839,8 @@ export default {
             break;
 
           case "Enter":
-            // Exit
-            console.log(this.$refs.textInput);
-            console.log("asda");
-
+            // Exit input
+            this.unFocusInputElement();
             // Emit enter pressed
             this.$emit("keyDownEnter");
             break;
