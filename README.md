@@ -1,5 +1,17 @@
-# paw
+<div align="center">
+
+![logo](logo.png)
+
+<h3>
 Paw, the Design System for 🦊
+</h3>
+
+![GitHub Repo stars](https://img.shields.io/github/stars/revendo/paw)
+![Lines of code](https://img.shields.io/tokei/lines/github/revendo/paw)
+
+</div>
+
+---
 
 
 ## Installation
