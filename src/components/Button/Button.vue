@@ -1,11 +1,11 @@
 <template>
   <template v-if="loading">
     <div
-      class="flex items-center group max-w-full my-0 transition"
+      class="flex items-center group max-w-fit my-0 transition"
       disabled
       :class="setClassNames()"
       :title="title"
-    ><div class="h-1/2 w-full bg-gray-500 rounded-full"></div></div
+    ><div class="h-1/3 w-10 bg-gray-500 rounded-full"></div></div
   ></template>
   <template v-if="!loading">
     <button
