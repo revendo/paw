@@ -348,7 +348,7 @@
                 <PawLink
                   v-if="(!informal && !loading) || informal"
                   size="sm"
-                  :icon="!informal ? 'last_page' : 'assignment'"
+                  :icon="!informal ? 'last_page' : ctaIcon"
                   :outlined="informal"
                   color="action"
                   align="right"
@@ -577,6 +577,10 @@ export default {
     informal: {
       type: Boolean,
       default: false,
+    },
+    ctaIcon: {
+      type: String,
+      default: "assignment",
     },
     bgDark: {
       type: String,

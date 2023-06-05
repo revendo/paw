@@ -29,6 +29,10 @@ export default {
       description:
         "Set rendering mode of table to `informal`.<br><b>Shortcut:</b> `<PawTable informal></PawTable>`",
     },
+    ctaIcon: {
+      control: { type: "text" },
+      description: "Set click to action icon for informal table",
+    },
     bgDark: {
       control: { type: "text" },
       description:
