@@ -8349,6 +8349,10 @@ const sg = /* @__PURE__ */ De(Ym, [["render", Vm], ["__scopeId", "data-v-34a5eeb
       type: Boolean,
       default: !1
     },
+    ctaIcon: {
+      type: String,
+      default: "assignment"
+    },
     bgDark: {
       type: String,
       default: "bg-gray-800"
@@ -8854,7 +8858,7 @@ function tg(e, t, n, r, a, s) {
                 !n.informal && !n.loading || n.informal ? (y(), de(f, {
                   key: 0,
                   size: "sm",
-                  icon: n.informal ? "assignment" : "last_page",
+                  icon: n.informal ? n.ctaIcon : "last_page",
                   outlined: n.informal,
                   color: "action",
                   align: "right",
