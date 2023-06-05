@@ -195,7 +195,7 @@ const et = /* @__PURE__ */ De(Mi, [["render", Ii]]), Ci = {
       return this.loading ? "bg-gray-400 loading-bubble" : this.disabled ? "italic text-white dark:text-gray-800 bg-gray-200 dark:bg-gray-600 cursor-default pointer-events-none" : this.outlined ? "bg-white dark:bg-gray-800 text-gray-500 border border-gray-200 dark:border-gray-600 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 active:text-gray-500 dark:active:text-gray-500 active:bg-white dark:active:bg-gray-800 active:border-gray-400 dark:active:border-gray-400 focus:text-action-500 dark:focus:text-action-400 focus:border-action-500 dark:focus:border-action-400" : "bg-action-500 dark:bg-action-400 text-white hover:bg-action-300 dark:hover:bg-action-600 active:bg-action-500 dark:active:bg-action-400";
     }
   }
-}, Li = ["title"], Pi = /* @__PURE__ */ F("div", { class: "h-1/2 w-full bg-gray-500 rounded-full" }, null, -1), Yi = [
+}, Li = ["title"], Pi = /* @__PURE__ */ F("div", { class: "h-1/3 w-10 bg-gray-500 rounded-full" }, null, -1), Yi = [
   Pi
 ], Ri = ["title"], Ai = { class: "truncate" };
 function Fi(e, t, n, r, a, s) {
@@ -203,7 +203,7 @@ function Fi(e, t, n, r, a, s) {
   return y(), E(_e, null, [
     n.loading ? (y(), E("div", {
       key: 0,
-      class: D(["flex items-center group max-w-full my-0 transition", s.setClassNames()]),
+      class: D(["flex items-center group max-w-fit my-0 transition", s.setClassNames()]),
       disabled: "",
       title: n.title
     }, Yi, 10, Li)) : Y("", !0),
