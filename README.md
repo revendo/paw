@@ -9,6 +9,8 @@ Paw, the Design System for 🦊
 ![GitHub Repo stars](https://img.shields.io/github/stars/revendo/paw)
 ![Lines of code](https://img.shields.io/tokei/lines/github/revendo/paw)
 
+[![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)](https://paw.revendo.dev/)
+
 </div>
 
 ---
