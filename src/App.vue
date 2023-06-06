@@ -617,6 +617,7 @@
               "
               @keyDownEnter="keyDownEventHandler('enter')"
               context-control="radio"
+              secret
               placeholder="Initial content"
               label="Crazy Input"
               extra-label="Text"
@@ -910,6 +911,7 @@
                 },
               ]"
               :informal="informalTable"
+              ctaIcon="ac_unit"
               bg-light="bg-white"
               bg-dark="bg-gray-800"
               @buttonClicked="(identifier) => tableButtonClicked(identifier)"

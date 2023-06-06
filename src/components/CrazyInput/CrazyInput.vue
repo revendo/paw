@@ -206,7 +206,7 @@
 
             <input
               v-else
-              type="text"
+              :type="secret ? 'password' : 'text'"
               v-model="inputValue"
               ref="textInput"
               @input="type"
@@ -493,6 +493,9 @@ export default {
     },
     placeholder: {
       type: String,
+    },
+    secret: {
+      type: Boolean,
     },
     disabled: {
       type: Boolean,
@@ -1211,5 +1214,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+    background-color: transparent !important;
+}
+</style>
 
