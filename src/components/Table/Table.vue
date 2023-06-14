@@ -19,7 +19,7 @@
         'overflow-hidden': loading,
         'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 border-t border-l border-r rounded-t-xl translate-z-0':
           !informal,
-        'px-4': informal,
+        'px-0': informal,
       }"
     >
       <!-- Header - CTA & Title -->
@@ -184,6 +184,16 @@
               ]"
             >
               <PawLink
+                v-if="heading.sort == 'disabled'"
+                class="inline-flex uppercase"
+                size="sm"
+                align="right"
+                compact
+              >
+                {{ headingTitle(heading.title || heading.name) }}
+              </PawLink>
+              <PawLink
+                v-else
                 class="inline-flex uppercase"
                 size="sm"
                 align="right"
