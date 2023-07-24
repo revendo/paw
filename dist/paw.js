@@ -8431,7 +8431,7 @@ function Pm(e, t, n, r, s, a) {
       class: M(["overflow-y-auto max-h-full transition", {
         "overflow-hidden": n.loading,
         "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 border-t border-l border-r rounded-t-xl translate-z-0": !n.informal,
-        "px-0": n.informal
+        "px-4": n.informal
       }])
     }, [
       n.buttons.length || n.title ? (y(), w("div", {
