@@ -1,31 +1,32 @@
 <template>
-  <template v-if="loading">
-    <div
-      class="flex items-center group max-w-fit my-0 transition"
-      disabled
-      :class="setClassNames()"
-      :title="title"
-    ><div class="h-1/3 w-10 bg-gray-500 rounded-full"></div></div
-  ></template>
-  <template v-if="!loading">
-    <button
-      class="flex items-center group max-w-full my-0 transition"
-      :class="setClassNames()"
-      :title="title"
-      @click="click"
+  <div
+    v-if="loading"
+    class="flex items-center group max-w-fit my-0 transition"
+    disabled
+    :class="setClassNames()"
+    :title="title"
+  >
+    <div class="h-1/3 w-10 bg-gray-500 rounded-full"></div>
+  </div>
+  <button
+    v-else
+    class="flex items-center group max-w-full my-0 transition"
+    :class="setClassNames()"
+    :title="title"
+    @click="click"
+  >
+    <PawIcon
+      v-if="icon"
+      :size="size"
+      :outlined="outlined"
+      class="transition"
+      :class="setIconClassNames()"
+      >{{ icon }}</PawIcon
     >
-      <PawIcon
-        v-if="icon"
-        :size="size"
-        :outlined="outlined"
-        class="transition"
-        :class="setIconClassNames()"
-        >{{ icon }}</PawIcon
-      >
-      <span class="truncate">
-        <slot></slot>
-      </span></button
-  ></template>
+    <span class="truncate">
+      <slot></slot>
+    </span>
+  </button>
 </template>
 
 <script>
