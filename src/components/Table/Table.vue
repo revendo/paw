@@ -264,7 +264,11 @@
                 'pt-2 pb-2': informal,
               }"
             >
-              <PawCheckbox size="md" @changed="select($event, item.id)" />
+              <PawCheckbox
+                v-if="selectionEnabled"
+                size="md"
+                @changed="select($event, item.id)"
+              />
             </td>
 
             <td
@@ -605,6 +609,10 @@ export default {
       default: false,
     },
     searchbar: {
+      type: Boolean,
+      default: false,
+    },
+    selectionEnabled: {
       type: Boolean,
       default: false,
     },
