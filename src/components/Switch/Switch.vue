@@ -10,6 +10,7 @@
     :title="title"
   >
     <input
+      ref="switch"
       type="checkbox"
       @change="change"
       :checked="checked"
@@ -17,34 +18,11 @@
       class="peer hidden"
     />
     <span
-      class="
-        relative
-        w-8
-        h-5
-        m-0.5
-        shrink-0
-        self-start
-        bg-gray-400
-        peer-disabled:bg-gray-200
-        dark:peer-disabled:bg-gray-600
-        peer-checked:bg-action-500
-        dark:peer-checked:bg-action-500
-        rounded-full
-        transition
-      "
+      class="relative w-8 h-5 m-0.5 shrink-0 self-start bg-gray-400 peer-disabled:bg-gray-200 dark:peer-disabled:bg-gray-600 peer-checked:bg-action-500 dark:peer-checked:bg-action-500 rounded-full transition"
     >
       <span
-        class="
-          block
-          w-4
-          h-4
-          bg-white
-          m-0.5
-          rounded-full
-          shadow-box
-          dark:shadow-box-dark
-          transition
-        "
+        class="block w-4 h-4 bg-white m-0.5 rounded-full shadow-box dark:shadow-box-dark transition"
+        :class="this.$refs.switch?.checked ? 'translate-x-3' : 'translate-x-0'"
       >
       </span>
     </span>
@@ -109,9 +87,6 @@ export default {
 </script>
 
 <style scoped>
-.peer:checked + .relative .block {
-  @apply translate-x-3;
-}
 .peer:disabled + .relative .block {
   @apply dark:bg-gray-400;
 }
