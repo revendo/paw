@@ -29,6 +29,10 @@ export default {
       description:
         "Set rendering mode of table to `informal`.<br><b>Shortcut:</b> `<PawTable informal></PawTable>`",
     },
+    ctaIcon: {
+      control: { type: "text" },
+      description: "Set click to action icon for informal table",
+    },
     bgDark: {
       control: { type: "text" },
       description:
@@ -49,6 +53,12 @@ export default {
       description:
         "Enables searchbar in header of table. <br/><b>IMPORTANT</b> Only visible if title or buttons in the header section are set. Event @searched will be triggered on typing. <br><b>Shortcut:</b> `<PawTable searchbar></PawTable>`",
     },
+    selectionEnabled: {
+      control: { type: "boolean" },
+      description:
+        "Enables selection of a table row on formal tables.",
+    },
+    
     filtered: {
       description: "Triggered when heading's visibility is changed (filtered).",
     },

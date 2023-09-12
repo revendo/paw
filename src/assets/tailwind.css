@@ -1,48 +1,56 @@
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-    /* Transform */
-    .translate-z-0 {
-        transform: translateZ(0);
-    }
+  /* Transform */
+  .translate-z-0 {
+    transform: translateZ(0);
+  }
 }
 
 @layer components {
-    /* Margin block */
-    .element-text {
-        margin-block: 0;
-    }
-    .before\:element-text::before {
-        margin-block: 0 !important;
-    }
-    .after\:element-text::before {
-        margin-block: 0 !important;
-    }
+  /* Margin block */
+  .element-text {
+    margin-block: 0;
+  }
+  .before\:element-text::before {
+    margin-block: 0 !important;
+  }
+  .after\:element-text::before {
+    margin-block: 0 !important;
+  }
 
-    /* Input reset */
-    .input-reset {
-        @apply py-1.5 pl-2 w-full m-0 bg-transparent prose-md element-text outline-none border-none resize-none appearance-none;
-    }
+  /* Input reset */
+  .input-reset {
+    @apply py-1.5 pl-2 w-full m-0 bg-transparent prose-md element-text outline-none border-none resize-none appearance-none;
+  }
 
-    /* Table */
-    .table-informal {
-        border-spacing: 0 theme('spacing.2');
-    }
-    .fill-available {
-        width: 100%;
-        width: -moz-available;
-        width: -webkit-fill-available;
-        width: fill-available;
-        width: stretch;
-    }
+  /* Table */
+  .table-informal {
+    border-spacing: 0 theme("spacing.2");
+  }
+  .fill-available {
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: stretch;
+  }
 
-    /* Loading bubble */
-    .loading-bubble {
-        @apply block w-full rounded-md overflow-hidden pointer-events-none animate-loading;
-    }
+  /* Loading bubble */
+  .loading-bubble {
+    @apply block w-full rounded-md overflow-hidden pointer-events-none animate-loading;
+  }
+
+  /* Remove autocomplete formatting */
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+  input[data-autocompleted] {
+    background-color: transparent !important;
+  }
 }

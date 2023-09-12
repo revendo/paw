@@ -206,7 +206,7 @@
 
             <input
               v-else
-              type="text"
+              :type="secret ? 'password' : 'text'"
               v-model="inputValue"
               ref="textInput"
               @input="type"
@@ -493,6 +493,9 @@ export default {
     },
     placeholder: {
       type: String,
+    },
+    secret: {
+      type: Boolean,
     },
     disabled: {
       type: Boolean,
@@ -1210,6 +1213,4 @@ export default {
   },
 };
 </script>
-
-<style></style>
 
