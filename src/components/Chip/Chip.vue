@@ -106,7 +106,6 @@ export default {
       if (!this.icon) {
         switch (this.size) {
           case "sm":
-            console.log("here");
             className += " pl-2";
             break;
           case "md":
