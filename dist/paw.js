@@ -8113,7 +8113,7 @@ const um = ["title"], dm = ["checked", "disabled"], fm = { class: "relative w-8 
   setup(e) {
     const t = Me();
     return (n, r) => {
-      var s, a;
+      var s;
       return y(), w("label", {
         class: M(["group inline-flex items-center", {
           "cursor-pointer": !e.disabled,
@@ -8127,14 +8127,17 @@ const um = ["title"], dm = ["checked", "disabled"], fm = { class: "relative w-8 
           ref_key: "toggle",
           ref: t,
           type: "checkbox",
-          onChange: r[0] || (r[0] = (...i) => n.change && n.change(...i)),
+          onChange: r[0] || (r[0] = (...a) => n.change && n.change(...a)),
           checked: e.checked,
           disabled: e.disabled,
           class: "peer hidden"
         }, null, 40, dm),
         P("span", fm, [
           P("span", {
-            class: M(["block w-4 h-4 bg-white m-0.5 rounded-full shadow-box dark:shadow-box-dark transition", [(s = t.value) != null && s.checked ? "translate-x-3" : "translate-x-0", (a = t.value) != null && a.disabled ? "dark:bg-gray-400" : ""]])
+            class: M(["block w-4 h-4 bg-white m-0.5 rounded-full shadow-box dark:shadow-box-dark transition", [
+              n.value ? "translate-x-3" : "translate-x-0",
+              (s = t.value) != null && s.disabled ? "dark:bg-gray-400" : ""
+            ]])
           }, null, 2)
         ]),
         n.$slots.default ? (y(), w("span", {
@@ -8149,7 +8152,7 @@ const um = ["title"], dm = ["checked", "disabled"], fm = { class: "relative w-8 
       ], 10, um);
     };
   }
-}), Rm = /* @__PURE__ */ ve(mm, [["__scopeId", "data-v-c043c632"]]), gm = 8, ym = 5, bm = {
+}), Rm = /* @__PURE__ */ ve(mm, [["__scopeId", "data-v-5cd34538"]]), gm = 8, ym = 5, bm = {
   name: "PawTable",
   emits: [
     "filtered",
