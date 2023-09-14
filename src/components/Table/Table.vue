@@ -184,6 +184,16 @@
               ]"
             >
               <PawLink
+                v-if="heading.sort == 'disabled'"
+                class="inline-flex uppercase"
+                size="sm"
+                align="right"
+                compact
+              >
+                {{ headingTitle(heading.title || heading.name) }}
+              </PawLink>
+              <PawLink
+                v-else
                 class="inline-flex uppercase"
                 size="sm"
                 align="right"
@@ -254,7 +264,11 @@
                 'pt-2 pb-2': informal,
               }"
             >
-              <PawCheckbox size="md" @changed="select($event, item.id)" />
+              <PawCheckbox
+                v-if="selectionEnabled"
+                size="md"
+                @changed="select($event, item.id)"
+              />
             </td>
 
             <td
@@ -348,7 +362,7 @@
                 <PawLink
                   v-if="(!informal && !loading) || informal"
                   size="sm"
-                  :icon="!informal ? 'last_page' : 'assignment'"
+                  :icon="!informal ? 'last_page' : ctaIcon"
                   :outlined="informal"
                   color="action"
                   align="right"
@@ -578,6 +592,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    ctaIcon: {
+      type: String,
+      default: "assignment",
+    },
     bgDark: {
       type: String,
       default: "bg-gray-800",
@@ -591,6 +609,10 @@ export default {
       default: false,
     },
     searchbar: {
+      type: Boolean,
+      default: false,
+    },
+    selectionEnabled: {
       type: Boolean,
       default: false,
     },
