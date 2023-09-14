@@ -10,7 +10,7 @@
     :title="title"
   >
     <input
-      ref="switch"
+      ref="toggle"
       type="checkbox"
       @change="change"
       :checked="checked"
@@ -22,7 +22,8 @@
     >
       <span
         class="block w-4 h-4 bg-white m-0.5 rounded-full shadow-box dark:shadow-box-dark transition"
-        :class="this.$refs.switch?.checked ? 'translate-x-3' : 'translate-x-0'"
+        :class="[toggle?.checked ? 'translate-x-3' : 'translate-x-0', toggle?.disabled ? 'dark:bg-gray-400' : '']"
+        
       >
       </span>
     </span>
@@ -85,6 +86,12 @@ export default {
   },
 };
 </script>
+
+<script setup>
+import { ref } from "vue";
+const toggle = ref()
+</script>
+
 
 <style scoped>
 .peer:disabled + .relative .block {
