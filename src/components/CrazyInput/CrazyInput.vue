@@ -999,9 +999,16 @@ export default {
 
     updateDropdown() {
       if (this.select) {
-        this.selected = this.data.filter(
+        var checkSelected = this.data.filter(
           (item) => item.value === this.inputValue
         );
+        if (checkSelected !== this.selected) {
+          this.selected = checkSelected;
+          /** Emit because of new item selected */
+          this.$emit("selected", this.selected);
+        } else {
+          this.selected = checkSelected;
+        }
         return;
       }
       this.selected = this.arrayUnique(this.selected.concat(this.chips));
