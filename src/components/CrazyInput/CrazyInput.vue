@@ -1,9 +1,9 @@
 <template>
   <div
-    class="relative flex flex-col"
+    class="relative flex "
     :class="{
       'gap-1': !readonly,
-      'mb-44': this.dropdownWrap,
+      'mb-44 flex-col': this.dropdownWrap,
     }"
     ref="crazyInput"
   >
@@ -513,6 +513,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    inputRoundedClasses: {
+      type: String,
+    },
+    fullwidth: {
+      type: Boolean,
+      default: false,
+    },
 
     /* Search results (dropdown) */
     data: {
@@ -899,7 +906,7 @@ export default {
             break;
         }
       } else {
-        event: switch (event.code) {
+        switch (event.code) {
           case "Enter":
             // Exit input
             this.unFocusInputElement();
@@ -1174,10 +1181,15 @@ export default {
     setContainerClassNames() {
       let classNames = "";
 
+      let roundedClasses = this.inputRoundedClasses !== "" ? this.inputRoundedClasses : "rounded-md ";
+
       // Not readonly classes
       classNames += !this.readonly
-        ? "pr-0.75 border border-gray-200 dark:border-gray-600 rounded-md transition"
+        ? "pr-0.75 border border-gray-200 dark:border-gray-600 transition " + roundedClasses
         : "";
+
+      // Width
+      classNames += this.fullwidth ? " w-full " : "";
 
       // Padding
       if (

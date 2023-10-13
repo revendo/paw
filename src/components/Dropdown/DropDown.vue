@@ -8,6 +8,7 @@
       :icon="props.icon"
       :disabled="props.disabled"
       :outlined="props.outlined"
+      :buttonRoundedClasses="props.buttonRoundedClasses"
     >
       {{ props.textSlot }}
     </PawButton>
@@ -95,6 +96,9 @@ const props = defineProps({
   textSlot: {
     type: String,
   },
+  buttonRoundedClasses : {
+    type: String,
+  }
 });
 
 // States for component

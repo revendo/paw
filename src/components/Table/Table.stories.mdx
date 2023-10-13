@@ -50,6 +50,41 @@ buttons: [
 >
 > Represents the PawButton outlined state
 
+## **`searchDropdownItems`**
+
+Item list that is used in the search dropdown.
+
+```js
+searchDropdownItems: [
+    {
+        icon: 'phone',
+        textSlot: 'Telephone',
+        identifier: 'phone',
+    },
+    {
+        icon: 'mail',
+        textSlot: 'Email',
+        identifier: 'email',
+    },
+    {
+      icon: 'contact_phone',
+      textSlot: 'Name',
+      identifier: 'name',
+    },
+  ],
+```
+
+> #### **`identifier`**
+>
+> This will be the identifier which is also the payload of a click event callback
+>
+> #### **`textSlot`**
+>
+> Represents the dropdown item text slot
+>
+> #### **`icon`**
+>
+> Represents the dropdown item icon
 
 ## **`title`**
 
@@ -585,6 +620,31 @@ In the `PawTable` component:
  */
 tableButtonClicked(identifier) {
     this.tableOutput = `Table button was clicked! ${identifier}`;
+},
+```
+
+## `searchDropdownItemClicked`
+
+This event is fired when one of the search related dropdown items are clicked. 
+
+In the `PawTable` component:
+
+```vue
+<PawTable
+    @searchDropdownItemClicked="
+        (identifier) =>
+            searchDropdownClicked(identifier)
+    "
+></PawTable>
+```
+
+```js
+/**
+ * One of the dropdown items was clicked
+ * @param identifier {String} identifier of the dropdown item
+ */
+searchDropdownClicked(identifier) {
+    this.tableSearchDropdownText = `Searching by ${identifier}`
 },
 ```
 

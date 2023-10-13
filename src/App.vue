@@ -885,7 +885,8 @@
             ><span> {{ tableSearchInput }}</span
             ><br />
             <strong>Selected records:</strong> {{ selectedRecords }}<br />
-            <strong>Events output:</strong> <span v-html="tableOutput"></span>
+            <strong>Events output:</strong> <span v-html="tableOutput"></span><br />
+            <strong>Searching identifier (key):</strong> {{ tableSearchIdentifier }}
           </div>
           <div
             class="flex flex-col gap-8 justify-center bg-white dark:bg-gray-800 p-4 xs:p-8 rounded-3xl transition"
@@ -914,6 +915,21 @@
               ctaIcon="ac_unit"
               bg-light="bg-white"
               bg-dark="bg-gray-800"
+              :searchDropdownItems="[
+                {
+                    icon: 'numbers',
+                    textSlot: 'Code',
+                    identifier: 'code',
+                },
+                {
+                    icon: 'mail',
+                    textSlot: 'Email',
+                    identifier: 'email',
+                },
+              ]"
+              :searchDropdownText="tableDropdownText"
+              :inputRoundedClasses="'rounded-md rounded-l-none'"
+              :buttonRoundedClasses="'rounded-md rounded-r-none'"
               @buttonClicked="(identifier) => tableButtonClicked(identifier)"
               @filtered="
                 (headingName, headingPosition) =>
@@ -931,6 +947,7 @@
               "
               @paginated="paginateTable($event)"
               @searched="(v) => tableSearched(v)"
+              @searchDropdownItemClicked="(identifier) => searchDropdownClicked(identifier)"
             >
               <PawIcon
                 size="md"
@@ -1344,6 +1361,10 @@ export default {
 4053 Basel
 Schweiz`,
 
+      tableDropdownText: "Seach by",
+      
+      tableSearchIdentifier: "code",
+
       // Formal Table
       table: {
         meta: {
@@ -1534,7 +1555,9 @@ Schweiz`,
             position: 0,
             sort: "asc",
             visible: true,
-            format: "date",
+            format: "datetime",
+            unitIcon: "",
+            unitLabel: "",
           },
           {
             name: "invoice",
@@ -1567,7 +1590,7 @@ Schweiz`,
         items: [
           {
             id: 1,
-            date: "4.12.2021",
+            date: "2023-01-10T13:37:28.019514Z",
             invoice: "RA123456",
             amount: 128,
             status: {
@@ -1750,6 +1773,12 @@ Schweiz`,
 
     tableButtonClicked(identifier) {
       this.tableOutput = `Table button was clicked! ${identifier}`;
+    },
+
+    searchDropdownClicked(identifier) {
+      let searchText = identifier.charAt(0).toUpperCase() + identifier.slice(1);
+      this.tableSearchIdentifier = identifier;
+      this.tableDropdownText = searchText
     },
 
     activateLoadingMode(loading) {

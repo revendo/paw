@@ -24,11 +24,11 @@
     >
       <!-- Header - CTA & Title -->
       <div
-        v-if="buttons.length || title"
-        :class="{ 'px-0': informal, 'px-6': !informal }"
-        class="sticky inset-0 flex flex-row justify-between items-center mt-3 h-8 z-50 gap-3"
+        v-if="buttons.length || title || searchDropdownItems.length"
+        :class="{ 'px-0 mb-3 sm:mb-5': informal, 'px-6': !informal }"
+        class="sticky inset-0 flex flex-row justify-between items-center mt-3 h-fit sm:h-8 z-50 gap-3"
       >
-        <div>
+        <div :class="{'hidden sm:block' : searchDropdownItems.length}">
           <h1
             v-if="title"
             class="text-lg font-bold text-gray-500 dark:text-white whitespace-nowrap"
@@ -42,9 +42,9 @@
           class="md:flex flex-row gap-3 hidden"
         >
           <!-- Searchbar -->
-          <div class="flex flex-row">
+          <div class="flex flex-row transition-all">
             <PawButton
-              v-show="!searchbarOpened && searchbar"
+              v-show="!searchDropdownItems.length ? !searchbarOpened && searchbar : false"
               :disabled="loading"
               outlined
               size="md"
@@ -53,6 +53,17 @@
               @clicked="openSearchbar()"
             ></PawButton>
 
+            <PawDropdown
+                v-if="searchDropdownItems.length"
+                outlined
+                size="md"
+                icon="expand_more"
+                class="h-full"
+                :textSlot="searchDropdownText"
+                :items="searchDropdownItems"
+                :buttonRoundedClasses="computedButtonRoundedClasses"
+                @selected="(v) => this.$emit('searchDropdownItemClicked', v)"
+              />
             <PawCrazyInput
               ref="searchbar"
               :value="searchValue"
@@ -60,7 +71,8 @@
               title="Extended information about this field"
               contextIcon="search"
               class="max-h-8"
-              :class="searchbarOpened ? 'w-full' : 'w-0 overflow-hidden'"
+              :inputRoundedClasses="computedInputRoundedClasses"
+              :class="searchbarOpened && !searchDropdownItems.length ? 'w-full' : searchDropdownItems.length ? 'w-full rounded-l-none' :'w-0 overflow-hidden'"
               @typed="(v) => searchTyped(v)"
               >{{ searchValue }}
             </PawCrazyInput>
@@ -81,11 +93,11 @@
         <!-- Buttons mobile -->
         <div
           class="flex flex-row gap-3 md:hidden"
-          :class="[buttons.length >= 4 ? '!flex' : '']"
+          :class="[buttons.length >= 4 ? '!flex' : '',  searchDropdownItems.length ? 'flex-col-reverse items-end sm:flex-row w-full' : '' ]"
         >
-          <div class="flex flex-row">
+          <div class="flex flex-row w-full">
             <PawButton
-              v-show="!searchbarOpened && searchbar"
+              v-show="!searchDropdownItems.length ? !searchbarOpened && searchbar : false"
               :disabled="loading"
               outlined
               size="md"
@@ -94,6 +106,17 @@
               @clicked="openSearchbar('mobile')"
             ></PawButton>
 
+            <PawDropdown
+                v-if="searchDropdownItems.length"
+                outlined
+                size="md"
+                icon="expand_more"
+                class="h-full"
+                :textSlot="searchDropdownText"
+                :items="searchDropdownItems"
+                :buttonRoundedClasses="computedButtonRoundedClasses"
+                @selected="(v) => this.$emit('searchDropdownItemClicked', v)"
+              />
             <PawCrazyInput
               ref="searchbarMobile"
               :value="searchValue"
@@ -101,20 +124,43 @@
               title="Extended information about this field"
               contextIcon="search"
               class="max-h-8"
-              :class="searchbarOpened ? 'w-full' : 'w-0 overflow-hidden'"
+              :class="searchbarOpened && !searchDropdownItems.length ? 'w-full' : searchDropdownItems.length ? 'w-full rounded-l-none' :'w-0 overflow-hidden'"
               @typed="(v) => searchTyped(v)"
+              :inputRoundedClasses="computedInputRoundedClasses"
+              :fullwidth="true"
               >{{ searchValue }}
             </PawCrazyInput>
           </div>
+
+          <div class="flex justify-between w-full items-center sm:w-fit" v-if="searchDropdownItems.length">
+            <div class="block sm:hidden">
+              <h1
+                v-if="title"
+                class="text-lg font-bold text-gray-500 dark:text-white whitespace-nowrap"
+              >
+                {{ title }}
+              </h1>
+            </div>
+            <PawDropdown
+              :class="searchbarOpened ? 'hidden' : ''"
+              outlined
+              size="md"
+              icon="expand_more"
+              textSlot="Options"
+              :items="buttons"
+              @selected="(v) => this.$emit('buttonClicked', v)"
+            />
+          </div>
           <PawDropdown
-            :class="searchbarOpened ? 'hidden' : ''"
-            outlined
-            size="md"
-            icon="expand_more"
-            textSlot="Options"
-            :items="buttons"
-            @selected="(v) => this.$emit('buttonClicked', v)"
-          />
+              v-else
+              :class="searchbarOpened ? 'hidden' : ''"
+              outlined
+              size="md"
+              icon="expand_more"
+              textSlot="Options"
+              :items="buttons"
+              @selected="(v) => this.$emit('buttonClicked', v)"
+            />
         </div>
       </div>
 
@@ -437,8 +483,8 @@
       :class="{
         'opacity-0 invisible -translate-y-5': !settingsOpened || this.loading,
         'opacity-1 visible translate-y-0': settingsOpened && !this.loading,
-        'top-24 right-3 before:right-6': !informal,
-        'top-20 right-5 before:right-3': informal,
+        'top-32 sm:top-20 right-3 before:right-6': !informal,
+        'top-36 sm:top-24 right-5 before:right-3': informal,
       }"
     >
       <div
@@ -549,6 +595,7 @@ export default {
     "reordered",
     "paginated",
     "buttonClicked",
+    "searchDropdownItemClicked",
     "searched",
   ],
   data() {
@@ -578,6 +625,14 @@ export default {
     buttons: {
       type: Array,
       default: () => [],
+    },
+    searchDropdownItems: {
+      type: Array,
+      default: () => [],
+    },
+    searchDropdownText: {
+      type: String,
+      default: "Search by"
     },
     title: {
       type: String,
@@ -756,6 +811,12 @@ export default {
           this.data.items.length
         ),
       });
+    },
+    computedInputRoundedClasses() {
+        return this.searchDropdownItems.length > 0? "rounded-md rounded-l-none" : "rounded-md";
+    }, 
+    computedButtonRoundedClasses() {
+        return this.searchDropdownItems.length > 0 ? "rounded-md rounded-r-none" : "rounded-md";
     },
   },
   methods: {

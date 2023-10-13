@@ -577,6 +577,23 @@ Searchbar.args = {
       outlined: true,
     },
   ],
+  searchDropdownItems: [
+    {
+        icon: 'phone',
+        textSlot: 'Telephone',
+        identifier: 'phone',
+    },
+    {
+        icon: 'mail',
+        textSlot: 'Email',
+        identifier: 'email',
+    },
+    {
+      icon: 'contact_phone',
+      textSlot: 'Name',
+      identifier: 'name',
+    },
+  ],
   searchbar: true,
   loading: false,
   bgDark: "bg-gray-900",
