@@ -391,8 +391,8 @@ export default {
                 case 'date':
                     break;
                 case 'datetime':
-                    this.unit.label = '24h';
-                    this.unit.icon = 'calendar_today';
+                    this.unit.label = this.unitLabel ?? '24h';
+                    this.unit.icon = this.unitIcon ?? 'calendar_today';
                     break;
             }
             return momentObj.locale(languagePreference).format(format);
