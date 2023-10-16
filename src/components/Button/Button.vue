@@ -75,6 +75,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    buttonRoundedClasses: {
+      type: String,
+    }
   },
   components: {
     PawIcon,
@@ -90,15 +93,19 @@ export default {
       // Size-based styles
       switch (this.size) {
         case "sm":
-          className += "h-6 prose-xs element-text rounded-sm";
+
+          className += "h-6 prose-xs element-text";
           break;
-        case "md":
-          className += "h-8 prose-md element-text rounded-md";
+          case "md":
+          className += "h-8 prose-md element-text ";
           break;
         case "lg":
-          className += "h-10 prose-md element-text rounded-lg";
+          className += "h-10 prose-md element-text";
           break;
       }
+
+      let roundedClass = this.buttonRoundedClasses ?? `rounded-${this.size}`;
+      className += roundedClass;
 
       // Set width if only icon
       if (this.icon && !this.hasSlot && !this.loading) {
