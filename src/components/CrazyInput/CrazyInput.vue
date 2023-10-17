@@ -1,10 +1,13 @@
 <template>
   <div
-    class="relative flex "
-    :class="{
+    class="relative flex"
+    :class="[
+      {
       'gap-1': !readonly,
-      'mb-44 flex-col': this.dropdownWrap,
-    }"
+      'mb-44': this.dropdownWrap,
+      },
+      `flex-${this.flexDir}`
+    ]"
     ref="crazyInput"
   >
     <template v-if="loading">
@@ -388,13 +391,13 @@
 </template>
 
 <script>
+import { useI18n } from "vue-i18n";
+import PawButton from "../Button/Button.vue";
+import PawCheckbox from "../Checkbox/Checkbox.vue";
+import PawChip from "../Chip/Chip.vue";
 import PawIcon from "../Icon/Icon.vue";
 import PawLink from "../Link/Link.vue";
-import PawCheckbox from "../Checkbox/Checkbox.vue";
 import PawRadio from "../Radio/Radio.vue";
-import PawChip from "../Chip/Chip.vue";
-import PawButton from "../Button/Button.vue";
-import { useI18n } from "vue-i18n";
 
 // Number of loading items
 const numLoadingItems = 5;
@@ -515,6 +518,7 @@ export default {
     },
     inputRoundedClasses: {
       type: String,
+      default: "",
     },
     fullwidth: {
       type: Boolean,
@@ -543,6 +547,13 @@ export default {
     dropdownWrap: {
       type: Boolean,
       default: false,
+    },
+    flexDir: {
+      type: String,
+      validator: function (value) {
+        return ["col", "row"].includes(value);
+      },
+      default: "col",
     },
 
     /* State */

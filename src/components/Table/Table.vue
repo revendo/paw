@@ -72,6 +72,7 @@
               contextIcon="search"
               class="max-h-8"
               :inputRoundedClasses="computedInputRoundedClasses"
+              :flexDir="computedFlexDirectionProperty"
               :class="searchbarOpened && !searchDropdownItems.length ? 'w-full' : searchDropdownItems.length ? 'w-full rounded-l-none' :'w-0 overflow-hidden'"
               @typed="(v) => searchTyped(v)"
               >{{ searchValue }}
@@ -128,6 +129,7 @@
               @typed="(v) => searchTyped(v)"
               :inputRoundedClasses="computedInputRoundedClasses"
               :fullwidth="true"
+              :flexDir="computedFlexDirectionProperty"
               >{{ searchValue }}
             </PawCrazyInput>
           </div>
@@ -818,6 +820,9 @@ export default {
     computedButtonRoundedClasses() {
         return this.searchDropdownItems.length > 0 ? "rounded-md rounded-r-none" : "rounded-md";
     },
+    computedFlexDirectionProperty() {
+        return this.searchDropdownItems.length > 0 ? "row" : "col";
+    }
   },
   methods: {
     /* Emitters */
