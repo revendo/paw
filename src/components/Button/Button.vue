@@ -107,7 +107,7 @@ export default {
 
       let roundedClass = this.buttonRoundedClasses !== "" ? this.buttonRoundedClasses : ` rounded-${this.size} `;
       className += roundedClass;
-      console.log(roundedClass);
+      
       // Set width if only icon
       if (this.icon && !this.hasSlot && !this.loading) {
         switch (this.size) {
