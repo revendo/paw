@@ -598,6 +598,7 @@
               extra-icon="add_circle"
               extra-position="top"
               notification="Notification message"
+              warning="Warning message"
               error="Error message"
               >Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder
               wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu
@@ -927,6 +928,9 @@
                     identifier: 'email',
                 },
               ]"
+              :itemsNotFoundHasBgColor="true"
+              itemsNotFoundBgClass="warning"
+              itemsNotFoundTextColorClass="warning"
               :searchDropdownText="tableDropdownText"
               :inputRoundedClasses="'rounded-md rounded-l-none'"
               :buttonRoundedClasses="'rounded-md rounded-r-none'"
@@ -948,6 +952,7 @@
               @paginated="paginateTable($event)"
               @searched="(v) => tableSearched(v)"
               @searchDropdownItemClicked="(identifier) => searchDropdownClicked(identifier)"
+              @keyDownEnter="keyDownEventHandler('enter')"
             >
               <PawIcon
                 size="md"

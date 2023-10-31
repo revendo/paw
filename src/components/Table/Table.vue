@@ -1,13 +1,5 @@
 <template>
   <div
-    v-if="!data || Object.keys(data).length === 0"
-    class="flex items-center w-full p-4 mb-8 bg-warning-100 dark:bg-warning-800 text-warning-800 dark:text-warning-100 rounded-lg transition"
-    :class="!hasSlot ? 'hidden' : ''"
-  >
-    <slot></slot>
-  </div>
-  <div
-    v-else
     class="flex flex-col relative transition z-0"
     :class="{
       'pointer-events-none': loading,
@@ -25,7 +17,11 @@
       <!-- Header - CTA & Title -->
       <div
         v-if="buttons.length || title || searchDropdownItems.length"
-        :class="{ 'px-0 mb-3 sm:mb-5': informal, 'px-6': !informal }"
+        :class="{
+          'px-0 mb-3 sm:mb-5' : informal,
+          'px-6': !informal,
+          'flex-wrap sm:!h-fit' : searchDropdownItems.length > 0,
+        }"
         class="sticky inset-0 flex flex-row justify-between items-center mt-3 h-fit sm:h-8 z-50 gap-3"
       >
         <div :class="{'hidden sm:block' : searchDropdownItems.length}">
@@ -72,9 +68,11 @@
               contextIcon="search"
               class="max-h-8"
               :inputRoundedClasses="computedInputRoundedClasses"
+              inputMinWidthClasses="min-w-[30ch]"
               :flexDir="computedFlexDirectionProperty"
               :class="searchbarOpened && !searchDropdownItems.length ? 'w-full' : searchDropdownItems.length ? 'w-full rounded-l-none' :'w-0 overflow-hidden'"
               @typed="(v) => searchTyped(v)"
+              @keyDownEnter="this.$emit('keyDownEnter')"
               >{{ searchValue }}
             </PawCrazyInput>
           </div>
@@ -130,6 +128,7 @@
               :inputRoundedClasses="computedInputRoundedClasses"
               :fullwidth="true"
               :flexDir="computedFlexDirectionProperty"
+              @keyDownEnter="this.$emit('keyDownEnter')"
               >{{ searchValue }}
             </PawCrazyInput>
           </div>
@@ -144,6 +143,7 @@
               </h1>
             </div>
             <PawDropdown
+            v-if="buttons && buttons.length"
               :class="searchbarOpened ? 'hidden' : ''"
               outlined
               size="md"
@@ -154,7 +154,7 @@
             />
           </div>
           <PawDropdown
-              v-else
+            v-else-if="buttons && buttons.length"
               :class="searchbarOpened ? 'hidden' : ''"
               outlined
               size="md"
@@ -165,9 +165,20 @@
             />
         </div>
       </div>
-
+      <div
+        v-if="(!data || Object.keys(data).length === 0 || Object.keys(data.items).length === 0) && !loading"
+        class="flex items-center w-auto p-4 rounded-lg transition"
+        :class="[
+          !hasSlot ? 'hidden' : '',
+          itemsNotFoundHasBgColor ? `bg-${itemsNotFoundBgClass}-100 dark:bg-${itemsNotFoundBgClass}-800 text-${itemsNotFoundTextColorClass}-800 dark:text-${itemsNotFoundTextColorClass}-100`: 'text-white',
+          informal ? 'mx-auto mb-3 sm:mb-5' : 'm-6',
+         ]"
+      >
+        <slot></slot>
+      </div>
       <!-- Table Start -->
       <table
+        v-else
         class="relative w-full formal-table fill-available"
         :class="{
           'border-collapse': !informal,
@@ -390,19 +401,22 @@
 
             <!-- Details -->
             <td
-              class="sticky z-10 pl-3 py-0 max-w-[120px] right-0 bg-white dark:bg-gray-800 transition-all"
+              class="z-10 pl-3 py-0 max-w-[120px] right-0 bg-white dark:bg-gray-800 transition-all"
               :class="[
                 loading ? 'before:opacity-100' : '',
                 !informal
                   ? 'pr-6 overflow-y-clip row-clip group-hover:bg-gray-100 dark:group-hover:bg-gray-800 before:content-[\'\'] before:absolute before:-z-10 before:inset-0 before:opacity-0 group-hover:before:opacity-100 before:transition before:shadow-box dark:before:shadow-box-dark'
                   : `pr-3 h-12`,
+                informal && !bgDark && !bgLight ? '!bg-transparent' : '',
+                hasStickyDetails() || !informal ? 'sticky' : 'relative border-gray-200 dark:border-gray-700 rounded-r-lg border-t border-r border-b',
               ]"
             >
               <!-- cap -->
               <div
+                v-if="hasStickyDetails() || !informal"
                 :class="[
                   informal
-                    ? `flex items-center absolute -top-2 h-16 left-[-0.75px] -right-4 pr-4 overflow-hidden transition-all`
+                    ? `flex items-center absolute -top-2  h-16 left-[-0.75px] -right-4 pr-4 overflow-hidden transition-all`
                     : '',
                 ]"
               >
@@ -421,6 +435,7 @@
                     'ml-auto': !informal,
                     'justify-center absolute h-12 w-[49px] bg-white dark:bg-gray-800 border-r border-t border-b border-gray-200 dark:border-gray-700 rounded-r-lg transition':
                       informal,
+                    'cursor-auto': informal && !ctaIcon,
                   }"
                 >
                   {{ detailsText }}
@@ -470,7 +485,11 @@
                 <!-- cap background big -->
                 <div
                   v-if="informal"
-                  :class="`${bgLight} dark:${bgDark} absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition`"
+                  class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition"
+                  :class="[
+                    bgLight ? `${bgLight}` : 'bg-white',
+                    bgDark ? `dark:${bgDark}` : 'dark:bg-gray-800',
+                  ]"
                 ></div>
               </div>
             </td>
@@ -599,6 +618,7 @@ export default {
     "buttonClicked",
     "searchDropdownItemClicked",
     "searched",
+    "keyDownEnter"
   ],
   data() {
     return {
@@ -672,6 +692,18 @@ export default {
     selectionEnabled: {
       type: Boolean,
       default: false,
+    },
+    itemsNotFoundHasBgColor: {
+      type: Boolean,
+      default: true,
+    },
+    itemsNotFoundBgClass: {
+      type: String,
+      default: "warning"
+    },
+    itemsNotFoundTextColorClass: {
+      type: String,
+      default: "gray"
     },
   },
   components: {
@@ -977,6 +1009,9 @@ export default {
         }
       });
     },
+    hasStickyDetails() {
+      return this.ctaIcon && this.ctaIcon !== "";
+    }
   },
 };
 </script>

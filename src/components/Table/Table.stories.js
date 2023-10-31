@@ -1,5 +1,6 @@
 import "../../assets/tailwind.css";
 import PawTable from "./index";
+import PawIcon from '../Icon/index';
 import { componentProps } from "../../index.js";
 
 export default {
@@ -57,6 +58,21 @@ export default {
       control: { type: "boolean" },
       description:
         "Enables selection of a table row on formal tables.",
+    },    
+    itemsNotFoundHasBgColor: {
+      control: { type: "boolean" },
+      description:
+      "Toggles background for the items not found table view.",
+    },
+    itemsNotFoundBgClass: {
+      control: { type: "text" },
+      description:
+      "Background class for the items not found table view.",
+    },
+    itemsNotFoundTextColorClass: {
+      control: { type: "text" },
+      description:
+      "Text color class for the items not found table view.",
     },
     
     filtered: {
@@ -82,14 +98,20 @@ export default {
     buttonClicked: {
       description: "Triggered when a button in header is clicked",
     },
+    searchDropdownItemClicked: {
+      description: "Triggered when a search dropdown item is clicked.",
+    },
     searched: {
       description: "Triggered when searchbar is typed",
     },
+    keyDownEnter: {
+      description: "Triggered when the enter is pressed while the searchbar is focused."
+    }
   },
 };
 
 const Template = (args) => ({
-  components: { PawTable },
+  components: { PawTable, PawIcon },
   setup() {
     return { args };
   },
