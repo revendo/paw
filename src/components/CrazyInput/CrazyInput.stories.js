@@ -250,6 +250,13 @@ export default {
       table: {
         category: "Bottom elements",
       },
+    },    /* Bottom labels */
+    warning: {
+      control: { type: "text" },
+      description: "Content of bottom warning text.",
+      table: {
+        category: "Bottom elements",
+      },
     },
     error: {
       control: { type: "text" },
@@ -323,6 +330,7 @@ Ellipsis.args = {
   extraIcon: "add_circle",
   extraPosition: "top",
   notification: "Notification message",
+  warning: "Warning message",
   error: "Error message",
   default:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae elit vel ante bibendum lobortis.",
@@ -352,6 +360,7 @@ Multiline.args = {
   extraIcon: "add_circle",
   extraPosition: "top",
   notification: "Notification message",
+  warning: "Warning message",
   error: "Error message",
   default:
     "Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen?",
@@ -379,6 +388,7 @@ Loading.args = {
   extraIcon: "add_circle",
   extraPosition: "top",
   notification: "Notification message",
+  warning: "Warning message",
   error: "Error message",
 };
 Loading.parameters = {
