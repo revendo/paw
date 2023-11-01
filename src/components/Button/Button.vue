@@ -105,7 +105,7 @@ export default {
           break;
       }
 
-      let roundedClass = this.buttonRoundedClasses !== "" ? this.buttonRoundedClasses : ` rounded-${this.size} `;
+      let roundedClass = this.buttonRoundedClasses !== "" ? ` ${this.buttonRoundedClasses} ` : ` rounded-${this.size} `;
       className += roundedClass;
       
       // Set width if only icon
