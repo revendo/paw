@@ -648,7 +648,17 @@ searchDropdownClicked(identifier) {
 },
 ```
 
+## `keyDownEnter`
 
+This event is fired when the enter key is pressed while the searchbar is in focus. 
+
+In the `PawTable` component:
+
+```vue
+<PawTable
+    @keyDownEnter="this.$emit('keyDownEnter')"
+></PawTable>
+```
 
 
 For a fully operational example of `PawTable` please check `Paw`'s [App.vue file](https://github.com/revendo/paw/blob/dev/src/App.vue).

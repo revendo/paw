@@ -70,10 +70,14 @@
         </template>
       </div>
 
-      <div v-if="notification || error" class="ml-2 mt-1">
+      <div v-if="notification || warning || error" class="ml-2 mt-1">
         <div
           v-if="notification"
           class="max-w-[120px] h-2 bg-gray-400 mb-2 loading-bubble"
+        ></div>
+        <div
+          v-if="warning"
+          class="max-w-[120px] h-2 bg-warning-400 mb-2 loading-bubble"
         ></div>
         <div
           v-if="error"
@@ -372,12 +376,18 @@
         </div>
       </div>
 
-      <div v-if="notification || error" class="ml-2">
+      <div v-if="notification || warning || error" class="ml-2">
         <div
           v-if="notification"
           class="prose-xs element-text italic text-gray-500 transition"
         >
           {{ notification }}
+        </div>
+        <div
+          v-if="warning"
+          class="prose-xs element-text italic text-warning-500 transition"
+        >
+          {{ warning }}
         </div>
         <div
           v-if="error"
@@ -520,6 +530,10 @@ export default {
       type: String,
       default: "",
     },
+    inputMinWidthClasses: {
+      type: String,
+      default: "",
+    },
     fullwidth: {
       type: Boolean,
       default: false,
@@ -628,6 +642,9 @@ export default {
 
     /* Bottom labels */
     notification: {
+      type: String,
+    },
+    warning: {
       type: String,
     },
     error: {
@@ -1202,6 +1219,7 @@ export default {
       // Width
       classNames += this.fullwidth ? " w-full " : "";
 
+      classNames += ` ${this.inputMinWidthClasses} `;
       // Padding
       if (
         this.contextIcon ||

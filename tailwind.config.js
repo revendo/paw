@@ -243,8 +243,8 @@ export default {
                  * */
                 box: `0px 1px 4px ${colors.gray[800]}1A, 0px 4px 8px ${colors.gray[800]}33`,
                 "box-dark": `0px 1px 4px ${colors.gray[900]}, 0px 4px 8px ${colors.gray[900]}`,
-                card: `0px 2px 8px ${colors.gray[800]}1A, 0px 4px 24px ${colors.gray[800]}40`,
-                "card-dark": `0px 2px 8px rgba(0, 0, 0, 0.4), 0px 4px 24px rgba(0, 0, 0, 0.5)`,
+                card: `0px 2px 4px ${colors.gray[800]}1A, 0px 4px 12px ${colors.gray[800]}40`,
+                "card-dark": `0px 2px 4px rgba(0, 0, 0, 0.4), 0px 4px 12px rgba(0, 0, 0, 0.5)`,
                 "gray-200-border-b-full": `0 1px 0 0  ${colors.gray[200]}`,
                 "gray-700-border-b-full": `0 1px 0 0  ${colors.gray[700]}`,
             },
