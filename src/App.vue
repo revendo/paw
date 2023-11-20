@@ -928,6 +928,18 @@
                     identifier: 'email',
                 },
               ]"
+              :actionDropdownItems="[
+                {
+                    icon: 'edit',
+                    textSlot: 'Edit',
+                    identifier: 'edit',
+                },
+                {
+                    icon: 'delete',
+                    textSlot: 'Delete',
+                    identifier: 'delete',
+                },
+              ]"
               :itemsNotFoundHasBgColor="true"
               itemsNotFoundBgClass="warning"
               itemsNotFoundTextColorClass="warning"
@@ -953,6 +965,7 @@
               @searched="(v) => tableSearched(v)"
               @searchDropdownItemClicked="(identifier) => searchDropdownClicked(identifier)"
               @keyDownEnter="keyDownEventHandler('enter')"
+              @actionSelected="(actionIdentifier, rowItemIdentifier) => actionItemSelected(actionIdentifier, rowItemIdentifier)"
             >
               <PawIcon
                 size="md"
@@ -1784,6 +1797,10 @@ Schweiz`,
       let searchText = identifier.charAt(0).toUpperCase() + identifier.slice(1);
       this.tableSearchIdentifier = identifier;
       this.tableDropdownText = searchText
+    },
+
+    actionItemSelected(actionIdentifier, rowItemIdentifier) {
+      this.tableOutput = `Table dropdown action button was clicked! Button identifier:  ${actionIdentifier}, row item identifier: ${rowItemIdentifier}`;
     },
 
     activateLoadingMode(loading) {

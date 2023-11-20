@@ -86,6 +86,48 @@ searchDropdownItems: [
 >
 > Represents the dropdown item icon
 
+## **`actionDropdownItems`**
+
+Item list that is used in the row action dropdown.
+
+```js
+:actionDropdownItems="[
+    {
+        icon: 'edit',
+        textSlot: 'Edit',
+        identifier: 'edit',
+    },
+    {
+        icon: 'delete',
+        textSlot: 'Delete',
+        identifier: 'delete',
+    },
+]"
+```
+
+> #### **`identifier`**
+>
+> This will be the identifier which is also the payload of a click event callback
+>
+> #### **`textSlot`**
+>
+> Represents the dropdown item text slot
+>
+> #### **`icon`**
+>
+> Represents the dropdown item icon
+
+
+## **`rowItemIdentifier`**
+This attribute is used to specify the key in the row items that is emitted when the user clicks on a row action item.
+
+```js
+rowItemIdentifier: {
+      type: String,
+      default: "id",
+    },
+```
+
 ## **`title`**
 
 ```js
@@ -647,6 +689,26 @@ searchDropdownClicked(identifier) {
     this.tableSearchDropdownText = `Searching by ${identifier}`
 },
 ```
+
+## `actionSelected`
+
+```vue
+<PawTable
+   @actionSelected="
+    (actionIdentifier, rowItemIdentifier) => 
+        actionItemSelected(actionIdentifier, rowItemIdentifier)
+    "
+></PawTable>
+```
+
+```js
+actionItemSelected(actionIdentifier, rowItemIdentifier) {
+    this.tableOutput = `Table dropdown action button was clicked! Button identifier:  
+        ${actionIdentifier}, row item identifier: ${rowItemIdentifier}`;
+},
+```
+
+              
 
 ## `keyDownEnter`
 
