@@ -16,6 +16,7 @@
     >
       <!-- Header - CTA & Title -->
       <div
+        ref="tableHeader"
         v-if="buttons.length || title || searchDropdownItems.length"
         :class="{
           'px-0 mb-3 sm:mb-5' : informal,
@@ -179,6 +180,7 @@
       <!-- Table Start -->
       <table
         v-else
+        ref="table"
         class="relative w-full formal-table fill-available"
         :class="{
           'border-collapse': !informal,
@@ -422,7 +424,7 @@
               >
                 <!-- Details link -->
                 <PawLink
-                  v-if="(!informal && !loading) || informal"
+                  v-if="((!informal && !loading) || informal) && !actionDropdownItems.length"
                   size="sm"
                   :icon="!informal ? 'last_page' : ctaIcon"
                   :outlined="informal"
@@ -440,6 +442,18 @@
                 >
                   {{ detailsText }}
                 </PawLink>
+                <!-- Action Dropdown -->
+                <div v-else class="z-50">
+                  <PawButton
+                    @click="openDropdown($event, item[rowItemIdentifier])"
+                    size="sm"
+                    icon="more_horiz"
+                    outlined
+                    buttonRoundedClasses="border-none bg-inherit hover:bg-inherit"
+                  >
+                  </PawButton>
+
+                </div>
 
                 <!-- Details loading -->
                 <div
@@ -497,6 +511,36 @@
         </tbody>
       </table>
     </div>
+
+    <!-- Dropdown template -->
+    <transition
+      enter-active-class="transition ease-out duration-200"
+      enter-from-class="transform opacity-0 scale-95"
+      enter-to-class="transform opacity-100 scale-100"
+      leave-active-class="transition ease-in duration-75"
+      leave-from-class="transform opacity-100 scale-100"
+      leave-to-class="transform opacity-0 scale-95"
+      appear
+    >
+      <div
+        ref="actionDropdown"
+        v-show="dropdownOpen"
+        class="absolute max-w-xs w-fit min-w-[120px] rounded-lg shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 my-2 z-50 right-0"
+      >
+        <div class="flex flex-col">
+          <button
+            @click="dropdownActionSelected(item.identifier)"
+            v-for="item in actionDropdownItems"
+            v-bind:key="item.identifier"
+            class="dark:hover:bg-gray-900 cursor-pointer first-of-type:rounded-tr-lg first-of-type:rounded-tl-lg last-of-type:rounded-br-lg last-of-type:rounded-bl-lg hover:bg-gray-100 w-full p-2 text-md dark:text-white text-gray-900 transition-all duration-300 items-center flex flex-row space-x-3 border-t dark:border-gray-700 first-of-type:border-t-0"
+          >
+            <PawIcon size="sm" class="text-gray-400"> {{ item.icon }} </PawIcon>
+
+            <span class="">{{ item.textSlot }}</span>
+          </button>
+        </div>
+      </div>
+    </transition>
 
     <!-- Table settings -->
     <div
@@ -618,7 +662,8 @@ export default {
     "buttonClicked",
     "searchDropdownItemClicked",
     "searched",
-    "keyDownEnter"
+    "keyDownEnter",
+    "actionSelected"
   ],
   data() {
     return {
@@ -637,6 +682,8 @@ export default {
       searchbarOpened: false,
       searchValue: null,
       error: false,
+      dropdownOpen: false,
+      rowIdentifierProxy: null,
     };
   },
   props: {
@@ -655,6 +702,14 @@ export default {
     searchDropdownText: {
       type: String,
       default: "Search by"
+    },
+    actionDropdownItems: {
+      type: Array,
+      default: () => []
+    },
+    rowItemIdentifier: {
+      type: String,
+      default: "id",
     },
     title: {
       type: String,
@@ -955,6 +1010,38 @@ export default {
           this.$refs.searchbar.unFocusInputElement();
         });
       }
+    },
+
+    openDropdown(event, rowItemIdentifier) {
+        this.dropdownOpen = false;
+        // Timeout so the dropdown can disappear and reappear
+        setTimeout(() => {
+          const dropdown = this.$refs.actionDropdown;
+
+          const targetElRect = event.target.getBoundingClientRect();
+          const tableElRect = this.$refs.table.getBoundingClientRect();
+          const tableHeaderElRect = this.$refs.tableHeader.getBoundingClientRect();
+
+          const offset = this.informal ? 30 : 10;
+          
+          const dropdownTopValue = targetElRect.top - tableElRect.top + tableHeaderElRect.height + targetElRect.height + offset;
+        
+          dropdown.style.top = `${dropdownTopValue}px`;
+
+          this.dropdownOpen = true;
+          this.rowIdentifierProxy = rowItemIdentifier;
+
+          this.clickOutsideElement(this.$refs.actionDropdown, () => {
+            this.dropdownOpen = false;
+          });
+        }, 150);
+    },
+
+    dropdownActionSelected(actionIdentifier) {
+      this.dropdownOpen = false;
+
+      // Emit the selected state to parent component
+      this.$emit("actionSelected", actionIdentifier, this.rowIdentifierProxy);
     },
 
     cellValue(value, key) {
