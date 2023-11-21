@@ -449,7 +449,7 @@
                     size="sm"
                     icon="more_horiz"
                     outlined
-                    buttonRoundedClasses="border-none bg-inherit hover:bg-inherit"
+                    buttonRoundedClasses="border-none !bg-transparent "
                   >
                   </PawButton>
 
