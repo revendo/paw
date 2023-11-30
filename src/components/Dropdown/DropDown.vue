@@ -9,6 +9,9 @@
       :disabled="props.disabled"
       :outlined="props.outlined"
       :buttonRoundedClasses="props.buttonRoundedClasses"
+      :buttonColorClasses="props.buttonColorClasses"
+      :buttonBackgroundClasses="props.buttonBackgroundClasses"
+      :iconColorClasses="props.iconColorClasses"
     >
       {{ props.textSlot }}
     </PawButton>
@@ -24,26 +27,31 @@
     >
       <div
         v-show="dropdownOpen"
-        :class="popoverClass"
-        class="absolute max-w-xs w-full min-w-[240px] rounded-lg shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 my-2 z-50"
+        :class="[
+          fluidWidthDropdown ? 'min-w-max' : 'min-w-[240px]',
+          popoverClass,
+        ]"
+        class="absolute max-w-xs w-full rounded-lg shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 my-2 z-50"
       >
         <div class="flex flex-col">
           <button
             @click="selected(item.identifier)"
             v-for="item in props.items"
             v-bind:key="item.identifier"
-            class="dark:hover:bg-gray-900 cursor-pointer first-of-type:rounded-tr-lg first-of-type:rounded-tl-lg last-of-type:rounded-br-lg last-of-type:rounded-bl-lg hover:bg-gray-100 w-full p-2 text-md dark:text-white text-gray-900 transition-all duration-300 items-center flex flex-row space-x-3 border-t dark:border-gray-700 first-of-type:border-t-0"
+            class="dark:hover:bg-gray-900 cursor-pointer first-of-type:rounded-tr-lg first-of-type:rounded-tl-lg last-of-type:rounded-br-lg last-of-type:rounded-bl-lg hover:bg-gray-100 w-full text-md dark:text-white text-gray-900 transition-all duration-300 items-center flex flex-row space-x-3 border-t dark:border-gray-700 first-of-type:border-t-0"
+            :class="[fluidWidthDropdown ? 'px-4 py-2' : 'p-2']"
           >
-            <PawIcon size="sm" class="text-gray-400"> {{ item.icon }} </PawIcon>
+            <PawIcon v-if="item.icon" size="sm" class="text-gray-400">
+              {{ item.icon }}
+            </PawIcon>
 
-            <span class="">{{ item.textSlot }}</span>
+            <span>{{ item.textSlot }}</span>
           </button>
         </div>
       </div>
     </transition>
   </div>
 </template>
-
 
 <script setup>
 /* eslint-disable */
@@ -61,7 +69,6 @@ function openDropdown(event) {
 
   // Switch state
   dropdownOpen.value = !dropdownOpen.value;
-
 }
 
 // // Define emits
@@ -96,9 +103,26 @@ const props = defineProps({
   textSlot: {
     type: String,
   },
-  buttonRoundedClasses : {
+  buttonRoundedClasses: {
     type: String,
-  }
+    default: "",
+  },
+  buttonColorClasses: {
+    type: String,
+    default: "",
+  },
+  buttonBackgroundClasses: {
+    type: String,
+    default: "",
+  },
+  iconColorClasses: {
+    type: String,
+    default: "",
+  },
+  fluidWidthDropdown: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // States for component
@@ -113,5 +137,3 @@ function selected(identifier) {
   emit("selected", identifier);
 }
 </script>
-
-

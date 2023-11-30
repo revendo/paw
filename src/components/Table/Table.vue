@@ -449,7 +449,7 @@
                     size="sm"
                     icon="more_horiz"
                     outlined
-                    buttonRoundedClasses="border-none bg-inherit hover:bg-inherit"
+                    buttonRoundedClasses="border-none !bg-transparent "
                   >
                   </PawButton>
 
@@ -525,7 +525,7 @@
       <div
         ref="actionDropdown"
         v-show="dropdownOpen"
-        class="absolute max-w-xs w-fit min-w-[120px] rounded-lg shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 my-2 z-50 right-0"
+        class="absolute max-w-xs w-fit min-w-[120px] rounded-lg shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 my-2 z-50 right-0 mr-6"
       >
         <div class="flex flex-col">
           <button
