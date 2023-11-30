@@ -115,7 +115,6 @@ export default {
           className += "h-10 prose-md element-text";
           break;
       }
-      console.log(className);
 
       let roundedClass =
         this.buttonRoundedClasses !== ""
@@ -138,16 +137,12 @@ export default {
         }
       }
 
-      console.log(className);
       // Paddings
       className += " " + this.setPaddings(this.size);
 
-      console.log(className);
       // States
       className += " " + this.setStates();
 
-      console.log(className);
-      console.log(typeof className);
       return className;
     },
 
