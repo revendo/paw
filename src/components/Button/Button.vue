@@ -77,8 +77,20 @@ export default {
     },
     buttonRoundedClasses: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
+    buttonColorClasses: {
+      type: String,
+      default: "",
+    },
+    buttonBackgroundClasses: {
+      type: String,
+      default: "",
+    },
+    iconColorClasses: {
+      type: String,
+      default: "",
+    },
   },
   components: {
     PawIcon,
@@ -94,20 +106,23 @@ export default {
       // Size-based styles
       switch (this.size) {
         case "sm":
-
           className += "h-6 prose-xs element-text";
           break;
-          case "md":
+        case "md":
           className += "h-8 prose-md element-text ";
           break;
         case "lg":
           className += "h-10 prose-md element-text";
           break;
       }
+      console.log(className);
 
-      let roundedClass = this.buttonRoundedClasses !== "" ? ` ${this.buttonRoundedClasses} ` : ` rounded-${this.size} `;
+      let roundedClass =
+        this.buttonRoundedClasses !== ""
+          ? ` ${this.buttonRoundedClasses} `
+          : ` rounded-${this.size} `;
       className += roundedClass;
-      
+
       // Set width if only icon
       if (this.icon && !this.hasSlot && !this.loading) {
         switch (this.size) {
@@ -123,12 +138,16 @@ export default {
         }
       }
 
+      console.log(className);
       // Paddings
       className += " " + this.setPaddings(this.size);
 
+      console.log(className);
       // States
       className += " " + this.setStates();
 
+      console.log(className);
+      console.log(typeof className);
       return className;
     },
 
@@ -141,15 +160,19 @@ export default {
       } else {
         // Filled / Outlined
         if (this.outlined) {
-          className +=
+          let iconColor =
+            this.iconColorClasses ||
             "text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200 group-active:text-gray-400 dark:group-active:text-gray-400 group-focus:text-action-400 dark:group-focus:text-action-400";
+          className += iconColor;
           // Correct icon's position of only-icon button
           if (this.icon && !this.hasSlot) {
             className += "  -ml-px";
           }
         } else {
-          className +=
+          let iconColor =
+            this.iconColorClasses ||
             "text-action-100 dark:text-action-100 group-hover:text-white group-active:text-action-100 dark:group-active:text-action-100 group-focus:text-white dark:group-focus:text-white";
+          className += iconColor;
         }
       }
 
@@ -263,9 +286,23 @@ export default {
 
       // Outlined / Filled
       if (this.outlined) {
-        return "bg-white dark:bg-gray-800 text-gray-500 border border-gray-200 dark:border-gray-600 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 active:text-gray-500 dark:active:text-gray-500 active:bg-white dark:active:bg-gray-800 active:border-gray-400 dark:active:border-gray-400 focus:text-action-500 dark:focus:text-action-400 focus:border-action-500 dark:focus:border-action-400";
+        // Custom background and text colors or Default
+        let bgClasses =
+          this.buttonBackgroundClasses ||
+          "bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-white dark:active:bg-gray-800";
+        let textColorClasses =
+          this.buttonColorClasses ||
+          "text-gray-500 hover:text-gray-900 dark:hover:text-white active:text-gray-500 dark:active:text-gray-500 focus:text-action-500 dark:focus:text-action-400 ";
+
+        return `${bgClasses} ${textColorClasses} border border-gray-200 dark:border-gray-600 active:border-gray-400 dark:active:border-gray-400 focus:border-action-500 dark:focus:border-action-400`;
       } else {
-        return "bg-action-500 dark:bg-action-400 text-white hover:bg-action-300 dark:hover:bg-action-600 active:bg-action-500 dark:active:bg-action-400";
+        // Custom background and text colors or Default
+        let bgClasses =
+          this.buttonBackgroundClasses ||
+          "bg-action-500 dark:bg-action-400 hover:bg-action-300 dark:hover:bg-action-600 active:bg-action-500 dark:active:bg-action-400";
+        let textColorClasses = this.buttonColorClasses || "text-white";
+
+        return `${bgClasses} ${textColorClasses}`;
       }
     },
   },
