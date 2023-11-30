@@ -41,7 +41,7 @@
             class="dark:hover:bg-gray-900 cursor-pointer first-of-type:rounded-tr-lg first-of-type:rounded-tl-lg last-of-type:rounded-br-lg last-of-type:rounded-bl-lg hover:bg-gray-100 w-full text-md dark:text-white text-gray-900 transition-all duration-300 items-center flex flex-row space-x-3 border-t dark:border-gray-700 first-of-type:border-t-0"
             :class="[fluidWidthDropdown ? 'px-4 py-2' : 'p-2']"
           >
-            <PawIcon size="sm" class="text-gray-400">
+            <PawIcon v-if="item.icon" size="sm" class="text-gray-400">
               {{ item.icon }}
             </PawIcon>
 
