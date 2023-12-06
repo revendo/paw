@@ -3,10 +3,10 @@
     class="relative flex"
     :class="[
       {
-      'gap-1': !readonly,
-      'mb-44': this.dropdownWrap,
+        'gap-1': !readonly,
+        'mb-44': this.dropdownWrap,
       },
-      `flex-${this.flexDir}`
+      `flex-${this.flexDir}`,
     ]"
     ref="crazyInput"
   >
@@ -967,7 +967,7 @@ export default {
     },
     unFocusTextInput() {
       this.$refs.textInput.blur();
-      console.log("blur");
+      // console.log("blur");
     },
 
     getOptionId(item) {
@@ -1209,11 +1209,15 @@ export default {
     setContainerClassNames() {
       let classNames = "";
 
-      let roundedClasses = this.inputRoundedClasses !== "" ? this.inputRoundedClasses : "rounded-md ";
+      let roundedClasses =
+        this.inputRoundedClasses !== ""
+          ? this.inputRoundedClasses
+          : "rounded-md ";
 
       // Not readonly classes
       classNames += !this.readonly
-        ? "pr-0.75 border border-gray-200 dark:border-gray-600 transition " + roundedClasses
+        ? "pr-0.75 border border-gray-200 dark:border-gray-600 transition " +
+          roundedClasses
         : "";
 
       // Width
@@ -1261,4 +1265,3 @@ export default {
   },
 };
 </script>
-
