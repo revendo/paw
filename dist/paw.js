@@ -8449,7 +8449,7 @@ const Am = ["title"], Fm = ["checked", "disabled"], Wm = { class: "relative w-8 
       ).length,
       settingsOpened: !1,
       searchbarOpened: !1,
-      searchValue: null,
+      searchValue: this.searchbarValueProxy,
       error: !1,
       dropdownOpen: !1,
       rowIdentifierProxy: null
@@ -8512,6 +8512,10 @@ const Am = ["title"], Fm = ["checked", "disabled"], Wm = { class: "relative w-8 
     searchbar: {
       type: Boolean,
       default: !1
+    },
+    searchbarValueProxy: {
+      type: String,
+      default: ""
     },
     selectionEnabled: {
       type: Boolean,
@@ -8808,7 +8812,10 @@ function ug(e, t, n, r, a, s) {
               icon: "search",
               onClicked: t[0] || (t[0] = (m) => s.openSearchbar())
             }, null, 8, ["disabled"]), [
-              [_n, n.searchDropdownItems.length ? !1 : !a.searchbarOpened && n.searchbar]
+              [
+                _n,
+                n.searchDropdownItems.length ? !1 : !a.searchbarOpened && n.searchbar
+              ]
             ]),
             n.searchDropdownItems.length ? (_(), $(o, {
               key: 0,
@@ -8827,7 +8834,10 @@ function ug(e, t, n, r, a, s) {
               placeholder: "Search",
               title: "Extended information about this field",
               contextIcon: "search",
-              class: T(["max-h-8", a.searchbarOpened && !n.searchDropdownItems.length ? "w-full" : n.searchDropdownItems.length ? "w-full rounded-l-none" : "w-0 overflow-hidden"]),
+              class: T([
+                "max-h-8",
+                a.searchbarOpened && !n.searchDropdownItems.length ? "w-full" : n.searchDropdownItems.length ? "w-full rounded-l-none" : "w-0 overflow-hidden"
+              ]),
               inputRoundedClasses: s.computedInputRoundedClasses,
               inputMinWidthClasses: "min-w-[30ch]",
               flexDir: s.computedFlexDirectionProperty,
@@ -8856,7 +8866,10 @@ function ug(e, t, n, r, a, s) {
           }, 1032, ["onClicked", "disabled", "outlined", "title", "icon"]))), 128))
         ])) : I("", !0),
         F("div", {
-          class: T(["flex flex-row gap-3 md:hidden", [n.buttons.length >= 4 ? "!flex" : "", n.searchDropdownItems.length ? "flex-col-reverse items-end sm:flex-row w-full" : ""]])
+          class: T(["flex flex-row gap-3 md:hidden", [
+            n.buttons.length >= 4 ? "!flex" : "",
+            n.searchDropdownItems.length ? "flex-col-reverse items-end sm:flex-row w-full" : ""
+          ]])
         }, [
           F("div", Xm, [
             vt(ce(i, {
@@ -8867,7 +8880,10 @@ function ug(e, t, n, r, a, s) {
               icon: "search",
               onClicked: t[4] || (t[4] = (m) => s.openSearchbar("mobile"))
             }, null, 8, ["disabled"]), [
-              [_n, n.searchDropdownItems.length ? !1 : !a.searchbarOpened && n.searchbar]
+              [
+                _n,
+                n.searchDropdownItems.length ? !1 : !a.searchbarOpened && n.searchbar
+              ]
             ]),
             n.searchDropdownItems.length ? (_(), $(o, {
               key: 0,
@@ -8886,7 +8902,10 @@ function ug(e, t, n, r, a, s) {
               placeholder: "Search",
               title: "Extended information about this field",
               contextIcon: "search",
-              class: T(["max-h-8", a.searchbarOpened && !n.searchDropdownItems.length ? "w-full" : n.searchDropdownItems.length ? "w-full rounded-l-none" : "w-0 overflow-hidden"]),
+              class: T([
+                "max-h-8",
+                a.searchbarOpened && !n.searchDropdownItems.length ? "w-full" : n.searchDropdownItems.length ? "w-full rounded-l-none" : "w-0 overflow-hidden"
+              ]),
               onTyped: t[6] || (t[6] = (m) => s.searchTyped(m)),
               inputRoundedClasses: s.computedInputRoundedClasses,
               fullwidth: !0,
