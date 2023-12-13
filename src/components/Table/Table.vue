@@ -19,13 +19,13 @@
         ref="tableHeader"
         v-if="buttons.length || title || searchDropdownItems.length"
         :class="{
-          'px-0 mb-3 sm:mb-5' : informal,
+          'px-0 mb-3 sm:mb-5': informal,
           'px-6': !informal,
-          'flex-wrap sm:!h-fit' : searchDropdownItems.length > 0,
+          'flex-wrap sm:!h-fit': searchDropdownItems.length > 0,
         }"
         class="sticky inset-0 flex flex-row justify-between items-center mt-3 h-fit sm:h-8 z-50 gap-3"
       >
-        <div :class="{'hidden sm:block' : searchDropdownItems.length}">
+        <div :class="{ 'hidden sm:block': searchDropdownItems.length }">
           <h1
             v-if="title"
             class="text-lg font-bold text-gray-500 dark:text-white whitespace-nowrap"
@@ -41,7 +41,11 @@
           <!-- Searchbar -->
           <div class="flex flex-row transition-all">
             <PawButton
-              v-show="!searchDropdownItems.length ? !searchbarOpened && searchbar : false"
+              v-show="
+                !searchDropdownItems.length
+                  ? !searchbarOpened && searchbar
+                  : false
+              "
               :disabled="loading"
               outlined
               size="md"
@@ -51,16 +55,16 @@
             ></PawButton>
 
             <PawDropdown
-                v-if="searchDropdownItems.length"
-                outlined
-                size="md"
-                icon="expand_more"
-                class="h-full"
-                :textSlot="searchDropdownText"
-                :items="searchDropdownItems"
-                :buttonRoundedClasses="computedButtonRoundedClasses"
-                @selected="(v) => this.$emit('searchDropdownItemClicked', v)"
-              />
+              v-if="searchDropdownItems.length"
+              outlined
+              size="md"
+              icon="expand_more"
+              class="h-full"
+              :textSlot="searchDropdownText"
+              :items="searchDropdownItems"
+              :buttonRoundedClasses="computedButtonRoundedClasses"
+              @selected="(v) => this.$emit('searchDropdownItemClicked', v)"
+            />
             <PawCrazyInput
               ref="searchbar"
               :value="searchValue"
@@ -71,7 +75,13 @@
               :inputRoundedClasses="computedInputRoundedClasses"
               inputMinWidthClasses="min-w-[30ch]"
               :flexDir="computedFlexDirectionProperty"
-              :class="searchbarOpened && !searchDropdownItems.length ? 'w-full' : searchDropdownItems.length ? 'w-full rounded-l-none' :'w-0 overflow-hidden'"
+              :class="
+                searchbarOpened && !searchDropdownItems.length
+                  ? 'w-full'
+                  : searchDropdownItems.length
+                  ? 'w-full rounded-l-none'
+                  : 'w-0 overflow-hidden'
+              "
               @typed="(v) => searchTyped(v)"
               @keyDownEnter="this.$emit('keyDownEnter')"
               >{{ searchValue }}
@@ -93,11 +103,20 @@
         <!-- Buttons mobile -->
         <div
           class="flex flex-row gap-3 md:hidden"
-          :class="[buttons.length >= 4 ? '!flex' : '',  searchDropdownItems.length ? 'flex-col-reverse items-end sm:flex-row w-full' : '' ]"
+          :class="[
+            buttons.length >= 4 ? '!flex' : '',
+            searchDropdownItems.length
+              ? 'flex-col-reverse items-end sm:flex-row w-full'
+              : '',
+          ]"
         >
           <div class="flex flex-row w-full">
             <PawButton
-              v-show="!searchDropdownItems.length ? !searchbarOpened && searchbar : false"
+              v-show="
+                !searchDropdownItems.length
+                  ? !searchbarOpened && searchbar
+                  : false
+              "
               :disabled="loading"
               outlined
               size="md"
@@ -107,16 +126,16 @@
             ></PawButton>
 
             <PawDropdown
-                v-if="searchDropdownItems.length"
-                outlined
-                size="md"
-                icon="expand_more"
-                class="h-full"
-                :textSlot="searchDropdownText"
-                :items="searchDropdownItems"
-                :buttonRoundedClasses="computedButtonRoundedClasses"
-                @selected="(v) => this.$emit('searchDropdownItemClicked', v)"
-              />
+              v-if="searchDropdownItems.length"
+              outlined
+              size="md"
+              icon="expand_more"
+              class="h-full"
+              :textSlot="searchDropdownText"
+              :items="searchDropdownItems"
+              :buttonRoundedClasses="computedButtonRoundedClasses"
+              @selected="(v) => this.$emit('searchDropdownItemClicked', v)"
+            />
             <PawCrazyInput
               ref="searchbarMobile"
               :value="searchValue"
@@ -124,7 +143,13 @@
               title="Extended information about this field"
               contextIcon="search"
               class="max-h-8"
-              :class="searchbarOpened && !searchDropdownItems.length ? 'w-full' : searchDropdownItems.length ? 'w-full rounded-l-none' :'w-0 overflow-hidden'"
+              :class="
+                searchbarOpened && !searchDropdownItems.length
+                  ? 'w-full'
+                  : searchDropdownItems.length
+                  ? 'w-full rounded-l-none'
+                  : 'w-0 overflow-hidden'
+              "
               @typed="(v) => searchTyped(v)"
               :inputRoundedClasses="computedInputRoundedClasses"
               :fullwidth="true"
@@ -134,7 +159,10 @@
             </PawCrazyInput>
           </div>
 
-          <div class="flex justify-between w-full items-center sm:w-fit" v-if="searchDropdownItems.length">
+          <div
+            class="flex justify-between w-full items-center sm:w-fit"
+            v-if="searchDropdownItems.length"
+          >
             <div class="block sm:hidden">
               <h1
                 v-if="title"
@@ -144,7 +172,7 @@
               </h1>
             </div>
             <PawDropdown
-            v-if="buttons && buttons.length"
+              v-if="buttons && buttons.length"
               :class="searchbarOpened ? 'hidden' : ''"
               outlined
               size="md"
@@ -156,24 +184,31 @@
           </div>
           <PawDropdown
             v-else-if="buttons && buttons.length"
-              :class="searchbarOpened ? 'hidden' : ''"
-              outlined
-              size="md"
-              icon="expand_more"
-              textSlot="Options"
-              :items="buttons"
-              @selected="(v) => this.$emit('buttonClicked', v)"
-            />
+            :class="searchbarOpened ? 'hidden' : ''"
+            outlined
+            size="md"
+            icon="expand_more"
+            textSlot="Options"
+            :items="buttons"
+            @selected="(v) => this.$emit('buttonClicked', v)"
+          />
         </div>
       </div>
       <div
-        v-if="(!data || Object.keys(data).length === 0 || Object.keys(data.items).length === 0) && !loading"
+        v-if="
+          (!data ||
+            Object.keys(data).length === 0 ||
+            Object.keys(data.items).length === 0) &&
+          !loading
+        "
         class="flex items-center w-auto p-4 rounded-lg transition"
         :class="[
           !hasSlot ? 'hidden' : '',
-          itemsNotFoundHasBgColor ? `bg-${itemsNotFoundBgClass}-100 dark:bg-${itemsNotFoundBgClass}-800 text-${itemsNotFoundTextColorClass}-800 dark:text-${itemsNotFoundTextColorClass}-100`: 'text-white',
+          itemsNotFoundHasBgColor
+            ? `bg-${itemsNotFoundBgClass}-100 dark:bg-${itemsNotFoundBgClass}-800 text-${itemsNotFoundTextColorClass}-800 dark:text-${itemsNotFoundTextColorClass}-100`
+            : 'text-white',
           informal ? 'mx-auto mb-3 sm:mb-5' : 'm-6',
-         ]"
+        ]"
       >
         <slot></slot>
       </div>
@@ -410,7 +445,9 @@
                   ? 'pr-6 overflow-y-clip row-clip group-hover:bg-gray-100 dark:group-hover:bg-gray-800 before:content-[\'\'] before:absolute before:-z-10 before:inset-0 before:opacity-0 group-hover:before:opacity-100 before:transition before:shadow-box dark:before:shadow-box-dark'
                   : `pr-3 h-12`,
                 informal && !bgDark && !bgLight ? '!bg-transparent' : '',
-                hasStickyDetails() || !informal ? 'sticky' : 'relative border-gray-200 dark:border-gray-700 rounded-r-lg border-t border-r border-b',
+                hasStickyDetails() || !informal
+                  ? 'sticky'
+                  : 'relative border-gray-200 dark:border-gray-700 rounded-r-lg border-t border-r border-b',
               ]"
             >
               <!-- cap -->
@@ -424,7 +461,10 @@
               >
                 <!-- Details link -->
                 <PawLink
-                  v-if="((!informal && !loading) || informal) && !actionDropdownItems.length"
+                  v-if="
+                    ((!informal && !loading) || informal) &&
+                    !actionDropdownItems.length
+                  "
                   size="sm"
                   :icon="!informal ? 'last_page' : ctaIcon"
                   :outlined="informal"
@@ -452,7 +492,6 @@
                     buttonRoundedClasses="border-none !bg-transparent "
                   >
                   </PawButton>
-
                 </div>
 
                 <!-- Details loading -->
@@ -663,7 +702,7 @@ export default {
     "searchDropdownItemClicked",
     "searched",
     "keyDownEnter",
-    "actionSelected"
+    "actionSelected",
   ],
   data() {
     return {
@@ -680,7 +719,7 @@ export default {
           ).length,
       settingsOpened: false,
       searchbarOpened: false,
-      searchValue: null,
+      searchValue: this.searchbarValueProxy,
       error: false,
       dropdownOpen: false,
       rowIdentifierProxy: null,
@@ -701,11 +740,11 @@ export default {
     },
     searchDropdownText: {
       type: String,
-      default: "Search by"
+      default: "Search by",
     },
     actionDropdownItems: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     rowItemIdentifier: {
       type: String,
@@ -744,6 +783,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    searchbarValueProxy: {
+      type: String,
+      default: "",
+    },
     selectionEnabled: {
       type: Boolean,
       default: false,
@@ -754,11 +797,11 @@ export default {
     },
     itemsNotFoundBgClass: {
       type: String,
-      default: "warning"
+      default: "warning",
     },
     itemsNotFoundTextColorClass: {
       type: String,
-      default: "gray"
+      default: "gray",
     },
   },
   components: {
@@ -902,14 +945,18 @@ export default {
       });
     },
     computedInputRoundedClasses() {
-        return this.searchDropdownItems.length > 0? "rounded-md rounded-l-none" : "rounded-md";
-    }, 
+      return this.searchDropdownItems.length > 0
+        ? "rounded-md rounded-l-none"
+        : "rounded-md";
+    },
     computedButtonRoundedClasses() {
-        return this.searchDropdownItems.length > 0 ? "rounded-md rounded-r-none" : "rounded-md";
+      return this.searchDropdownItems.length > 0
+        ? "rounded-md rounded-r-none"
+        : "rounded-md";
     },
     computedFlexDirectionProperty() {
-        return this.searchDropdownItems.length > 0 ? "row" : "col";
-    }
+      return this.searchDropdownItems.length > 0 ? "row" : "col";
+    },
   },
   methods: {
     /* Emitters */
@@ -1013,28 +1060,34 @@ export default {
     },
 
     openDropdown(event, rowItemIdentifier) {
-        this.dropdownOpen = false;
-        // Timeout so the dropdown can disappear and reappear
-        setTimeout(() => {
-          const dropdown = this.$refs.actionDropdown;
+      this.dropdownOpen = false;
+      // Timeout so the dropdown can disappear and reappear
+      setTimeout(() => {
+        const dropdown = this.$refs.actionDropdown;
 
-          const targetElRect = event.target.getBoundingClientRect();
-          const tableElRect = this.$refs.table.getBoundingClientRect();
-          const tableHeaderElRect = this.$refs.tableHeader.getBoundingClientRect();
+        const targetElRect = event.target.getBoundingClientRect();
+        const tableElRect = this.$refs.table.getBoundingClientRect();
+        const tableHeaderElRect =
+          this.$refs.tableHeader.getBoundingClientRect();
 
-          const offset = this.informal ? 30 : 10;
-          
-          const dropdownTopValue = targetElRect.top - tableElRect.top + tableHeaderElRect.height + targetElRect.height + offset;
-        
-          dropdown.style.top = `${dropdownTopValue}px`;
+        const offset = this.informal ? 30 : 10;
 
-          this.dropdownOpen = true;
-          this.rowIdentifierProxy = rowItemIdentifier;
+        const dropdownTopValue =
+          targetElRect.top -
+          tableElRect.top +
+          tableHeaderElRect.height +
+          targetElRect.height +
+          offset;
 
-          this.clickOutsideElement(this.$refs.actionDropdown, () => {
-            this.dropdownOpen = false;
-          });
-        }, 150);
+        dropdown.style.top = `${dropdownTopValue}px`;
+
+        this.dropdownOpen = true;
+        this.rowIdentifierProxy = rowItemIdentifier;
+
+        this.clickOutsideElement(this.$refs.actionDropdown, () => {
+          this.dropdownOpen = false;
+        });
+      }, 150);
     },
 
     dropdownActionSelected(actionIdentifier) {
@@ -1098,7 +1151,7 @@ export default {
     },
     hasStickyDetails() {
       return this.ctaIcon && this.ctaIcon !== "";
-    }
+    },
   },
 };
 </script>
