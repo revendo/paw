@@ -43,6 +43,18 @@
                          class="text-gray-400 cursor-pointer">
                     copy_all
                 </PawIcon>
+                <PawIcon v-if="editAction && !formatError"
+                         size="sm"
+                         @click="editTrigger"
+                         class="text-gray-400 cursor-pointer">
+                    edit
+                </PawIcon>
+                <PawIcon v-if="deleteAction && !formatError"
+                         size="sm"
+                         @click="deleteTrigger"
+                         class="text-gray-400 cursor-pointer">
+                    delete
+                </PawIcon>
                 <PawIcon v-if="secret && !formatError"
                          size="sm"
                          class="text-gray-400 cursor-pointer"
@@ -76,7 +88,7 @@ import { useI18n } from 'vue-i18n';
 
 export default {
     name: 'PawLazyField',
-    emits: ['clicked'],
+    emits: ['clicked', 'editClicked', 'deleteClicked'],
     data() {
         return {
             hasSlot: null,
@@ -158,6 +170,12 @@ export default {
             default: false,
         },
         copy: {
+            type: Boolean,
+        },
+        editAction: {
+            type: Boolean,
+        },
+        deleteAction: {
             type: Boolean,
         },
         secret: {
@@ -296,6 +314,14 @@ export default {
                 () => this.setMessage(this.t('clipboard.success'), true),
                 () => this.setMessage(this.t('clipboard.error'), false)
             );
+        },
+
+        editTrigger() {
+            this.$emit('editClicked');
+        },
+
+        deleteTrigger() {
+            this.$emit('deleteClicked');
         },
 
         setMessage(message, success) {
