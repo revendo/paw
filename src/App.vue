@@ -865,6 +865,18 @@
               label="Lazy Field Action Link"
               info="Info"
               title="Extended information about this field"
+              deleteAction
+              editAction
+              @deleteClicked="() => console.log('delete!')"
+              @editClicked="() => console.log('edit!')"
+            >
+              localhost:8080
+            </PawLazyField>
+
+            <PawLazyField
+              label="Lazy Field Action Link"
+              info="Info"
+              title="Extended information about this field"
               action="link"
               insecure
             >

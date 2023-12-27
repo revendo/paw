@@ -86,6 +86,20 @@ export default {
                 category: 'Actions & format',
             },
         },
+        edit: {
+            control: { type: 'boolean' },
+            description: 'The edit button is shown on the field?',
+            table: {
+                category: 'Actions & format',
+            },
+        },
+        delete: {
+            control: { type: 'boolean' },
+            description: 'The delete button is shown on the field?',
+            table: {
+                category: 'Actions & format',
+            },
+        },
         secret: {
             control: { type: 'boolean' },
             description: 'Should the content of the field be hidden by default?',
@@ -157,6 +171,18 @@ export default {
         /* Events */
         clicked: {
             description: 'Fired on lazy field or action icon clicked when action is set.',
+            table: {
+                category: 'Events',
+            },
+        },
+        deleteClicked: {
+            description: 'Fired on delete action icon clicked.',
+            table: {
+                category: 'Events',
+            },
+        },
+        editClicked: {
+            description: 'Fired on edit action icon clicked.',
             table: {
                 category: 'Events',
             },
