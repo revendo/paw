@@ -909,6 +909,7 @@
               :loading="loadingMode"
               :searchbar="true"
               title="Card Title"
+              :isRowClickable="true"
               :buttons="[
                 {
                   identifier: 'add',
