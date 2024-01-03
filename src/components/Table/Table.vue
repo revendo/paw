@@ -382,8 +382,10 @@
                 !informal
                   ? 'py-0'
                   : 'pt-2 pb-2 border-t border-b border-gray-200 dark:border-gray-700 transition',
+                !isRowClickable && heading.action ? 'cursor-auto w-fit' : 'cursor-pointer'
               ]"
               class="align-middle"
+              @click="!isRowClickable && heading.action ? '' : click(item.id) "
             >
               <PawLazyField
                 v-if="!loading && heading.format !== 'label'"
@@ -803,6 +805,10 @@ export default {
       type: String,
       default: "gray",
     },
+    isRowClickable: {
+      type: Boolean,
+      default: false,
+    }
   },
   components: {
     PawCheckbox,
