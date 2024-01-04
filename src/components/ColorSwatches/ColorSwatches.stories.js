@@ -1,6 +1,6 @@
-import '../assets/tailwind.css';
+import '@/assets/tailwind.css';
 import PawColorSwatches from './ColorSwatches.vue'
-import { componentProps } from '../index.js'
+import { componentProps } from '@'
 
 export default {
     title: 'Colors',
