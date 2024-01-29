@@ -5,6 +5,7 @@ import PawChip from "./src/components/Chip/Chip.vue";
 import PawCrazyInput from "./src/components/CrazyInput/CrazyInput.vue";
 import PawDatePicker from "./src/components/Datepicker/DatePicker.vue";
 import PawDropDown from "./src/components/Dropdown/DropDown.vue";
+import PawFloatingBar from "./src/components/FloatingBar/FloatingBar.vue";
 import PawIcon from "./src/components/Icon/Icon.vue";
 import PawLabel from "./src/components/Label/Label.vue";
 import PawLazyField from "./src/components/LazyField/LazyField.vue";
@@ -22,6 +23,7 @@ export {
     PawCrazyInput,
     PawDatePicker,
     PawDropDown,
+    PawFloatingBar,
     PawIcon,
     PawLabel,
     PawLazyField,
