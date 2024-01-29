@@ -1006,7 +1006,6 @@ export default {
      * @param source {String} Source of record - row or actionButton
      */
     click(id, source) {
-      console.log([id,source]);
       this.$emit("clicked", id, source);
     },
 
