@@ -301,8 +301,9 @@
         :class="[
           showingResults ? 'opacity-100' : 'opacity-0 pointer-events-none',
         ]"
-        class="absolute z-10 bottom-0 w-full max-h-[161px] overflow-auto translate-y-full border border-t-0 border-gray-200 dark:border-gray-600 rounded-md rounded-t-none shadow-box dark:shadow-box-dark transition"
+        class="absolute z-10 bottom-0 w-full max-h-[181px] translate-y-full rounded-md rounded-t-none transition"
       >
+      <div class="max-h-[inherit] overflow-y-auto  border-gray-300 dark:border-gray-700 shadow-box dark:shadow-box-dark" :class="addLabel ? 'rounded-b-none' : 'rounded-b-md'">        
         <div
           v-for="item in dropdownItems"
           :key="item"
@@ -365,10 +366,12 @@
             {{ item.value }}
           </PawCrazyInput>
         </div>
+      </div>
+
 
         <div
           v-if="addLabel && !loadingResults"
-          class="flex justify-center py-2 bg-gray-100 dark:bg-gray-700"
+          class="flex justify-center py-2 bg-gray-100  box-content dark:bg-gray-700 border-gray-200 dark:border-gray-600 rounded-b-md shadow-box dark:shadow-box-dark"
         >
           <PawButton size="sm" :icon="addIcon" @clicked="add">{{
             addLabel
