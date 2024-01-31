@@ -969,7 +969,7 @@
                 (headingName, headingSort) =>
                   updateSorting(headingName, headingSort)
               "
-              @clicked="showRecordDetails($event)"
+              @clicked="(identifier,source) => showRecordDetails(identifier, source)"
               @reordered="
                 (headingName, headingPosition) =>
                   updatePosition(headingName, headingPosition)
@@ -1049,6 +1049,53 @@
           <h1
             class="text-xxl mt-10 mb-5 text-gray-900 dark:text-white transition"
           >
+            Floating Bar
+          </h1>
+          <div
+            class="flex flex-col gap-8 bg-white dark:bg-gray-800 p-4 xs:p-8 rounded-3xl transition"
+          >
+            <PawSwitch
+              size="lg"
+              class="self-start"
+              title="Activate floating bar"
+              @changed="activateFloatingBar($event)"
+              >Activate floating bar</PawSwitch
+            >
+
+          <div
+            class="bg-success-100 dark:bg-success-800 text-success-800 dark:text-success-100 p-4 mb-5 rounded-md transition"
+          >
+            <div v-html="floatingBarOutput"  class="text-gray-900 dark:text-white"> </div>
+          </div>
+
+            <PawFloatingBar
+              v-if="floatingBar"
+              :scrollGradient="true"
+              :buttons="[
+                {
+                    textSlot: 'Code',
+                    identifier: 'code',
+                    size: 'lg',
+                    outlined: false,
+                    
+                },
+                
+                {
+                    icon: 'mail',
+                    textSlot: 'Email',
+                    identifier: 'email',
+                    size: 'lg',
+                    outlined: true,
+                },
+              ]"
+              @clicked="(identifier) => floatingBarButtonClicked(identifier)"
+            ></PawFloatingBar>
+          </div>
+        </div>
+        <div class="max-w-6xl w-full mx-auto mb-32">
+          <h1
+            class="text-xxl mt-10 mb-5 text-gray-900 dark:text-white transition"
+          >
             Datepicker
           </h1>
           <div
@@ -1100,6 +1147,7 @@ import PawCrazyInput from "@/components/CrazyInput/CrazyInput.vue";
 import PawLazyField from "@/components/LazyField/LazyField.vue";
 import PawTable from "@/components/Table/Table.vue";
 import PawDatepicker from "@/components/Datepicker/Datepicker.vue";
+import PawFloatingBar from "@/components/FloatingBar/FloatingBar.vue";
 
 export default {
   name: "App",
@@ -1119,6 +1167,7 @@ export default {
     PawTable,
     PawDropdown,
     PawDatepicker,
+    PawFloatingBar
   },
   data() {
     const testElements = [
@@ -1660,7 +1709,12 @@ Schweiz`,
             },
           },
         ],
+
+        
       },
+      // Floating bar
+      floatingBar: false,
+      floatingBarOutput: null,
     };
   },
   methods: {
@@ -1777,8 +1831,8 @@ Schweiz`,
      * Executed on show record details clicked
      * @param id {Number | String} ID of record
      */
-    showRecordDetails(id) {
-      this.tableOutput = `Details of record <b>${id}</b> clicked.`;
+    showRecordDetails(id, source) {
+      this.tableOutput = `Details of record <b>${id}</b> clicked, source of click is <b>${source}</b>`;
     },
 
     /**
@@ -1879,7 +1933,20 @@ Schweiz`,
       this.results[scope] = [];
       this.eventsOutput = "Loading of results was cancelled.";
     },
-  },
+
+    activateFloatingBar(floatingBar) {
+      this.floatingBar = floatingBar;
+      this.floatingBarOutput = `Floating bar ${
+        floatingBar ? "activated" : "deactivated"
+      }.`;
+    },
+
+    floatingBarButtonClicked(identifier) {
+      this.floatingBarOutput = `Floating bar ${
+        this.floatingBar ? "activated" : "deactivated"
+      }. Clicked button "${identifier}".`;
+    },
+  }
 };
 </script>
 

@@ -16,6 +16,7 @@
                   :class="{
                     'prose-md': size === 'md',
                     'prose-sm': size === 'sm',
+                    'prose-xs': size === 'xs',
                     'whitespace-pre-wrap': format === 'multiline',
                     'truncate': format !== 'multiline',
                     'text-action-500 dark:text-action-400 hover:text-action-300 dark:hover:text-action-600 cursor-pointer transition': action && !formatError

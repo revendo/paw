@@ -385,7 +385,7 @@
                 isRowClickable && !heading.action ? 'cursor-pointer' : ''
               ]"
               class="align-middle"
-              @click="isRowClickable && !heading.action ? click(item.id)  : ''"
+              @click="isRowClickable && !heading.action ? click(item.id, 'row')  : ''"
             >
               <PawLazyField
                 v-if="!loading && heading.format !== 'label'"
@@ -473,7 +473,7 @@
                   color="action"
                   align="right"
                   compact
-                  @clicked="click(item.id)"
+                  @clicked="click(item.id, 'actionButton')"
                   class="z-20"
                   :class="{
                     'ml-auto': !informal,
@@ -1003,9 +1003,10 @@ export default {
     /**
      * Emitted when record detail link clicked
      * @param id {Number | String} ID of record
+     * @param source {String} Source of record - row or actionButton
      */
-    click(id) {
-      this.$emit("clicked", id);
+    click(id, source) {
+      this.$emit("clicked", id, source);
     },
 
     /**
