@@ -219,7 +219,7 @@ export default {
         format: {
             type: String,
             validator: function(value) {
-                return [undefined, 'mail', 'phone', 'number', 'card', 'iban', 'multiline', 'date', 'time', 'datetime'].includes(value);
+                return [undefined, 'mail', 'phone', 'number', 'card', 'iban', 'multiline', 'date', 'time', 'datetime', 'icon'].includes(value);
             },
         },
         link: {
