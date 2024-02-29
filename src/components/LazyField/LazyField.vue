@@ -13,9 +13,9 @@
                 'border-t border-gray-200 dark:border-gray-600': label,
              }">
             <div class="flex items-center" :class="formatting == 'icon' && fieldValueIconPosition == 'right' ? 'flex-row-reverse' : ''">
-                <PawIcon v-if="formatting == 'icon' && valueIconName" :class="valueColorClass ?? 'text-gray-400'" size="sm"  >
-                {{ valueIconName }}
-             </PawIcon>
+                <PawIcon v-if="formatting == 'icon' && valueIconName" :class="valueColorClass ?? 'text-gray-400'" size="sm" >
+                    {{ valueIconName }}
+                </PawIcon>
                 <span class="my-1.5"
                       :class="{
                         'prose-md': size === 'md',
