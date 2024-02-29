@@ -2,6 +2,7 @@
 import PawButton from "./src/components/Button/Button.vue";
 import PawCheckbox from "./src/components/Checkbox/Checkbox.vue";
 import PawChip from "./src/components/Chip/Chip.vue";
+import PawColorSwatches from "./src/components/ColorSwatches/ColorSwatches.vue";
 import PawCrazyInput from "./src/components/CrazyInput/CrazyInput.vue";
 import PawDatePicker from "./src/components/Datepicker/DatePicker.vue";
 import PawDropDown from "./src/components/Dropdown/DropDown.vue";
@@ -15,11 +16,13 @@ import PawListItem from "./src/components/NavigationList/ListItem.vue";
 import PawRadio from "./src/components/Radio/Radio.vue";
 import PawSwitch from "./src/components/Switch/Switch.vue";
 import PawTable from "./src/components/Table/Table.vue";
+import PawTypography from "./src/components/Typography/Typography.vue";
 
 export {
     PawButton,
     PawCheckbox,
     PawChip,
+    PawColorSwatches,
     PawCrazyInput,
     PawDatePicker,
     PawDropDown,
@@ -32,5 +35,6 @@ export {
     PawListItem,
     PawRadio,
     PawSwitch,
-    PawTable
+    PawTable,
+    PawTypography
 };
