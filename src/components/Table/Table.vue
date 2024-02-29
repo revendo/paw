@@ -407,12 +407,17 @@
                 :unit-icon-outlined="heading.unitIconOutlined"
                 :min-decimals="heading.minDecimals"
                 :max-decimals="heading.maxDecimals"
+                :valueIcon="heading.format == 'icon' ? item[heading.name].icon : ''"
+                :valueIconPosition="heading.format == 'icon' ? item[heading.name].iconPosition: ''"
+                :valueColorClass="heading.format == 'icon' ? item[heading.name].valueColor : ''"
               >
                 {{
                   cellValue(
                     heading.action === "link"
                       ? item[heading.name].text
-                      : item[heading.name],
+                      : heading.format == "icon"
+                        ? item[heading.name].value
+                        : item[heading.name],
                     heading.name
                   )
                 }}
@@ -471,6 +476,7 @@
                   :icon="!informal ? 'last_page' : ctaIcon"
                   :outlined="informal"
                   color="action"
+                  :disabled="ctaIconDisabled"
                   align="right"
                   compact
                   @clicked="click(item.id, 'actionButton')"
@@ -768,6 +774,10 @@ export default {
     ctaIcon: {
       type: String,
       default: "assignment",
+    },
+    ctaIconDisabled: {
+      type: Boolean,
+      default: false,
     },
     bgDark: {
       type: String,

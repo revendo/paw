@@ -12,18 +12,25 @@
              :class="{
                 'border-t border-gray-200 dark:border-gray-600': label,
              }">
-            <span class="my-1.5"
-                  :class="{
-                    'prose-md': size === 'md',
-                    'prose-sm': size === 'sm',
-                    'prose-xs': size === 'xs',
-                    'whitespace-pre-wrap': format === 'multiline',
-                    'truncate': format !== 'multiline',
-                    'text-action-500 dark:text-action-400 hover:text-action-300 dark:hover:text-action-600 cursor-pointer transition': action && !formatError
-                  }"
-                  @click="click"
-                  v-text="this.inputValue(false)">
-            </span>
+            <div class="flex items-center" :class="formatting == 'icon' && fieldValueIconPosition == 'right' ? 'flex-row-reverse' : ''">
+                <PawIcon v-if="formatting == 'icon' && valueIconName" :class="valueColorClass ?? 'text-gray-400'" size="sm" >
+                    {{ valueIconName }}
+                </PawIcon>
+                <span class="my-1.5"
+                      :class="{
+                        'prose-md': size === 'md',
+                        'prose-sm': size === 'sm',
+                        'prose-xs': size === 'xs',
+                        'whitespace-pre-wrap': format === 'multiline',
+                        'truncate': format !== 'multiline',
+                        'text-action-500 dark:text-action-400 hover:text-action-300 dark:hover:text-action-600 cursor-pointer transition': action && !formatError,
+                        [valueColorClass]: valueColorClass,
+                      }"
+                      @click="click"
+                      v-text="this.inputValue(false)">
+                
+                </span>
+            </div>
 
             <div class="flex flex-row shrink-0 items-center gap-1 py-1 ml-3" :class="{
                      'self-start': unitPosition === 'top',
@@ -95,6 +102,8 @@ export default {
             hasSlot: null,
             formatting: null,
             inputOutline: false,
+            fieldValueIconPosition: this.valueIconPosition,
+            valueIconName: this.valueIcon,
             show: false,
             copying: false,
             message: null,
@@ -159,6 +168,18 @@ export default {
         value: {
             type: String,
             default: '',
+        },
+        valueIcon: {
+            type: String,
+            default: ""
+        },
+        valueIconPosition: {
+            type: String,
+            default: "left",
+        },
+        valueColorClass: {
+            type: String,
+            default: ""
         },
         unitLabel: {
             type: String,

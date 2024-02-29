@@ -1,6 +1,6 @@
-import '../assets/tailwind.css';
+import '@/assets/tailwind.css';
 import PawTypography from './Typography.vue'
-import { componentProps } from '../index.js'
+import { componentProps } from '@'
 
 export default {
     title: 'Typography',
