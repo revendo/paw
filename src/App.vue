@@ -748,6 +748,18 @@
           <div
             class="flex flex-col gap-8 justify-center bg-white dark:bg-gray-800 p-4 xs:p-8 rounded-3xl transition"
           >
+
+          <PawLazyField
+              label="Lazy Field Icon Format"
+              title="Extended information about this field"
+              format="icon"
+              valueIcon="arrow_drop_down"
+              valueColorClass="text-action-500 dark:text-action-400"
+              valueIconPosition="right"
+              >2</PawLazyField
+            >
+
+
             <PawLazyField
               label="Lazy Field Date Format"
               info="Info"
