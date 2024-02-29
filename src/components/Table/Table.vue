@@ -471,6 +471,7 @@
                   :icon="!informal ? 'last_page' : ctaIcon"
                   :outlined="informal"
                   color="action"
+                  :disabled="ctaIconDisabled"
                   align="right"
                   compact
                   @clicked="click(item.id, 'actionButton')"
@@ -768,6 +769,10 @@ export default {
     ctaIcon: {
       type: String,
       default: "assignment",
+    },
+    ctaIconDisabled: {
+      type: Boolean,
+      default: false,
     },
     bgDark: {
       type: String,
