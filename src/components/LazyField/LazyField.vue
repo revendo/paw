@@ -13,7 +13,7 @@
                 'border-t border-gray-200 dark:border-gray-600': label,
              }">
             <div class="flex items-center" :class="formatting == 'icon' && fieldValueIconPosition == 'right' ? 'flex-row-reverse' : ''">
-                <PawIcon v-if="formatting == 'icon' && valueIconName" :class="valueColorClass ?? 'text-gray-400'" size="sm" >
+                <PawIcon v-if="formatting == 'icon' && valueIcon" :class="valueColorClass ?? 'text-gray-400'" size="sm" >
                     {{ valueIconName }}
                 </PawIcon>
                 <span class="my-1.5"
@@ -103,7 +103,6 @@ export default {
             formatting: null,
             inputOutline: false,
             fieldValueIconPosition: this.valueIconPosition,
-            valueIconName: this.valueIcon,
             show: false,
             copying: false,
             message: null,
@@ -136,7 +135,10 @@ export default {
 
                 return '';
             }
-        }
+        },
+        valueIconName() {
+            return this.valueIcon;
+        },
     },
     created() {
         this.initFormat();
