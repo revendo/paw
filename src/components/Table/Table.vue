@@ -361,9 +361,15 @@
               }"
             >
               <PawCheckbox
-                v-if="selectionEnabled"
+                v-if="selectionEnabled && multiselect"
                 size="md"
                 @changed="select($event, item.id)"
+              />
+              <PawRadio 
+                v-if="selectionEnabled && !multiselect" 
+                size="lg"
+                :checked="item['selected']"
+                @changed="selectRadio($event, item.id)"
               />
             </td>
 
@@ -683,16 +689,17 @@
 </template>
 
 <script>
-import PawCheckbox from "../Checkbox/Checkbox.vue";
-import PawButton from "../Button/Button.vue";
-import PawLazyField from "../LazyField/LazyField.vue";
-import PawIcon from "../Icon/Icon.vue";
-import PawLink from "../Link/Link.vue";
-import PawLabel from "../Label/Label.vue";
-import PawDropdown from "../Dropdown/DropDown.vue";
-import PawCrazyInput from "../CrazyInput/CrazyInput.vue";
-import { languagePreference } from "../../constants";
 import { useI18n } from "vue-i18n";
+import { languagePreference } from "../../constants";
+import PawButton from "../Button/Button.vue";
+import PawCheckbox from "../Checkbox/Checkbox.vue";
+import PawCrazyInput from "../CrazyInput/CrazyInput.vue";
+import PawDropdown from "../Dropdown/DropDown.vue";
+import PawIcon from "../Icon/Icon.vue";
+import PawLabel from "../Label/Label.vue";
+import PawLazyField from "../LazyField/LazyField.vue";
+import PawLink from "../Link/Link.vue";
+import PawRadio from "../Radio/Radio.vue";
 
 const loadingRowsFormal = 8;
 const loadingRowsInformal = 5;
@@ -803,6 +810,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    multiselect: {
+      type: Boolean,
+      default: true,
+    },
     itemsNotFoundHasBgColor: {
       type: Boolean,
       default: true,
@@ -829,6 +840,7 @@ export default {
     PawButton,
     PawDropdown,
     PawCrazyInput,
+    PawRadio,
   },
   setup() {
     const { t } = useI18n({
@@ -990,6 +1002,18 @@ export default {
      * @param id {Number | String} ID of record
      */
     select(eventValue, id) {
+      this.$emit("selected", id, eventValue);
+    },
+
+      /**
+     * Emitted when record radio button selected
+     * @param eventValue {Boolean} Is radio button selected?
+     * @param id {Number | String} ID of record
+     */
+    selectRadio(eventValue, id) {
+      this.currentItems.forEach(item => {
+        item.id == id ? item["selected"] = true : item["selected"] = false
+      })
       this.$emit("selected", id, eventValue);
     },
 
