@@ -1,13 +1,13 @@
 <template>
   <div
-    class="flex items-center gap-2 fixed bottom-0 w-full justify-center left-0 right-0 py-4 z-50"
+    class="fixed bottom-0 w-full left-0 right-0 py-4 z-50 grid place-items-center"
     :class="
       scrollGradient
         ? 'from-gray-100 dark:from-gray-900 to-transparent bg-gradient-to-t'
         : ''
     "
   >
-    <PawButton
+  <div class="flex items-center gap-2 self-center p-3 rounded-xl bg-gray-900/60 backdrop-blur-sm  dark:bg-gray-950/60 w-fit"> <PawButton
       v-for="(button, index) in buttons"
       :key="`button-${index}`"
       :icon="button.icon"
@@ -17,7 +17,8 @@
       @clicked="clicked(button.identifier)"
     >
       {{ button.textSlot }}
-    </PawButton>
+    </PawButton></div>
+   
   </div>
 </template>
 

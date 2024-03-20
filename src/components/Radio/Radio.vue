@@ -27,11 +27,6 @@
 export default {
     name: 'PawRadio',
     emits: ['changed'],
-    data() {
-        return {
-            value: this.checked,
-        }
-    },
     props: {
         size: {
             type: String,
@@ -54,7 +49,7 @@ export default {
     },
     methods: {
         change() {
-            this.$emit('changed', this.value = !this.value);
+            this.$emit('changed', !this.checked);
         },
     },
 }
