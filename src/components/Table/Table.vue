@@ -738,6 +738,7 @@ export default {
       error: false,
       dropdownOpen: false,
       rowIdentifierProxy: null,
+      items: this.data?.items ?? [],
     };
   },
   props: {
@@ -899,10 +900,10 @@ export default {
     currentItems() {
       const totalItems = this.meta.lastItem - this.meta.firstItem + 1;
       let items = [];
-      if (this.meta.pagination >= this.data.items.length) {
-        items = this.data.items.slice(0, totalItems);
+      if (this.meta.pagination >= this.items.length) {
+        items = this.items.slice(0, totalItems);
       } else {
-        items = this.data.items.slice(
+        items = this.items.slice(
           this.meta.firstItem - 1,
           Math.max(this.meta.firstItem - 1 + this.meta.pagination, totalItems)
         );
@@ -927,7 +928,7 @@ export default {
       // Total records
       meta.totalRecords = Math.max(
         this.data.meta.records,
-        this.data.items.length
+        this.items.length
       );
       // Records per page (default: 10)
       meta.pagination =
@@ -941,7 +942,7 @@ export default {
       meta.firstItem = meta.pagination * (meta.currentPage - 1) + 1;
       meta.lastItem =
         Math.min(meta.firstItem + meta.pagination - 1, meta.totalRecords) ||
-        this.data.items.length;
+        this.items.length;
       //console.log(meta);
 
       return meta;
@@ -968,7 +969,7 @@ export default {
       }
       return this.t("table.showRecords", {
         total: new Intl.NumberFormat(languagePreference).format(
-          this.data.items.length
+          this.items.length
         ),
       });
     },
@@ -1005,15 +1006,20 @@ export default {
       this.$emit("selected", id, eventValue);
     },
 
-      /**
+    /**
      * Emitted when record radio button selected
      * @param eventValue {Boolean} Is radio button selected?
      * @param id {Number | String} ID of record
      */
     selectRadio(eventValue, id) {
-      this.currentItems.forEach(item => {
-        item.id == id ? item["selected"] = true : item["selected"] = false
-      })
+      // Find and unselect the previously selected item
+      const previouslySelectedItem = this.items.find(item => item.selected);
+      if (previouslySelectedItem) previouslySelectedItem.selected = false;
+
+      // Find and select the new item
+      const newItemToSelect = this.items.find(item => item.id === id);
+      if (newItemToSelect) newItemToSelect.selected = true;
+
       this.$emit("selected", id, eventValue);
     },
 
