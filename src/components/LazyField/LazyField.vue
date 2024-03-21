@@ -88,11 +88,11 @@
 </template>
 
 <script>
-import PawIcon from '../Icon/Icon.vue';
 import creditCardType from 'credit-card-type';
 import moment from 'moment';
-import { actionIcons, defaultLanguageLocale, languagePreference, creditCardMinDigits, momentFormats } from '../../constants';
 import { useI18n } from 'vue-i18n';
+import { actionIcons, creditCardMinDigits, defaultLanguageLocale, languagePreference, momentFormats } from '../../constants';
+import PawIcon from '../Icon/Icon.vue';
 
 export default {
     name: 'PawLazyField',
