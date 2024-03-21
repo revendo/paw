@@ -888,6 +888,14 @@ export default {
       });
     }
   },
+  watch: {
+    data: {
+      deep: true,
+      handler() {
+        this.syncItemsWithProp();
+      },
+    },
+  },
   computed: {
     headings() {
       if (!this.data.headings) return {};
@@ -1081,6 +1089,16 @@ export default {
       if (!title) return this.t("table.missingHeadingTitle");
 
       return title;
+    },
+    
+    /**
+     * Synchronizes the component's items state with the data prop.
+     * This method checks if the data prop and its items sub-property exist
+     * and updates the component's items state accordingly. If the data or
+     * data.items are not present, it sets the items state to an empty array.
+     */
+     syncItemsWithProp() {
+      this.items = this.data && this.data.items ? this.data.items : [];
     },
 
     openSearchbar(type) {

@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
-const plugin = require("tailwindcss/plugin");
-const colors = require("tailwindcss/colors");
+import defaultTheme from "tailwindcss/defaultTheme";
+import plugin  from "tailwindcss/plugin";
+import colors  from "tailwindcss/colors";
+import typography from  "@tailwindcss/typography";
 
 export default {
   content: ["./src/**/*.{vue,js}", "./node_modules/paw/**/*.js"],
@@ -281,8 +282,7 @@ export default {
     },
   },
   plugins: [
-    require("@tailwindcss/typography"),
-
+    typography,
     /** Add dynamically content to :before and :after pseudo-elements
      * @source: https://github.com/tailwindlabs/tailwindcss/discussions/2119#discussioncomment-200587
      * **/
