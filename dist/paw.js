@@ -13330,36 +13330,40 @@ const Ap = /* @__PURE__ */ ht(fp, [["render", Mp]]), Rp = { class: "relative w-f
       type: String,
       default: ""
     },
+    ref: {
+      type: String,
+      default: ""
+    },
     fluidWidthDropdown: {
       type: Boolean,
       default: !1
     }
   },
   emits: ["selected"],
-  setup(e, { emit: t }) {
-    const r = xt("right-0");
-    function n(o) {
-      o.x < 260 && (r.value = "left-0"), s.value = !s.value;
+  setup(e, { expose: t, emit: r }) {
+    const n = xt("right-0");
+    function i(l) {
+      l.x < 260 && (n.value = "left-0"), u.value = !u.value;
     }
-    const i = t, a = e, s = xt(!1);
-    function u(o) {
-      s.value = !1, i("selected", o);
+    const a = r, s = e, u = xt(!1);
+    function o(l) {
+      u.value = !1, a("selected", l);
     }
-    return (o, l) => (N(), W("div", Rp, [
+    return t({ dropdownOpen: u }), (l, f) => (N(), W("div", Rp, [
       nt(oi, {
-        onClick: l[0] || (l[0] = (f) => n(f)),
-        size: a.size,
-        title: a.title,
-        icon: a.icon,
-        disabled: a.disabled,
-        outlined: a.outlined,
-        buttonRoundedClasses: a.buttonRoundedClasses,
-        buttonColorClasses: a.buttonColorClasses,
-        buttonBackgroundClasses: a.buttonBackgroundClasses,
-        iconColorClasses: a.iconColorClasses
+        onClick: f[0] || (f[0] = (m) => i(m)),
+        size: s.size,
+        title: s.title,
+        icon: s.icon,
+        disabled: s.disabled,
+        outlined: s.outlined,
+        buttonRoundedClasses: s.buttonRoundedClasses,
+        buttonColorClasses: s.buttonColorClasses,
+        buttonBackgroundClasses: s.buttonBackgroundClasses,
+        iconColorClasses: s.iconColorClasses
       }, {
         default: we(() => [
-          Te(pe(a.textSlot), 1)
+          Te(pe(s.textSlot), 1)
         ]),
         _: 1
       }, 8, ["size", "title", "icon", "disabled", "outlined", "buttonRoundedClasses", "buttonColorClasses", "buttonBackgroundClasses", "iconColorClasses"]),
@@ -13376,30 +13380,30 @@ const Ap = /* @__PURE__ */ ht(fp, [["render", Mp]]), Rp = { class: "relative w-f
           kr(ne("div", {
             class: q([[
               e.fluidWidthDropdown ? "min-w-max" : "min-w-[240px]",
-              r.value
+              n.value
             ], "absolute max-w-xs w-full rounded-lg shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 my-2 z-50"])
           }, [
             ne("div", Fp, [
-              (N(!0), W(rt, null, _t(a.items, (f) => (N(), W("button", {
-                onClick: (m) => u(f.identifier),
-                key: f.identifier,
+              (N(!0), W(rt, null, _t(s.items, (m) => (N(), W("button", {
+                onClick: (g) => o(m.identifier),
+                key: m.identifier,
                 class: q(["dark:hover:bg-gray-900 cursor-pointer first-of-type:rounded-tr-lg first-of-type:rounded-tl-lg last-of-type:rounded-br-lg last-of-type:rounded-bl-lg hover:bg-gray-100 w-full text-md dark:text-white text-gray-900 transition-all duration-300 items-center flex flex-row space-x-3 border-t dark:border-gray-700 first-of-type:border-t-0", [e.fluidWidthDropdown ? "px-4 py-2" : "p-2"]])
               }, [
-                f.icon ? (N(), Ne(Xt, {
+                m.icon ? (N(), Ne(Xt, {
                   key: 0,
                   size: "sm",
                   class: "text-gray-400"
                 }, {
                   default: we(() => [
-                    Te(pe(f.icon), 1)
+                    Te(pe(m.icon), 1)
                   ]),
                   _: 2
                 }, 1024)) : Z("", !0),
-                ne("span", null, pe(f.textSlot), 1)
+                ne("span", null, pe(m.textSlot), 1)
               ], 10, Yp))), 128))
             ])
           ], 2), [
-            [gn, s.value]
+            [gn, u.value]
           ])
         ]),
         _: 1
