@@ -57,7 +57,7 @@
 /* eslint-disable */
 import PawIcon from "../Icon/Icon.vue";
 import PawButton from "../Button/Button.vue";
-import { ref } from "vue";
+import { ref, defineExpose } from "vue";
 
 const popoverClass = ref("right-0");
 
@@ -119,6 +119,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  ref: {
+    type: String,
+    default: "",
+  },
   fluidWidthDropdown: {
     type: Boolean,
     default: false,
@@ -136,4 +140,6 @@ function selected(identifier) {
   // Emit the selected state to parent component
   emit("selected", identifier);
 }
+
+defineExpose({ dropdownOpen })
 </script>

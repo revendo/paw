@@ -32,6 +32,10 @@ export default {
       control: { type: "object" },
       description: "Items to display in the dropdown",
     },
+    ref: {
+      control: { type: "text" },
+      description: "Reference to the dropdown component which exposes ref to parent component",
+    },
     selected: {
       control: { type: "text" },
       description: "Fired when item in dropdown is selected",
@@ -149,3 +153,5 @@ Icon.parameters = {
     },
   },
 };
+
+
