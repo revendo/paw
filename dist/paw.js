@@ -12551,7 +12551,7 @@ const nu = /* @__PURE__ */ ht(ip, [["render", up]]), cp = 5, dp = {
     },
     maxChips: {
       type: Number,
-      default: 2
+      default: 0
     },
     chipsTruncated: {
       type: Boolean,
