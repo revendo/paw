@@ -167,14 +167,24 @@
         >
           <!-- Chip selection -->
           <PawChip
-            v-for="item in chips"
+            v-for="item in maxChips>0 ? chips.slice(0 ,maxChips) : chips"
             :key="item.id"
             @clicked="removeChip(item)"
             size="sm"
             :icon="chipIcon"
             :title="this.t('removeItem')"
+            :textEllipsis="chipsTruncated"
             class="shrink align-top justify-self-start ml-1 mt-1"
             >{{ item.value }}</PawChip
+          >
+
+           <!-- Chip elipsis item -->
+           <PawChip
+            v-if="maxChips> 0 && chips.length > maxChips"
+            size="sm"
+            :icon="chipIcon"
+            class="shrink align-top justify-self-start ml-1 mt-1"
+            >...</PawChip
           >
 
           <span
@@ -226,7 +236,7 @@
                 'pr-3': extraLabel || extraIcon || readonly,
                 'pointer-events-none selection:bg-transparent': readonly,
               }"
-              :placeholder="placeholder"
+              :placeholder="chips.length ? '' : placeholder"
               :readonly="readonly"
               :tabindex="
                 (readonly && !isOpen) || item?.unselectable ? -1 : null
@@ -373,7 +383,7 @@
           v-if="addLabel && !loadingResults"
           class="flex justify-center py-2 bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600 rounded-b-md shadow-box dark:shadow-box-dark"
         >
-          <PawButton size="sm" :icon="addIcon" @clicked="add">{{
+          <PawButton :size="addButtonSize" :icon="addIcon" @clicked="add">{{
             addLabel
           }}</PawButton>
         </div>
@@ -561,6 +571,13 @@ export default {
       type: String,
       default: "add",
     },
+    addButtonSize: {
+      type: String,
+      default: "sm",
+      validator: function(value) {
+          return ['sm', 'md', 'lg'].includes(value);
+      }
+    },
     dropdownWrap: {
       type: Boolean,
       default: false,
@@ -571,6 +588,14 @@ export default {
         return ["col", "row"].includes(value);
       },
       default: "col",
+    },
+    maxChips: {
+      type: Number, 
+      default: 2
+    },
+    chipsTruncated: {
+      type: Boolean, 
+      default: true
     },
 
     /* State */

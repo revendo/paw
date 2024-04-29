@@ -108,7 +108,23 @@ export default {
         category: "Search results (dropdown)",
       },
     },
-
+    maxChips: {
+      control: { type: "number" },
+      description:
+      "Maximum number of chips to be displayed on a multiselect dropdown. Use 0 to display all chips.",
+      table: {
+        category: "Search results (dropdown)",
+      },
+    },
+    chipsTruncated: {
+      control: { type: "boolean" },
+      description:
+        "Is the content of the chips truncated to show only 12 characters (including spaces)",
+      table: {
+        category: "Search results (dropdown)",
+      },
+    },
+    
     /* State */
     loading: {
       control: { type: "boolean" },

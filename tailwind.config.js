@@ -279,6 +279,9 @@ export default {
       screens: {
         xs: "400px",
       },
+      spacing: {
+        "12ch": "12ch"
+      }
     },
   },
   plugins: [
