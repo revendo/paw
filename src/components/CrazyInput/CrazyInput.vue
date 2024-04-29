@@ -167,7 +167,7 @@
         >
           <!-- Chip selection -->
           <PawChip
-            v-for="item in maxChips>0 ? chips.slice(0 ,maxChips) : chips"
+            v-for="item in maxChips > 0 ? chips.slice(0, maxChips) : chips"
             :key="item.id"
             @clicked="removeChip(item)"
             size="sm"
@@ -180,7 +180,7 @@
 
            <!-- Chip elipsis item -->
            <PawChip
-            v-if="maxChips> 0 && chips.length > maxChips"
+            v-if="maxChips > 0 && chips.length > maxChips"
             size="sm"
             :icon="chipIcon"
             class="shrink align-top justify-self-start ml-1 mt-1"
@@ -591,7 +591,7 @@ export default {
     },
     maxChips: {
       type: Number, 
-      default: 2
+      default: 0
     },
     chipsTruncated: {
       type: Boolean, 
