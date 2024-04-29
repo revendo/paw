@@ -13,7 +13,7 @@
       :class="setIconClassNames()"
       >{{ icon }}</PawIcon
     >
-    <span class="truncate">
+    <span class="truncate" :class="[{'max-w-12ch':textEllipsis}]">
       <slot></slot>
     </span>
     <PawIcon
@@ -67,6 +67,10 @@ export default {
     disabled: {
       type: Boolean,
     },
+    textEllipsis: {
+      type: Boolean,
+      default: false
+    }
   },
   components: {
     PawIcon,
