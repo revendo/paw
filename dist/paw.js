@@ -12551,11 +12551,15 @@ const nu = /* @__PURE__ */ ht(ip, [["render", up]]), cp = 5, dp = {
     },
     maxChips: {
       type: Number,
-      default: 2
+      default: 0
     },
     chipsTruncated: {
       type: Boolean,
       default: !0
+    },
+    showSearchInputOnlyOnFocus: {
+      type: Boolean,
+      default: !1
     },
     /* State */
     loading: {
@@ -13155,7 +13159,7 @@ function Lp(e, t, r, n, i, a) {
             class: q([
               r.multiline ? "min-h-[32px] before:content_ before:py-1.5 before:pl-2 before:pr-3 before:row-start-1 before:col-start-1 before:prose-md before:element-text before:invisible before:whitespace-pre-wrap" : "h-8",
               r.multiline ? "inline-grid" : "",
-              r.multiselect ? "basis-20 grow" : "w-full"
+              r.multiselect ? r.showSearchInputOnlyOnFocus && i.showingResults && !i.inputValue && i.chips.length ? "basis-10 grow-0" : "basis-20 grow" : "w-full"
             ]),
             "data-content": r.multiline ? i.inputValue : ""
           }, [
@@ -17201,7 +17205,7 @@ const y1 = /* @__PURE__ */ ht(l1, [["render", _1]]), v1 = 8, b1 = 5, w1 = {
           t.sort = e.sort === "asc" ? "desc" : "asc";
           return;
         }
-        t.sort = null;
+        t.sort = t.sort == "disabled" ? "disabled" : null;
       }), this.$emit("sorted", e.name, e.sort);
     },
     /**

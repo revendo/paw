@@ -193,7 +193,11 @@
                 ? 'min-h-[32px] before:content_ before:py-1.5 before:pl-2 before:pr-3 before:row-start-1 before:col-start-1 before:prose-md before:element-text before:invisible before:whitespace-pre-wrap'
                 : 'h-8',
               multiline ? 'inline-grid' : '',
-              !multiselect ? 'w-full' : 'basis-20 grow',
+              !multiselect
+                ? 'w-full'
+                : showSearchInputOnlyOnFocus && showingResults && !inputValue && chips.length
+                  ? 'basis-10 grow-0'
+                  : 'basis-20 grow',
             ]"
             :data-content="multiline ? inputValue : ''"
           >
@@ -596,6 +600,10 @@ export default {
     chipsTruncated: {
       type: Boolean, 
       default: true
+    },
+    showSearchInputOnlyOnFocus: {
+      type: Boolean,
+      default: false,
     },
 
     /* State */
