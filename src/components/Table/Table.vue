@@ -1043,7 +1043,7 @@ export default {
           return;
         }
         // Remove sorting of rest of the headings
-        h.sort = null;
+        h.sort = h.sort == 'disabled' ? 'disabled' :  null;
       });
       this.$emit("sorted", heading.name, heading.sort);
     },
