@@ -8536,9 +8536,6 @@ const Eh = /* @__PURE__ */ rn(Oh), El = {
       },
       screens: {
         xs: "400px"
-      },
-      spacing: {
-        "12ch": "12ch"
       }
     }
   },
@@ -12171,7 +12168,7 @@ function Jm(e, t, r, n, i, a) {
       _: 1
     }, 8, ["size", "outlined", "class"])) : Z("", !0),
     ne("span", {
-      class: q(["truncate", [{ "max-w-12ch": r.textEllipsis }]])
+      class: q(["truncate", [{ "max-w-16": r.textEllipsis }]])
     }, [
       Bt(e.$slots, "default")
     ], 2),
@@ -12447,6 +12444,24 @@ const nu = /* @__PURE__ */ ht(ip, [["render", up]]), cp = 5, dp = {
           unselectable: !0
         }
       ];
+    },
+    multilineClasses() {
+      return this.multiline ? "min-h-[32px] before:content_ before:py-1.5 before:pl-2 before:pr-3 before:row-start-1 before:col-start-1 before:prose-md before:element-text before:invisible before:whitespace-pre-wrap" : "h-8";
+    },
+    gridClass() {
+      return this.multiline ? "inline-grid" : "";
+    },
+    widthClasses() {
+      if (this.multiselect) {
+        if (this.showSearchInputOnlyOnFocus) {
+          if (this.showingResults && !this.inputValue && this.chips.length)
+            return "basis-1/12 grow-0";
+          if (!this.showingResults && this.chips.length)
+            return "w-1";
+        }
+      } else
+        return "w-full";
+      return "basis-20 grow";
     }
   },
   watch: {
@@ -13156,11 +13171,7 @@ function Lp(e, t, r, n, i, a) {
             _: 1
           }, 8, ["icon"])) : Z("", !0),
           ne("span", {
-            class: q([
-              r.multiline ? "min-h-[32px] before:content_ before:py-1.5 before:pl-2 before:pr-3 before:row-start-1 before:col-start-1 before:prose-md before:element-text before:invisible before:whitespace-pre-wrap" : "h-8",
-              r.multiline ? "inline-grid" : "",
-              r.multiselect ? r.showSearchInputOnlyOnFocus && i.showingResults && !i.inputValue && i.chips.length ? "basis-10 grow-0" : "basis-20 grow" : "w-full"
-            ]),
+            class: q([a.multilineClasses, a.gridClass, a.widthClasses]),
             "data-content": r.multiline ? i.inputValue : ""
           }, [
             r.multiline ? kr((N(), W("textarea", {

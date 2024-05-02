@@ -13,7 +13,7 @@
       :class="setIconClassNames()"
       >{{ icon }}</PawIcon
     >
-    <span class="truncate" :class="[{'max-w-12ch':textEllipsis}]">
+    <span class="truncate" :class="[{'max-w-16':textEllipsis}]">
       <slot></slot>
     </span>
     <PawIcon
