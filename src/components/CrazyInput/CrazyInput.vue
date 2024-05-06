@@ -187,18 +187,8 @@
             >...</PawChip
           >
 
-          <span
-            :class="[
-              multiline
-                ? 'min-h-[32px] before:content_ before:py-1.5 before:pl-2 before:pr-3 before:row-start-1 before:col-start-1 before:prose-md before:element-text before:invisible before:whitespace-pre-wrap'
-                : 'h-8',
-              multiline ? 'inline-grid' : '',
-              !multiselect
-                ? 'w-full'
-                : showSearchInputOnlyOnFocus && showingResults && !inputValue && chips.length
-                  ? 'basis-10 grow-0'
-                  : 'basis-20 grow',
-            ]"
+          <span 
+            :class="[multilineClasses, gridClass, widthClasses]"
             :data-content="multiline ? inputValue : ''"
           >
             <textarea
@@ -480,6 +470,26 @@ export default {
         },
       ];
     },
+    multilineClasses() {
+      return this.multiline
+        ? 'min-h-[32px] before:content_ before:py-1.5 before:pl-2 before:pr-3 before:row-start-1 before:col-start-1 before:prose-md before:element-text before:invisible before:whitespace-pre-wrap'
+        : 'h-8';
+    },
+    gridClass() {
+      return this.multiline ? 'inline-grid' : '';
+    },
+    widthClasses() {
+      if (!this.multiselect) {
+        return 'w-full';
+      } else if (this.showSearchInputOnlyOnFocus) {
+        if (this.showingResults && !this.inputValue && this.chips.length) {
+          return 'basis-1/12 grow-0';
+        } else if (!this.showingResults && this.chips.length) {
+          return 'w-1';
+        }
+      }
+      return 'basis-20 grow';
+    }
   },
   watch: {
     value() {
@@ -1055,7 +1065,11 @@ export default {
         );
       }
       if (this.multiselect) {
-        return item.checked || this.selected.includes(item);
+        return (
+          item.checked ||
+          this.selected.includes(item) ||
+          this.selected.some(e => e.value === item.value)
+        );
       }
       return false;
     },
@@ -1179,6 +1193,7 @@ export default {
     removeChip(item) {
       // Remove from chips
       let index = this.chips.indexOf(item);
+
       if (index === -1) return;
       this.chips.splice(index, 1);
       // Remove from dropdown
