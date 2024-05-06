@@ -12941,7 +12941,7 @@ const nu = /* @__PURE__ */ ht(ip, [["render", up]]), cp = 5, dp = {
     },
     removeChip(e) {
       let t = this.chips.indexOf(e);
-      console.log(e), t !== -1 && (this.chips.splice(t, 1), t = this.selected.indexOf(e), t !== -1 && (this.selected.splice(t, 1), console.log(e), this.$emit("removed", e)));
+      t !== -1 && (this.chips.splice(t, 1), t = this.selected.indexOf(e), t !== -1 && (this.selected.splice(t, 1), this.$emit("removed", e)));
     },
     // Cancel loading of results
     cancelLoading(e) {
