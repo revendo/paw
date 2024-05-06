@@ -1065,7 +1065,11 @@ export default {
         );
       }
       if (this.multiselect) {
-        return item.checked || this.selected.includes(item);
+        return (
+          item.checked ||
+          this.selected.includes(item) ||
+          this.selected.some(e => e.value === item.value)
+        );
       }
       return false;
     },
@@ -1189,13 +1193,14 @@ export default {
     removeChip(item) {
       // Remove from chips
       let index = this.chips.indexOf(item);
+      console.log(item);
       if (index === -1) return;
       this.chips.splice(index, 1);
       // Remove from dropdown
       index = this.selected.indexOf(item);
       if (index === -1) return;
       this.selected.splice(index, 1);
-
+      console.log(item);
       //Return selected
       this.$emit("removed", item);
     },

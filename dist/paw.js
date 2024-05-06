@@ -12873,7 +12873,7 @@ const nu = /* @__PURE__ */ ht(ip, [["render", up]]), cp = 5, dp = {
       e && /INPUT|TEXTAREA/i.test(e.tagName) && ("selectionStart" in e && (e.selectionEnd = e.selectionStart), e.blur()), window.getSelection ? window.getSelection().removeAllRanges() : document.selection && document.selection.empty();
     },
     isItemChecked(e) {
-      return this.select ? e.checked && this.selected.length === 0 || this.selected.includes(e) : this.multiselect ? e.checked || this.selected.includes(e) : !1;
+      return this.select ? e.checked && this.selected.length === 0 || this.selected.includes(e) : this.multiselect ? e.checked || this.selected.includes(e) || this.selected.some((t) => t.value === e.value) : !1;
     },
     updateChips(e, t) {
       !t && e && this.removeChip(e), this.chips = this.arrayUnique(this.chips.concat(this.selected));
@@ -12941,7 +12941,7 @@ const nu = /* @__PURE__ */ ht(ip, [["render", up]]), cp = 5, dp = {
     },
     removeChip(e) {
       let t = this.chips.indexOf(e);
-      t !== -1 && (this.chips.splice(t, 1), t = this.selected.indexOf(e), t !== -1 && (this.selected.splice(t, 1), this.$emit("removed", e)));
+      console.log(e), t !== -1 && (this.chips.splice(t, 1), t = this.selected.indexOf(e), t !== -1 && (this.selected.splice(t, 1), console.log(e), this.$emit("removed", e)));
     },
     // Cancel loading of results
     cancelLoading(e) {
