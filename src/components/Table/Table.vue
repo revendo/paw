@@ -484,7 +484,7 @@
                   :icon="!informal ? 'last_page' : ctaIcon"
                   :outlined="informal"
                   color="action"
-                  :disabled="ctaIconDisabled "
+                  :disabled="ctaIconDisabled"
                   align="right"
                   compact
                   @clicked="click(item.id, 'actionButton')"
@@ -516,7 +516,7 @@
                     size="sm"
                     icon="more_horiz"
                     outlined
-                    buttonRoundedClasses="border-none !bg-transparent "
+                    buttonRoundedClasses="border-none !bg-transparent"
                   >
                   </PawButton>
                 </div>
