@@ -388,13 +388,14 @@
                 !informal
                   ? 'py-0'
                   : 'pt-2 pb-2 border-t border-b border-gray-200 dark:border-gray-700 transition',
-                isRowClickable && !heading.action ? 'cursor-pointer' : ''
+                isRowClickable && !heading.action ? 'cursor-pointer' : '',
+                item.rowLoading ? 'pointer-events-none': ''
               ]"
               class="align-middle"
               @click="isRowClickable && !heading.action ? click(item.id, 'row')  : ''"
             >
               <PawLazyField
-                v-if="!loading && heading.format !== 'label'"
+                v-if="!loading && !item.rowLoading && heading.format !== 'label'"
                 class="inline-flex"
                 size="sm"
                 hide-errors
@@ -430,7 +431,7 @@
               </PawLazyField>
 
               <PawLabel
-                v-if="!loading && heading.format === 'label'"
+                v-if="!loading && !item.rowLoading && heading.format === 'label'"
                 class="inline-flex my-0.75"
                 size="sm"
                 :color="item[heading.name].color"
@@ -440,7 +441,7 @@
               </PawLabel>
 
               <div
-                v-if="loading"
+                v-if="loading || item.rowLoading"
                 class="inline-block bg-gray-400 align-middle"
                 :class="{
                   'w-24 h-2 rounded-md': heading.format !== 'label',
@@ -476,13 +477,14 @@
                 <PawLink
                   v-if="
                     ((!informal && !loading) || informal) &&
-                    !actionDropdownItems.length
+!actionDropdownItems.length
+                    && !item.rowLoading
                   "
                   size="sm"
                   :icon="!informal ? 'last_page' : ctaIcon"
                   :outlined="informal"
                   color="action"
-                  :disabled="ctaIconDisabled"
+                  :disabled="ctaIconDisabled "
                   align="right"
                   compact
                   @clicked="click(item.id, 'actionButton')"
@@ -491,11 +493,22 @@
                     'ml-auto': !informal,
                     'justify-center absolute h-12 w-[49px] bg-white dark:bg-gray-800 border-r border-t border-b border-gray-200 dark:border-gray-700 rounded-r-lg transition':
                       informal,
-                    'cursor-auto': informal && !ctaIcon,
+                  'cursor-auto': informal && !ctaIcon,
                   }"
                 >
                   {{ detailsText }}
                 </PawLink>
+                <div v-else-if="item.rowLoading">
+                  <div class="flex h-fit items-center justify-center space-x-2">
+                    <div
+                      class="animate-loadingDots h-1 w-1 rounded-full bg-action-400 [animation-delay:-0.3s]"
+                    ></div>
+                    <div
+                      class="animate-loadingDots h-1 w-1  rounded-full bg-action-400 [animation-delay:-0.2s]"
+                    ></div>
+                    <div class="animate-loadingDots h-1 w-1  rounded-full bg-action-400"></div>
+                  </div>
+                </div>
                 <!-- Action Dropdown -->
                 <div v-else class="z-50">
                   <PawButton
