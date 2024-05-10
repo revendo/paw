@@ -270,27 +270,12 @@ export default {
             opacity: ".25",
           },
         },
-        "loading-dots": {
-          "0%": {
-              opacity: ".25",
-              transform: "scale(0.5)"
-          },
-          "50%": {
-              opacity: "1",
-              transform: "scale(1)"
-          },
-
-          "100%": {
-              opacity: "0",
-              transform: "scale(0.5)"
-          }
-        }
       },
       animation: {
         loading:
           "1800ms cubic-bezier(0.6, -0.28, 0.735, 0.045) 0s infinite normal none running pulse-in," +
           "1800ms ease-in-out 0ms infinite normal none running pulse-out",
-          loadingDots: "loading-dots 1s ease-in-out infinite"
+          loadingSpinner: "spin 1s linear infinite"
       },
       screens: {
         xs: "400px",

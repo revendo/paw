@@ -21,7 +21,7 @@
       :outlined="outlined"
       class="transition"
       :class="setIconClassNames()"
-      >{{ icon }}</PawIcon
+      >{{ !processing ? icon : 'sync' }}</PawIcon
     >
     <span class="truncate">
       <slot></slot>
@@ -74,6 +74,10 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+    processing: {
+      type: Boolean,
+      default: () => { false }
     },
     buttonRoundedClasses: {
       type: String,
@@ -169,8 +173,14 @@ export default {
             "text-action-100 dark:text-action-100 group-hover:text-white group-active:text-action-100 dark:group-active:text-action-100 group-focus:text-white dark:group-focus:text-white";
           className += iconColor;
         }
-      }
 
+       
+      }
+      //Processing icon
+      if (this.processing) {
+        className += " animate-loadingSpinner duration-500";
+      }
+      
       if (!this.hasSlot) {
         return className;
       }
