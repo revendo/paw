@@ -33,7 +33,7 @@
         class="transition w-full delay-150"
         :class="processing ? 'max-w-fit my-auto py-0.5 mx-2' : 'max-w-0 mx-0'" 
         loaderSize="sm" 
-        :spinnerColorClasses="setClassNames().includes('-action-') ? 'fill-white text-gray-300 dark:text-gray-600': 'fill-action-500 text-gray-300 dark:text-gray-600'"
+        :spinnerColorClasses="setClassNames().includes('-action-') && !outlined ? 'fill-white text-gray-300 dark:text-gray-600': 'fill-action-500 text-gray-300 dark:text-gray-600'"
       />
     </transition>
     <span class="truncate">
