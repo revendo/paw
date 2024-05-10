@@ -22,13 +22,19 @@
       class="transition"
       :class="setIconClassNames()"
       >{{ !processing ? icon : 'sync' }}</PawIcon
+    >    
+    <transition
+      enter-active-class="transition ease-in-out "
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
     >
-    <PawLoadingSpinner 
-      v-if="processing" 
-      class="mx-2 my-auto" 
-      loaderSize="sm" 
-      :spinnerColorClasses="setClassNames().includes('-action-') ? 'fill-white text-gray-300 dark:text-gray-600': 'fill-action-500 text-gray-300 dark:text-gray-600'"
-    />
+      <PawLoadingSpinner 
+        v-show="processing" 
+        class="mx-2 my-auto" 
+        loaderSize="sm" 
+        :spinnerColorClasses="setClassNames().includes('-action-') ? 'fill-white text-gray-300 dark:text-gray-600': 'fill-action-500 text-gray-300 dark:text-gray-600'"
+      />
+    </transition>
     <span class="truncate">
       <slot></slot>
     </span>
