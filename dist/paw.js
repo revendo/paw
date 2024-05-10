@@ -11978,16 +11978,16 @@ function qm(e, t, r, n, i, a) {
       _: 1
     }, 8, ["size", "outlined", "class"])) : Z("", !0),
     Je(Ra, {
-      "enter-active-class": "transition ease-in-out ",
-      "enter-from-class": "opacity-0",
-      "enter-to-class": "opacity-100"
+      "enter-active-class": "transitiona ease-in",
+      "enter-from-class": "opacity-0 delay-150 ease-out",
+      "enter-to-class": "opacity-100 "
     }, {
       default: we(() => [
         cr(Je(u, {
-          class: "mx-2 my-auto",
+          class: j(["transition w-full delay-150", r.processing ? "max-w-fit my-auto py-0.5 mx-2" : "max-w-0 mx-0"]),
           loaderSize: "sm",
           spinnerColorClasses: a.setClassNames().includes("-action-") ? "fill-white text-gray-300 dark:text-gray-600" : "fill-action-500 text-gray-300 dark:text-gray-600"
-        }, null, 8, ["spinnerColorClasses"]), [
+        }, null, 8, ["class", "spinnerColorClasses"]), [
           [Qr, r.processing]
         ])
       ]),
