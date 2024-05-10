@@ -497,16 +497,11 @@
                   {{ detailsText }}
                 </PawLink>
 
-                <PawLink v-else-if="item.rowLoading"
-                  size="sm"
-                  icon="sync"
-                  outlined
-                  color="action"
-                  align="right"
-                  compact
-                  class="z-20 animate-spin !duration-500 mx-auto !cursor-default"
-                >
-                </PawLink>
+                <PawLoadingSpinner 
+                  v-else-if="item.rowLoading"
+                  class="mx-auto my-auto p-1 z-20" 
+                  loaderSize="sm" 
+                />
 
                 <!-- Action Dropdown -->
                 <div v-else class="z-50">
@@ -711,6 +706,7 @@ import PawIcon from "../Icon/Icon.vue";
 import PawLabel from "../Label/Label.vue";
 import PawLazyField from "../LazyField/LazyField.vue";
 import PawLink from "../Link/Link.vue";
+import PawLoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
 import PawRadio from "../Radio/Radio.vue";
 
 const loadingRowsFormal = 8;
@@ -854,6 +850,7 @@ export default {
     PawDropdown,
     PawCrazyInput,
     PawRadio,
+    PawLoadingSpinner
   },
   setup() {
     const { t } = useI18n({

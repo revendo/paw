@@ -17,6 +17,7 @@ import PawColorSwatches from "./src/components/ColorSwatches/ColorSwatches.vue";
 import PawChip from "./src/components/Chip/Chip.vue";
 import PawCheckbox from "./src/components/Checkbox/Checkbox.vue";
 import PawButton from "./src/components/Button/Button.vue";
+import PawLoadingSpinner from "./src/components/LoadingSpinner/LoadingSpinner.vue";
 
 export {
     PawTypography,
@@ -36,5 +37,6 @@ export {
     PawColorSwatches,
     PawChip,
     PawCheckbox,
-    PawButton
+    PawButton,
+    PawLoadingSpinner
 };
