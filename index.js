@@ -5,6 +5,7 @@ import PawSwitch from "./src/components/Switch/Switch.vue";
 import PawRadio from "./src/components/Radio/Radio.vue";
 import PawListItem from "./src/components/NavigationList/ListItem.vue";
 import PawList from "./src/components/NavigationList/List.vue";
+import PawLoadingSpinner from "./src/components/LoadingSpinner/LoadingSpinner.vue";
 import PawLink from "./src/components/Link/Link.vue";
 import PawLazyField from "./src/components/LazyField/LazyField.vue";
 import PawLabel from "./src/components/Label/Label.vue";
@@ -25,6 +26,7 @@ export {
     PawRadio,
     PawListItem,
     PawList,
+    PawLoadingSpinner,
     PawLink,
     PawLazyField,
     PawLabel,

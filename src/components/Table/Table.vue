@@ -395,7 +395,7 @@
               @click="isRowClickable && !heading.action ? click(item.id, 'row')  : ''"
             >
               <PawLazyField
-                v-if="!loading && !item.rowLoading && heading.format !== 'label'"
+                v-if="!loading  && heading.format !== 'label'"
                 class="inline-flex"
                 size="sm"
                 hide-errors
@@ -431,7 +431,7 @@
               </PawLazyField>
 
               <PawLabel
-                v-if="!loading && !item.rowLoading && heading.format === 'label'"
+                v-if="!loading  && heading.format === 'label'"
                 class="inline-flex my-0.75"
                 size="sm"
                 :color="item[heading.name].color"
@@ -441,7 +441,7 @@
               </PawLabel>
 
               <div
-                v-if="loading || item.rowLoading"
+                v-if="loading"
                 class="inline-block bg-gray-400 align-middle"
                 :class="{
                   'w-24 h-2 rounded-md': heading.format !== 'label',
@@ -475,17 +475,15 @@
               >
                 <!-- Details link -->
                 <PawLink
-                  v-if="
-                    ((!informal && !loading) || informal) &&
-!actionDropdownItems.length
-                    && !item.rowLoading
-                  "
+                  v-if="((!informal && !loading) || informal)
+                  && !actionDropdownItems.length
+                  && !item.rowLoading"
                   size="sm"
                   :icon="!informal ? 'last_page' : ctaIcon"
                   :outlined="informal"
                   color="action"
                   :disabled="ctaIconDisabled"
-                  align="right"
+                  align="center"
                   compact
                   @clicked="click(item.id, 'actionButton')"
                   class="z-20"
@@ -498,17 +496,13 @@
                 >
                   {{ detailsText }}
                 </PawLink>
-                <div v-else-if="item.rowLoading">
-                  <div class="flex h-fit items-center justify-center space-x-2">
-                    <div
-                      class="animate-loadingDots h-1 w-1 rounded-full bg-action-400 [animation-delay:-0.3s]"
-                    ></div>
-                    <div
-                      class="animate-loadingDots h-1 w-1  rounded-full bg-action-400 [animation-delay:-0.2s]"
-                    ></div>
-                    <div class="animate-loadingDots h-1 w-1  rounded-full bg-action-400"></div>
-                  </div>
-                </div>
+
+                <PawLoadingSpinner 
+                  v-else-if="item.rowLoading"
+                  class="mx-auto my-auto p-1 z-20" 
+                  loaderSize="sm" 
+                />
+
                 <!-- Action Dropdown -->
                 <div v-else class="z-50">
                   <PawButton
@@ -712,6 +706,7 @@ import PawIcon from "../Icon/Icon.vue";
 import PawLabel from "../Label/Label.vue";
 import PawLazyField from "../LazyField/LazyField.vue";
 import PawLink from "../Link/Link.vue";
+import PawLoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
 import PawRadio from "../Radio/Radio.vue";
 
 const loadingRowsFormal = 8;
@@ -855,6 +850,7 @@ export default {
     PawDropdown,
     PawCrazyInput,
     PawRadio,
+    PawLoadingSpinner
   },
   setup() {
     const { t } = useI18n({

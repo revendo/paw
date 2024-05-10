@@ -16,13 +16,19 @@
     @click="click"
   >
     <PawIcon
-      v-if="icon"
+      v-if="icon && !processing"
       :size="size"
       :outlined="outlined"
       class="transition"
       :class="setIconClassNames()"
-      >{{ icon }}</PawIcon
+      >{{ !processing ? icon : 'sync' }}</PawIcon
     >
+    <PawLoadingSpinner 
+      v-if="processing" 
+      class="mx-2 my-auto" 
+      loaderSize="sm" 
+      :spinnerColorClasses="setClassNames().includes('-action-') ? 'fill-white text-gray-300 dark:text-gray-600': 'fill-action-500 text-gray-300 dark:text-gray-600'"
+    />
     <span class="truncate">
       <slot></slot>
     </span>
@@ -31,6 +37,7 @@
 
 <script>
 import PawIcon from "../Icon/Icon.vue";
+import PawLoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
 
 export default {
   name: "PawButton",
@@ -75,6 +82,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    processing: {
+      type: Boolean,
+      default: () => { false }
+    },
     buttonRoundedClasses: {
       type: String,
       default: "",
@@ -94,6 +105,7 @@ export default {
   },
   components: {
     PawIcon,
+    PawLoadingSpinner
   },
   methods: {
     click() {
@@ -169,8 +181,10 @@ export default {
             "text-action-100 dark:text-action-100 group-hover:text-white group-active:text-action-100 dark:group-active:text-action-100 group-focus:text-white dark:group-focus:text-white";
           className += iconColor;
         }
-      }
 
+       
+      }
+      
       if (!this.hasSlot) {
         return className;
       }
