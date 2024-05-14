@@ -15352,7 +15352,7 @@ J.HTML5_FMT = {
   MONTH: "YYYY-MM"
   // <input type="month" />
 };
-const fy = (e) => (Bc("data-v-fa9ff8c3"), e = e(), Wc(), e), hy = {
+const fy = (e) => (Bc("data-v-ee12da86"), e = e(), Wc(), e), hy = {
   key: 0,
   class: "flex flex-row"
 }, my = {
@@ -15382,7 +15382,7 @@ const fy = (e) => (Bc("data-v-fa9ff8c3"), e = e(), Wc(), e), hy = {
   key: 1,
   class: "prose-xs element-text italic text-danger-500 dark:text-danger-400 transition"
 }, Ty = {
-  __name: "Datepicker",
+  __name: "DatePicker",
   props: {
     label: {
       type: String
@@ -15501,8 +15501,8 @@ const fy = (e) => (Bc("data-v-fa9ff8c3"), e = e(), Wc(), e), hy = {
       ], 64))
     ], 512));
   }
-}, ab = /* @__PURE__ */ ft(Ty, [["__scopeId", "data-v-fa9ff8c3"]]), Oy = { class: "relative w-fit" }, Ey = { class: "flex flex-col" }, Dy = ["onClick"], Cy = {
-  __name: "Dropdown",
+}, ab = /* @__PURE__ */ ft(Ty, [["__scopeId", "data-v-ee12da86"]]), Oy = { class: "relative w-fit" }, Ey = { class: "flex flex-col" }, Dy = ["onClick"], Cy = {
+  __name: "DropDown",
   props: {
     items: {
       type: Array,
@@ -17989,8 +17989,8 @@ export {
   cd as PawChip,
   ib as PawColorSwatches,
   Zm as PawCrazyInput,
-  ab as PawDatepicker,
-  Cy as PawDropdown,
+  ab as PawDatePicker,
+  Cy as PawDropDown,
   sb as PawFloatingBar,
   Gt as PawIcon,
   Ay as PawLabel,
