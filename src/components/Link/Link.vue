@@ -1,32 +1,30 @@
 <template>
-    <div class="relative overflow-visible">
-        <button
-            class="flex items-center group max-w-full my-0"
-            :class="setClassNames()"
-            :title="titlePopover ? undefined : title"
-            @click="click"
-            @mouseenter="startHoverTimer"
-            @mouseleave="clearHoverTimer">
-            <PawIcon
-                v-if="icon"
-                :size="compact ? 'sm' : size"
-                :outlined="outlined"
-                :class="setIconClassNames()"
-                >{{ icon }}</PawIcon
-            >
-            <span
-                v-if="hasSlot"
-                class="truncate transition"
-                :class="setTextClassNames()">
-                <slot></slot>
-            </span>
-        </button>
+    <button
+        class="flex items-center group max-w-full my-0 relative"
+        :class="setClassNames()"
+        :title="titlePopover ? undefined : title"
+        @click="click"
+        @mouseenter="startHoverTimer"
+        @mouseleave="clearHoverTimer">
+        <PawIcon
+            v-if="icon"
+            :size="compact ? 'sm' : size"
+            :outlined="outlined"
+            :class="setIconClassNames()"
+            >{{ icon }}</PawIcon
+        >
+        <span
+            v-if="hasSlot"
+            class="truncate transition"
+            :class="setTextClassNames()">
+            <slot></slot>
+        </span>
         <div
             v-if="showPopover && titlePopover === true"
-            class="absolute w-60 bg-white dark:bg-gray-800 border border-gray-200 shadow-2xl dark:border-gray-700 transition-all duration-300 left-0 rounded-md z-[9999] top-full px-4 py-2 text-gray-500">
-            <span>{{ title }}</span>
+            class="absolute max-w-2xl w-60 bg-white dark:bg-gray-800 border border-gray-200 shadow-2xl dark:border-gray-700 transition-all duration-300 left-0 rounded-md z-[9999] top-full px-4 py-2 text-gray-500">
+            {{ title }}
         </div>
-    </div>
+    </button>
 </template>
 <script>
     import PawIcon from "../Icon/Icon.vue";
