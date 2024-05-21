@@ -17140,7 +17140,9 @@ const _1 = ["title"], v1 = ["checked", "disabled"], y1 = { class: "relative w-8 
   },
   computed: {
     headings() {
-      return this.data.headings ? [...this.data.headings].sort((e, t) => e.position - t.position) : {};
+      return this.data.headings ? [...this.data.headings].sort(
+        (e, t) => e.position - t.position
+      ) : {};
     },
     activeHeadings() {
       return this.headings ? this.headings.filter((e) => e.visible) : {};
@@ -17150,7 +17152,10 @@ const _1 = ["title"], v1 = ["checked", "disabled"], y1 = { class: "relative w-8 
       let t = [];
       this.meta.pagination >= this.items.length ? t = this.items.slice(0, e) : t = this.items.slice(
         this.meta.firstItem - 1,
-        Math.max(this.meta.firstItem - 1 + this.meta.pagination, e)
+        Math.max(
+          this.meta.firstItem - 1 + this.meta.pagination,
+          e
+        )
       );
       const r = this.informal ? x1 : k1;
       return this.loading && t.length < r ? t.concat(this.fillItems(r - t.length)) : t;
@@ -17163,7 +17168,13 @@ const _1 = ["title"], v1 = ["checked", "disabled"], y1 = { class: "relative w-8 
       return e.totalRecords = Math.max(
         this.data.meta.records,
         this.items.length
-      ), e.pagination = (this.data.meta.pagination < 1 ? 1 : this.data.meta.pagination) || 10, e.totalPages = Math.ceil(e.totalRecords / e.pagination) || 1, e.currentPage = Math.min(Math.max(this.data.meta.page, 1), e.totalPages) || 1, e.firstItem = e.pagination * (e.currentPage - 1) + 1, e.lastItem = Math.min(e.firstItem + e.pagination - 1, e.totalRecords) || this.items.length, e;
+      ), e.pagination = (this.data.meta.pagination < 1 ? 1 : this.data.meta.pagination) || 10, e.totalPages = Math.ceil(e.totalRecords / e.pagination) || 1, e.currentPage = Math.min(
+        Math.max(this.data.meta.page, 1),
+        e.totalPages
+      ) || 1, e.firstItem = e.pagination * (e.currentPage - 1) + 1, e.lastItem = Math.min(
+        e.firstItem + e.pagination - 1,
+        e.totalRecords
+      ) || this.items.length, e;
     },
     footerText() {
       return this.error ? this.error : this.loading ? this.t("table.loading") : this.data.meta.records ? this.t("table.showRecordsInterval", {
@@ -17215,9 +17226,13 @@ const _1 = ["title"], v1 = ["checked", "disabled"], y1 = { class: "relative w-8 
      * @param id {Number | String} ID of record
      */
     selectRadio(e, t) {
-      const r = this.items.find((i) => i.selected);
+      const r = this.items.find(
+        (i) => i.selected
+      );
       r && (r.selected = !1);
-      const n = this.items.find((i) => i.id === t);
+      const n = this.items.find(
+        (i) => i.id === t
+      );
       n && (n.selected = !0), this.$emit("selected", t, e);
     },
     /**
@@ -17291,7 +17306,11 @@ const _1 = ["title"], v1 = ["checked", "disabled"], y1 = { class: "relative w-8 
       }, 150);
     },
     dropdownActionSelected(e) {
-      this.dropdownOpen = !1, this.$emit("actionSelected", e, this.rowIdentifierProxy);
+      this.dropdownOpen = !1, this.$emit(
+        "actionSelected",
+        e,
+        this.rowIdentifierProxy
+      );
     },
     cellValue(e, t) {
       return t ? e : `<span class="italic text-danger-500 dark:text-danger-400 transition">${this.t(
@@ -17319,7 +17338,10 @@ const _1 = ["title"], v1 = ["checked", "disabled"], y1 = { class: "relative w-8 
       document.addEventListener(n, function i(a) {
         if (!(a.target instanceof Element))
           return document.removeEventListener(n, i), !1;
-        e !== a.target && !Array.from(r).includes(a.target) && t(a) !== !1 && document.removeEventListener(n, i);
+        e !== a.target && !Array.from(r).includes(a.target) && t(a) !== !1 && document.removeEventListener(
+          n,
+          i
+        );
       });
     },
     hasStickyDetails() {
@@ -17651,69 +17673,75 @@ function j1(e, t, r, n, i, a) {
                 onChanged: (_) => a.selectRadio(_, c.id)
               }, null, 8, ["checked", "onChanged"])) : X("", !0)
             ], 2)),
-            (P(!0), W(tt, null, gt(a.activeHeadings, (_, w) => (P(), W("td", {
-              key: _.name,
-              class: H([[
-                w > 0 ? "pl-7" : "",
-                w === 0 && r.informal ? "pl-3 rounded-l-lg border-l overflow-hidden before:opacity-0 group-hover:before:opacity-100 before:content-[''] before:absolute before:mt-[-9.75px] before:left-0 before:right-0 before:h-12 before:overflow-clip group-hover:before:shadow-card dark:group-hover:before:shadow-card-dark before:rounded-lg before:transition" : "",
-                w === a.activeHeadings.length - 1 ? "pr-2" : "",
-                _.align === "left" || !_.align ? "text-left" : "",
-                _.align === "right" ? "text-right" : "",
-                _.align === "center" ? "text-center" : "",
-                r.informal ? "pt-2 pb-2 border-t border-b border-gray-200 dark:border-gray-700 transition" : "py-0",
-                r.isRowClickable && !_.action ? "cursor-pointer" : "",
-                c.rowLoading ? "pointer-events-none" : ""
-              ], "align-middle"]),
-              onClick: (x) => r.isRowClickable && !_.action ? a.click(c.id, "row") : ""
-            }, [
-              !r.loading && _.format !== "label" ? (P(), Oe(p, {
-                key: 0,
-                class: "inline-flex",
-                size: "sm",
-                "hide-errors": "",
-                action: _.action,
-                copy: _.copy,
-                link: _.action === "link" ? c[_.name].link : null,
-                insecure: _.action === "link" ? c[_.name].insecure : null,
-                secret: _.secret,
-                format: _.format,
-                "unit-label": _.unitLabel,
-                "unit-icon": _.unitIcon,
-                "unit-icon-outlined": _.unitIconOutlined,
-                "min-decimals": _.minDecimals,
-                "max-decimals": _.maxDecimals,
-                valueIcon: _.format == "icon" ? c[_.name].icon : "",
-                valueIconPosition: _.format == "icon" ? c[_.name].iconPosition : "",
-                valueColorClass: _.format == "icon" ? c[_.name].valueColor : ""
-              }, {
-                default: be(() => [
-                  we(pe(a.cellValue(
-                    _.action === "link" ? c[_.name].text : _.format == "icon" ? c[_.name].value : c[_.name],
-                    _.name
-                  )), 1)
-                ]),
-                _: 2
-              }, 1032, ["action", "copy", "link", "insecure", "secret", "format", "unit-label", "unit-icon", "unit-icon-outlined", "min-decimals", "max-decimals", "valueIcon", "valueIconPosition", "valueColorClass"])) : X("", !0),
-              !r.loading && _.format === "label" ? (P(), Oe(E, {
-                key: 1,
-                class: "inline-flex my-0.75",
-                size: "sm",
-                color: c[_.name].color,
-                disabled: c[_.name].disabled
-              }, {
-                default: be(() => [
-                  we(pe(a.cellValue(c[_.name].text, _.name)), 1)
-                ]),
-                _: 2
-              }, 1032, ["color", "disabled"])) : X("", !0),
-              r.loading ? (P(), W("div", {
-                key: 2,
-                class: H(["inline-block bg-gray-400 align-middle", {
-                  "w-24 h-2 rounded-md": _.format !== "label",
-                  "w-14 h-6 rounded-full": _.format === "label"
-                }])
-              }, null, 2)) : X("", !0)
-            ], 10, M1))), 128)),
+            (P(!0), W(tt, null, gt(a.activeHeadings, (_, w) => {
+              var x;
+              return P(), W("td", {
+                key: _.name,
+                class: H([[
+                  w > 0 ? "pl-7" : "",
+                  w === 0 && r.informal ? "pl-3 rounded-l-lg border-l overflow-hidden before:opacity-0 group-hover:before:opacity-100 before:content-[''] before:absolute before:mt-[-9.75px] before:left-0 before:right-0 before:h-12 before:overflow-clip group-hover:before:shadow-card dark:group-hover:before:shadow-card-dark before:rounded-lg before:transition" : "",
+                  w === a.activeHeadings.length - 1 ? "pr-2" : "",
+                  _.align === "left" || !_.align ? "text-left" : "",
+                  _.align === "right" ? "text-right" : "",
+                  _.align === "center" ? "text-center" : "",
+                  r.informal ? "pt-2 pb-2 border-t border-b border-gray-200 dark:border-gray-700 transition" : "py-0",
+                  r.isRowClickable && !_.action ? "cursor-pointer" : "",
+                  c.rowLoading ? "pointer-events-none" : ""
+                ], "align-middle"]),
+                onClick: (b) => r.isRowClickable && !_.action ? a.click(c.id, "row") : ""
+              }, [
+                !r.loading && _.format !== "label" ? (P(), Oe(p, {
+                  key: 0,
+                  class: "inline-flex",
+                  size: "sm",
+                  "hide-errors": "",
+                  action: _.action,
+                  copy: _.copy,
+                  link: _.action === "link" ? c[_.name].link : null,
+                  insecure: _.action === "link" ? c[_.name].insecure : null,
+                  secret: _.secret,
+                  format: _.format,
+                  "unit-label": _.unitLabel,
+                  "unit-icon": _.unitIcon,
+                  "unit-icon-outlined": _.unitIconOutlined,
+                  "min-decimals": _.minDecimals,
+                  "max-decimals": _.maxDecimals,
+                  valueIcon: _.format == "icon" ? c[_.name].icon : "",
+                  valueIconPosition: _.format == "icon" ? c[_.name].iconPosition : "",
+                  valueColorClass: _.format == "icon" ? c[_.name].valueColor : ""
+                }, {
+                  default: be(() => [
+                    we(pe(a.cellValue(
+                      _.action === "link" ? c[_.name].text : _.format == "icon" ? c[_.name].value : c[_.name],
+                      _.name
+                    )), 1)
+                  ]),
+                  _: 2
+                }, 1032, ["action", "copy", "link", "insecure", "secret", "format", "unit-label", "unit-icon", "unit-icon-outlined", "min-decimals", "max-decimals", "valueIcon", "valueIconPosition", "valueColorClass"])) : X("", !0),
+                !r.loading && _.format === "label" && ((x = c[_.name]) != null && x.text) ? (P(), Oe(E, {
+                  key: 1,
+                  class: "inline-flex my-0.75",
+                  size: "sm",
+                  color: c[_.name].color,
+                  disabled: c[_.name].disabled
+                }, {
+                  default: be(() => [
+                    we(pe(a.cellValue(
+                      c[_.name].text,
+                      _.name
+                    )), 1)
+                  ]),
+                  _: 2
+                }, 1032, ["color", "disabled"])) : X("", !0),
+                r.loading ? (P(), W("div", {
+                  key: 2,
+                  class: H(["inline-block bg-gray-400 align-middle", {
+                    "w-24 h-2 rounded-md": _.format !== "label",
+                    "w-14 h-6 rounded-full": _.format === "label"
+                  }])
+                }, null, 2)) : X("", !0)
+              ], 10, M1);
+            }), 128)),
             te("td", {
               class: H(["z-10 pl-3 py-0 max-w-[120px] right-0 bg-white dark:bg-gray-800 transition-all", [
                 r.loading ? "before:opacity-100" : "",
@@ -17754,7 +17782,10 @@ function j1(e, t, r, n, i, a) {
                   loaderSize: "sm"
                 })) : (P(), W("div", N1, [
                   Qe(s, {
-                    onClick: (_) => a.openDropdown(_, c[r.rowItemIdentifier]),
+                    onClick: (_) => a.openDropdown(
+                      _,
+                      c[r.rowItemIdentifier]
+                    ),
                     size: "sm",
                     icon: "more_horiz",
                     outlined: "",
