@@ -223,6 +223,17 @@
             },
 
             setPaddings(size) {
+                // Processing
+                if (this.processing) {
+                    switch (size) {
+                        case "sm":
+                            return "pr-2.75 pl-1";
+                        case "md":
+                            return "pr-2.75 pl-1";
+                        case "lg":
+                            return "pr-3.75 pl-1";
+                    }
+                }
                 // Loading
                 if (this.loading) {
                     // Outlined

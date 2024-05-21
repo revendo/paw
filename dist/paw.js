@@ -190,6 +190,15 @@ const Gt = /* @__PURE__ */ ft(zc, [["render", Vc]]), Hc = /* @__PURE__ */ te("pa
       return e;
     },
     setPaddings(e) {
+      if (this.processing)
+        switch (e) {
+          case "sm":
+            return "pr-2.75 pl-1";
+          case "md":
+            return "pr-2.75 pl-1";
+          case "lg":
+            return "pr-3.75 pl-1";
+        }
       if (this.loading) {
         if (this.outlined)
           switch (e) {
