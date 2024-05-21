@@ -161,7 +161,7 @@ const Gt = /* @__PURE__ */ ft(zc, [["render", Vc]]), Hc = /* @__PURE__ */ te("pa
             e += " w-10";
             break;
         }
-      return e += " " + this.setPaddings(this.size), e += " " + this.setStates(), e;
+      return e += " " + this.setPaddings(this.size), e += " " + this.setStates(), (this.disabled || this.processing) && (e += " cursor-not-allowed"), e;
     },
     setIconClassNames() {
       let e = "";
@@ -266,7 +266,7 @@ const Gt = /* @__PURE__ */ ft(zc, [["render", Vc]]), Hc = /* @__PURE__ */ te("pa
   }
 }, Gc = ["title"], $c = /* @__PURE__ */ te("div", { class: "h-1/3 w-10 bg-gray-500 rounded-full" }, null, -1), Kc = [
   $c
-], Xc = ["title"], Qc = { class: "truncate" };
+], Xc = ["disabled", "title"], Qc = { class: "truncate" };
 function Zc(e, t, r, n, i, a) {
   const s = He("PawIcon"), u = He("PawLoadingSpinner");
   return r.loading ? (P(), W("div", {
@@ -277,6 +277,7 @@ function Zc(e, t, r, n, i, a) {
   }, Kc, 10, Gc)) : (P(), W("button", {
     key: 1,
     class: H(["flex items-center group max-w-full my-0 transition", a.setClassNames()]),
+    disabled: r.disabled || r.processing,
     title: r.title,
     onClick: t[0] || (t[0] = (...o) => a.click && a.click(...o))
   }, [
@@ -298,7 +299,10 @@ function Zc(e, t, r, n, i, a) {
     }, {
       default: be(() => [
         ir(Qe(u, {
-          class: H(["transition w-full delay-150", r.processing ? "max-w-fit my-auto py-0.5 mx-2" : "max-w-0 mx-0"]),
+          class: H([
+            "transition w-full delay-150",
+            r.processing ? "max-w-fit my-auto py-0.5 mx-2" : "max-w-0 mx-0"
+          ]),
           loaderSize: "sm",
           spinnerColorClasses: a.setClassNames().includes("-action-") && !r.outlined ? "fill-white text-gray-300 dark:text-gray-600" : "fill-action-500 text-gray-300 dark:text-gray-600"
         }, null, 8, ["class", "spinnerColorClasses"]), [
