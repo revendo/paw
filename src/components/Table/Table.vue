@@ -503,7 +503,7 @@
                                     :outlined="informal"
                                     color="action"
                                     :disabled="ctaIconDisabled"
-                                    align="center"
+                                    align="right"
                                     compact
                                     @clicked="click(item.id, 'actionButton')"
                                     class="z-20"
@@ -711,17 +711,17 @@
 
 <script>
     import { useI18n } from "vue-i18n";
-    import { languagePreference } from "../../constants";
-    import PawButton from "../Button/Button.vue";
-    import PawCheckbox from "../Checkbox/Checkbox.vue";
-    import PawCrazyInput from "../CrazyInput/CrazyInput.vue";
-    import PawDropdown from "../Dropdown/DropDown.vue";
-    import PawIcon from "../Icon/Icon.vue";
-    import PawLabel from "../Label/Label.vue";
-    import PawLazyField from "../LazyField/LazyField.vue";
-    import PawLink from "../Link/Link.vue";
-    import PawLoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
-    import PawRadio from "../Radio/Radio.vue";
+import { languagePreference } from "../../constants";
+import PawButton from "../Button/Button.vue";
+import PawCheckbox from "../Checkbox/Checkbox.vue";
+import PawCrazyInput from "../CrazyInput/CrazyInput.vue";
+import PawDropdown from "../Dropdown/DropDown.vue";
+import PawIcon from "../Icon/Icon.vue";
+import PawLabel from "../Label/Label.vue";
+import PawLazyField from "../LazyField/LazyField.vue";
+import PawLink from "../Link/Link.vue";
+import PawLoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
+import PawRadio from "../Radio/Radio.vue";
 
     const loadingRowsFormal = 8;
     const loadingRowsInformal = 5;

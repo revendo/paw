@@ -615,6 +615,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    collapseDropdownOnAdd: {
+      type: Boolean,
+      default: false,
+    },
 
     /* State */
     loading: {
@@ -1138,6 +1142,9 @@ export default {
     },
 
     add() {
+      if (this.collapseDropdownOnAdd) {
+        this.showingResults = false;
+      }
       this.$emit("added");
     },
 
