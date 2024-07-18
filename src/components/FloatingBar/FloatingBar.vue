@@ -39,7 +39,7 @@ defineProps({
           (typeof button.icon === "string" || button.icon === undefined) &&
           typeof button.textSlot === "string" &&
           typeof button.outlined === "boolean" &&
-          (typeof button.processing === "boolean" || button.processing === undefined )&&
+          (typeof button.processing === "boolean" || button.processing === undefined) &&
           (typeof button.loading === "boolean" || button.loading === undefined) &&
           ["sm", "md", "lg"].includes(button.size) &&
           typeof button.identifier === "string"
