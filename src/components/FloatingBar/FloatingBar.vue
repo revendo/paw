@@ -13,6 +13,8 @@
       :icon="button.icon"
       :title="button.textSlot"
       :outlined="button.outlined"
+      :loading="button.loading || false"
+      :processing="button.processing || false"
       :size="button.size"
       @clicked="clicked(button.identifier)"
     >
@@ -37,6 +39,8 @@ defineProps({
           (typeof button.icon === "string" || button.icon === undefined) &&
           typeof button.textSlot === "string" &&
           typeof button.outlined === "boolean" &&
+          (typeof button.processing === "boolean" || button.processing === undefined) &&
+          (typeof button.loading === "boolean" || button.loading === undefined) &&
           ["sm", "md", "lg"].includes(button.size) &&
           typeof button.identifier === "string"
         );
