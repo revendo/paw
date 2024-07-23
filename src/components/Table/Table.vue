@@ -922,6 +922,9 @@ import PawRadio from "../Radio/Radio.vue";
                     this.syncItemsWithProp();
                 },
             },
+            searchbarValueProxy(newValue) {
+                this.searchValue = newValue;
+            },
         },
         computed: {
             headings() {
