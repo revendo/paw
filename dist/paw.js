@@ -17218,6 +17218,9 @@ const k1 = /* @__PURE__ */ ht(f1, [["render", w1]]), x1 = 8, S1 = 5, T1 = {
       handler() {
         this.syncItemsWithProp();
       }
+    },
+    searchbarValueProxy(e) {
+      this.searchValue = e;
     }
   },
   computed: {
@@ -18298,7 +18301,7 @@ const Ub = /* @__PURE__ */ ht(rb, [["render", nb]]), ib = { class: "flex items-c
     buttons: {
       type: Array,
       default: () => [],
-      validator: (e) => e.every((t) => (typeof t.icon == "string" || t.icon === void 0) && typeof t.textSlot == "string" && typeof t.outlined == "boolean" && ["sm", "md", "lg"].includes(t.size) && typeof t.identifier == "string")
+      validator: (e) => e.every((t) => (typeof t.icon == "string" || t.icon === void 0) && typeof t.textSlot == "string" && typeof t.outlined == "boolean" && (typeof t.processing == "boolean" || t.processing === void 0) && (typeof t.loading == "boolean" || t.loading === void 0) && ["sm", "md", "lg"].includes(t.size) && typeof t.identifier == "string")
     },
     scrollGradient: {
       type: Boolean,
@@ -18322,6 +18325,8 @@ const Ub = /* @__PURE__ */ ht(rb, [["render", nb]]), ib = { class: "flex items-c
           icon: s.icon,
           title: s.textSlot,
           outlined: s.outlined,
+          loading: s.loading || !1,
+          processing: s.processing || !1,
           size: s.size,
           onClicked: (o) => n(s.identifier)
         }, {
@@ -18329,7 +18334,7 @@ const Ub = /* @__PURE__ */ ht(rb, [["render", nb]]), ib = { class: "flex items-c
             xe(pe(s.textSlot), 1)
           ]),
           _: 2
-        }, 1032, ["icon", "title", "outlined", "size", "onClicked"]))), 128))
+        }, 1032, ["icon", "title", "outlined", "loading", "processing", "size", "onClicked"]))), 128))
       ])
     ], 2));
   }
