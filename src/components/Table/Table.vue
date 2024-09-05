@@ -342,7 +342,7 @@
                         }">
                         <td
                             v-if="!informal || (informal && selectionEnabled)"
-                            class=" z-10 pl-6 pr-3 left-0 bg-white dark:bg-gray-800  overflow-hidden transition align-middle"
+                            class="z-10 pl-6 pr-3 left-0 bg-white dark:bg-gray-800  overflow-hidden transition align-middle"
                               :class="[
                                 informal && selectionEnabled
                                     ? `relative pl-3 rounded-l-lg border-l before:opacity-0 group-hover:before:opacity-100 before:content-['']  before:absolute before:mt-[-9.75px] before:left-0 before:right-0 before:h-12 before:overflow-clip group-hover:before:shadow-card dark:group-hover:before:shadow-card-dark before:rounded-l-lg before:transition`
@@ -357,12 +357,12 @@
                             ]"
                             >
                             <PawCheckbox
-                            :class=" informal ? 'z-20 relative my-auto !block' :''"
-                            v-if="selectionEnabled && multiselect"
-                            size="md"
-                            @changed="select($event, item.id)" />
+                                :class="informal ? 'z-20 relative my-auto !block' :''"
+                                v-if="selectionEnabled && multiselect"
+                                size="md"
+                                @changed="select($event, item.id)" />
                             <PawRadio
-                            :class=" informal ? 'z-20 relative my-auto !block' :''"
+                                :class="informal ? 'z-20 relative my-auto !block' :''"
                                 v-if="selectionEnabled && !multiselect"
                                 :size="informal ?'sm' :'md'"
                                 :checked="item['selected']"
