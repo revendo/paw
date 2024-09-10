@@ -15,7 +15,7 @@
             <!-- Header - CTA & Title -->
             <div
                 ref="tableHeader"
-                v-if="buttons.length || title || searchDropdownItems.length"
+                v-if="buttons.length || title || searchDropdownItems.length || searchbar"
                 :class="{
                     'px-0 mb-3 sm:mb-5': informal,
                     'px-6': !informal,
@@ -25,7 +25,7 @@
                 <div :class="{ 'hidden sm:block': searchDropdownItems.length }">
                     <h1
                         v-if="title"
-                        class="text-lg font-bold text-gray-500 dark:text-white whitespace-nowrap">
+                        class="text-lg font-bold text-gray-900 dark:text-white whitespace-nowrap">
                         {{ title }}
                     </h1>
                 </div>
@@ -341,19 +341,30 @@
                                 informal,
                         }">
                         <td
-                            v-if="!informal"
-                            class="sticky z-10 pl-6 pr-3 left-0 bg-white dark:bg-gray-800 group-hover:bg-gray-100 dark:group-hover:bg-gray-800 overflow-hidden transition"
-                            :class="{
-                                'py-0': !informal,
-                                'pt-2 pb-2': informal,
-                            }">
+                            v-if="!informal || (informal && selectionEnabled)"
+                            class="z-10 pl-6 pr-3 left-0 bg-white dark:bg-gray-800  overflow-hidden transition align-middle"
+                              :class="[
+                                informal && selectionEnabled
+                                    ? `relative pl-3 rounded-l-lg border-l before:opacity-0 group-hover:before:opacity-100 before:content-['']  before:absolute before:mt-[-9.75px] before:left-0 before:right-0 before:h-12 before:overflow-clip group-hover:before:shadow-card dark:group-hover:before:shadow-card-dark before:rounded-l-lg before:transition`
+                                    : 'sticky 0 group-hover:bg-gray-100 dark:group-hover:bg-gray-800 transition',
+
+                                !informal
+                                    ? 'py-0'
+                                    : 'pt-2 pb-2 border-t border-b border-gray-200 dark:border-gray-700 transition',
+                                
+                                item.rowLoading ? 'pointer-events-none' : '',
+                            
+                            ]"
+                            >
                             <PawCheckbox
+                                :class="informal ? 'z-20 relative my-auto !block' :''"
                                 v-if="selectionEnabled && multiselect"
                                 size="md"
                                 @changed="select($event, item.id)" />
                             <PawRadio
+                                :class="informal ? 'z-20 relative my-auto !block' :''"
                                 v-if="selectionEnabled && !multiselect"
-                                size="lg"
+                                :size="informal ?'sm' :'md'"
                                 :checked="item['selected']"
                                 @changed="selectRadio($event, item.id)" />
                         </td>
@@ -363,8 +374,11 @@
                             :key="heading.name"
                             :class="[
                                 index > 0 ? 'pl-7' : '',
-                                index === 0 && informal
+                                index === 0 && !selectionEnabled && informal
                                     ? `pl-3 rounded-l-lg border-l overflow-hidden before:opacity-0 group-hover:before:opacity-100 before:content-[''] before:absolute before:mt-[-9.75px] before:left-0 before:right-0 before:h-12 before:overflow-clip group-hover:before:shadow-card dark:group-hover:before:shadow-card-dark before:rounded-lg before:transition`
+                                    : '',
+                                index === 1 && selectionEnabled && informal
+                                    ? `pl-3 border-t border-b  overflow-hidden before:opacity-0 group-hover:before:opacity-100 before:content-[''] before:absolute before:mt-[-9.75px] before:left-0 before:right-0 before:h-12 before:overflow-clip group-hover:before:shadow-card dark:group-hover:before:shadow-card-dark before:rounded-lg before:transition`
                                     : '',
                                 index === activeHeadings.length - 1
                                     ? 'pr-2'
@@ -756,7 +770,7 @@ import PawRadio from "../Radio/Radio.vue";
                                     : o.children) !== ""
                         ).length,
                 settingsOpened: false,
-                searchbarOpened: false,
+                searchbarOpened: this.searchbarCollapsable ? false : true,
                 searchValue: this.searchbarValueProxy,
                 error: false,
                 dropdownOpen: false,
@@ -823,6 +837,10 @@ import PawRadio from "../Radio/Radio.vue";
                 default: false,
             },
             searchbar: {
+                type: Boolean,
+                default: false,
+            },
+            searchbarCollapsable: {
                 type: Boolean,
                 default: false,
             },

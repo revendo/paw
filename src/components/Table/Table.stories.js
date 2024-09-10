@@ -54,6 +54,11 @@ export default {
       description:
         "Enables searchbar in header of table. <br/><b>IMPORTANT</b> Only visible if title or buttons in the header section are set. Event @searched will be triggered on typing. <br><b>Shortcut:</b> `<PawTable searchbar></PawTable>`",
     },
+    searchbarCollapsable: {
+      control: { type: "boolean" },
+      description:
+        "Toggles searchbar collapse - if false searchbar input will always be shown in full width.",
+    },
     selectionEnabled: {
       control: { type: "boolean" },
       description:
