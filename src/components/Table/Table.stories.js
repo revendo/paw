@@ -57,7 +57,7 @@ export default {
     searchbarCollapsable: {
       control: { type: "boolean" },
       description:
-        "Toggles searchbar collapse - if false searchbar input will always be shown in full width.`",
+        "Toggles searchbar collapse - if false searchbar input will always be shown in full width.",
     },
     selectionEnabled: {
       control: { type: "boolean" },
