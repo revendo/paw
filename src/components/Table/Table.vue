@@ -34,7 +34,7 @@
                     v-if="Object.keys(buttons).length <= 4"
                     class="md:flex flex-row gap-3 hidden">
                     <!-- Searchbar -->
-                    <div class="flex flex-row transition-all">
+                    <div class="flex flex-row transition-all" v-if="searchbar">
                         <PawButton
                             v-show="
                                 !searchDropdownItems.length
@@ -107,7 +107,7 @@
                             ? 'flex-col-reverse items-end sm:flex-row w-full'
                             : '',
                     ]">
-                    <div class="flex flex-row w-full">
+                    <div class="flex flex-row w-full"  v-if="searchbar">
                         <PawButton
                             v-show="
                                 !searchDropdownItems.length
@@ -142,9 +142,9 @@
                             contextIcon="search"
                             class="max-h-8"
                             :class="
-                                searchbarOpened && !searchDropdownItems.length
+                                searchbarOpened && !searchDropdownItems.length && searchbar
                                     ? 'w-full'
-                                    : searchDropdownItems.length
+                                    : searchDropdownItems.length && searchbar
                                     ? 'w-full rounded-l-none'
                                     : 'w-0 overflow-hidden'
                             "
@@ -169,7 +169,7 @@
                         </div>
                         <PawDropdown
                             v-if="buttons && buttons.length"
-                            :class="searchbarOpened ? 'hidden' : ''"
+                            :class="searchbarOpened && searchbar ? 'hidden' : ''"
                             outlined
                             size="md"
                             icon="expand_more"
@@ -179,7 +179,7 @@
                     </div>
                     <PawDropdown
                         v-else-if="buttons && buttons.length"
-                        :class="searchbarOpened ? 'hidden' : ''"
+                        :class="searchbarOpened && searchbar ? 'hidden' : ''"
                         outlined
                         size="md"
                         icon="expand_more"
